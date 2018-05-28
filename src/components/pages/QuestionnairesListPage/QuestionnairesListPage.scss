@@ -1,0 +1,114 @@
+.wrapper {
+  padding: 30px;
+}
+
+.mainHeadline {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.questionnaireListWrapper {
+  margin: 0 0 30px;
+}
+
+.questionnaireListItem {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  border-bottom: 1px solid $borderGrey;
+
+  &:nth-child(odd) {
+    background: $white;
+  }
+}
+
+.questionnaireListControls {
+  display: flex;
+}
+
+.questionnaireListName {
+  @include link();
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  width: 300px;
+  margin-right: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.controlButtonIcon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 15px;
+    fill: $linkColor;
+    transition: fill .15s ease-in-out;
+  }
+}
+
+.controlButtonWrapper {
+  @include link();
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 6px;
+  transform: translate(0, 1px);
+  transition: color .15s ease-in-out, opacity .15s ease-in-out;
+
+  span {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    span {
+      text-decoration: none;
+    }
+
+    svg {
+      fill: $maincolor-lt;
+    }
+  }
+
+  &.delete {
+    color: $red;
+    opacity: .7;
+
+    svg {
+      fill: $red;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .questionnaireListWrapper {
+    margin: 0 -30px 30px;
+  }
+
+  .questionnaireListName {
+    width: 260px;
+  }
+
+  .controlName {
+    display: none;
+  }
+
+  .questionnaireListItem {
+    padding-right: 4px;
+  }
+}

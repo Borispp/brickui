@@ -1,0 +1,13 @@
+.wrapper {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.copyright {
+  margin-bottom: 4px;
+}
+
+.link {
+  @include link;
+  margin: 0 4px;
+}

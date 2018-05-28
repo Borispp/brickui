@@ -1,0 +1,45 @@
+.wrapper {
+  position: relative;
+  background: $white;
+  color: $mainText;
+  padding: 15px 30px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,.2);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  background-image: url('images/logo.png');
+  background-size: 48px 48px;
+}
+
+.userDataWrapper {
+  margin-left: 12px;
+  max-width: calc(100% - 74px);
+}
+
+.companyName {
+  font-size: 13px;
+  padding-top: 6px;
+}
+
+.right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logout {
+  @include linkOrange;
+}

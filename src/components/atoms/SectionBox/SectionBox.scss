@@ -1,0 +1,9 @@
+.wrapper {
+  width: 100%;
+
+  // Size prop
+  &.default {
+    padding: 0 25px;
+    box-sizing: border-box;
+  }
+}

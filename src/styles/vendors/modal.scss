@@ -1,0 +1,12 @@
+.ReactModal__Overlay {
+  z-index: 1001;
+  background-color: rgba(66, 69, 72, 0.7) !important;
+}
+
+.pop-contain {
+  border-radius: 4px;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}

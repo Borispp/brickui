@@ -1,0 +1,78 @@
+.notification-container {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999999;
+  padding: 0 15px;
+  width: 320px;
+  max-height: calc(100% - 30px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.notification {
+  box-sizing: border-box;
+  position: relative;
+  opacity: .93;
+  margin-top: 15px;
+  border-radius: 2px;
+  background-color: #ccc;
+  cursor: pointer;
+  padding: 15px;
+  line-height: 1.2em;
+  color: $white;
+  font-size: 1em;
+}
+
+.notification .title {
+  margin: 0 0 5px;
+  line-height: 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.notification:hover,
+.notification:focus {
+  opacity: 1;
+}
+
+.notification-enter {
+  transform: translate3d(100%, 0, 0);
+  visibility: hidden;
+}
+
+.notification-enter.notification-enter-active {
+  transform: translate3d(0, 0, 0);
+  transition: all .4s;
+  visibility: visible;
+}
+
+.notification-leave {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+}
+
+.notification-leave.notification-leave-active {
+  transform: translate3d(100%, 0, 0);
+  transition: all .4s;
+  visibility: hidden;
+}
+
+.notification-info {
+  background-color: $success;
+}
+
+.notification-success {
+  background-color: $success;
+}
+
+.notification-warning {
+  background-color: $yellow;
+  color: $black;
+}
+
+.notification-error {
+  background-color: $redPale;
+  color: $white;
+}

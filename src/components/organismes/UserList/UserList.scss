@@ -1,0 +1,84 @@
+.listHeadline {
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.list {
+  margin: 0 -20px;
+}
+
+.listWrapper {
+  margin-bottom: 30px;
+}
+
+.listWrapperItem {
+  height: 40px;
+  display: flex;
+  padding: 0 14px 0 20px;
+  align-items: center;
+
+  &:nth-child(odd) {
+    background: $body;
+  }
+
+  &.isAdmin {
+    font-weight: 600;
+    background: $yellow;
+  }
+}
+
+.listItemName {
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 16px;
+  text-overflow: ellipsis;
+}
+
+.listItemRight {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.userRole {
+  padding-right: 15px;
+}
+
+.deleteWrapper {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  color: $red;
+  opacity: .7;
+  transition: color .15s ease-in-out, opacity .15s ease-in-out;
+
+  span {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    span {
+      text-decoration: none;
+    }
+  }
+}
+
+.deleteIcon {
+  margin-right: 4px;
+
+  svg {
+    width: 12px;
+    fill: $red;
+  }
+}
+
+.noUsers {
+  opacity: .7;
+}

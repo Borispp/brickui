@@ -1,0 +1,216 @@
+.wrapper {
+  position: relative;
+  height: 64px;
+
+  &.small {
+    height: 34px;
+  }
+}
+
+.label {
+  padding: 2px 0 7px;
+  outline: none;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: $noncolor-t3;
+
+  // Size
+  &.large {
+    padding-bottom: 7px;
+  }
+}
+
+.select {
+  outline: none;
+  transition: box-shadow .15s ease-in-out;
+
+  // Bold
+  &.bold {
+    :global {
+      .Select-value-label {
+        font-weight: 600;
+      }
+
+      .Select-option.is-selected {
+        display: none;
+      }
+
+      .Select-option.is-focused {
+        font-weight: 600;
+      }
+    }
+  }
+
+  // Size default
+  :global {
+    .Select-control {
+      height: 38px;
+      cursor: pointer;
+    }
+
+    .Select-placeholder {
+      line-height: 38px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .Select-control .Select-value {
+      line-height: 38px !important;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .Select-value-label {
+      line-height: 38px !important;
+      padding-right: 20px;
+    }
+
+    .Select-input {
+      height: 38px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .Select-option {
+      padding: 0 36px 0 16px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+
+  // Size small
+  &.small {
+    :global {
+      .Select-control {
+        height: 32px;
+        cursor: pointer;
+      }
+
+      .Select-placeholder {
+        line-height: 32px;
+      }
+
+      .Select-value {
+        line-height: 32px !important;
+        padding-left: 16px;
+      }
+
+      .Select-value-label {
+        line-height: 32px !important;
+      }
+
+      .Select-input {
+        height: 32px;
+      }
+
+      .Select-option {
+        padding: 0 10px 0 16px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  :global {
+    .Select-control {
+      border: 1px solid $noncolor-t8;
+      border-radius: 4px;
+      transition: border-color .15s ease-in-out;
+      box-shadow: none;
+    }
+
+    .Select-menu-outer {
+      position: relative;
+      top: 0;
+      border: 0 !important;
+    }
+
+    .Select-placeholder {
+      color: $noncolor-t12;
+    }
+
+    .Select-option {
+      box-sizing: border-box;
+      background-color: #fff;
+      color: $noncolor-t12;
+      font-size: 14px;
+    }
+
+    .Select-option.is-selected,
+    .Select-option.is-focused {
+      background-color: $noncolor-t10;
+      color: $black;
+    }
+
+    //.Select-option.is-selected {
+    //  display: none;
+    //}
+
+    .Select-arrow {
+      display: block;
+      border: 0;
+      width: 10px;
+      height: 6px;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSI2Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNEOURBREEiIGQ9Ik05LjgyIDEuNTI4Yy4xOTgtLjE4OC4xOTgtLjQ5NCAwLS42OGwtLjcxNS0uNjhjLS4xOTYtLjE4OS0uNTE2LS4xODktLjcxMiAwTDQuOTk5IDMuNDQ2IDEuNTc2LjE0MWMtLjE5OC0uMTg5LS41MTgtLjE4OS0uNzE1IDBsLS43MTQuNjhjLS4xOTcuMTg2LS4xOTcuNDkxIDAgLjY4TDQuNjQgNS44MjhjLjE5OS4xODcuNTE5LjE4Ny43MTUgMGw0LjQ2NS00LjN6Ii8+PC9zdmc+');
+      background-size: 10px 6px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &:hover :global {
+    .Select-control {
+      border-color: $noncolor-t5;
+    }
+  }
+
+  &:focus :global {
+    .Select-control {
+      border-color: $color-blue-nr;
+    }
+  }
+
+  &:global(.is-focused:not(.is-open)) {
+    :global(.Select-control) {
+      border-color: $color-blue-nr;
+      box-shadow: none;
+    }
+  }
+
+  &:global(.is-open) {
+    border-radius: 4px;
+    box-shadow: 0 2px 10px 0 $dark-15;
+
+    :global {
+      .Select-control {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-color: transparent;
+      }
+
+      .Select-arrow {
+        top: 0;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSI2Ij48ZGVmcz48ZmlsdGVyIGlkPSJhIj48ZmVGbG9vZCBmbG9vZC1jb2xvcj0iIzYxQTBENyIgZmxvb2Qtb3BhY2l0eT0iMSIgcmVzdWx0PSJmbG9vZE91dCIvPjxmZUNvbXBvc2l0ZSBvcGVyYXRvcj0iYXRvcCIgaW49ImZsb29kT3V0IiBpbjI9IlNvdXJjZUdyYXBoaWMiIHJlc3VsdD0iY29tcE91dCIvPjxmZUJsZW5kIGluPSJjb21wT3V0IiBpbjI9IlNvdXJjZUdyYXBoaWMiLz48L2ZpbHRlcj48L2RlZnM+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSIjRDlEQURBIiBkPSJNOS44MiAxLjUyOGMuMTk4LS4xODguMTk4LS40OTQgMC0uNjhsLS43MTUtLjY4Yy0uMTk2LS4xODktLjUxNi0uMTg5LS43MTIgMEw0Ljk5OSAzLjQ0NiAxLjU3Ni4xNDFjLS4xOTgtLjE4OS0uNTE4LS4xODktLjcxNSAwbC0uNzE0LjY4Yy0uMTk3LjE4Ni0uMTk3LjQ5MSAwIC42OEw0LjY0IDUuODI4Yy4xOTkuMTg3LjUxOS4xODcuNzE1IDBsNC40NjUtNC4zeiIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+);
+      }
+    }
+  }
+}
+
+.error {
+  bottom: -22px;
+
+  &.top {
+    top: 1px;
+    bottom: auto;
+  }
+}
+
+.selectValueOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

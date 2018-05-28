@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-concentric-order",
+    "./node_modules/prettier-stylelint/config.js"
+  ],
+  "rules": {
+    "max-nesting-depth": 5,
+    "selector-max-compound-selectors": 5,
+    "selector-class-pattern": "^[a-zA-Z0-9-_]+$",
+    "number-leading-zero": "never",
+    "at-rule-no-unknown": [
+      true, {
+        "ignoreAtRules": [
+          "mixin",
+          "extend",
+          "include"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true, {
+        "ignorePseudoClasses": [
+          "local",
+          "global"
+        ]
+      }
+    ],
+    "order/properties-alphabetical-order": null
+  }
+}

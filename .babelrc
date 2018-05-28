@@ -1,0 +1,16 @@
+{
+  "presets": [["env", {
+    "targets": {
+      "node": "current",
+      "browsers": ["last 2 versions"]
+    }
+  }], "stage-0", "react-app"],
+  "plugins": [
+    ["lodash", { "id": ["lodash", "recompose"] }]
+  ],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
+}

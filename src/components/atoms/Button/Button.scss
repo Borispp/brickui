@@ -1,0 +1,180 @@
+$content: '';
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  line-height: 24px;
+  font-family: 'proxima-nova', sans-serif;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  transition: background-color .1s ease-in-out, border-color .1s ease-in-out, color .1s ease-in-out, opacity .25s ease-in-out;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  text-decoration: none;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  &.submitting {
+    cursor: not-allowed;
+  }
+
+  &:active {
+    transform: translate(0, 1px);
+  }
+}
+
+.countText {
+  font-weight: 500;
+}
+
+// Size
+.small {
+  padding: 0 20px;
+  height: 36px;
+  font-size: 13px;
+}
+
+.normal {
+  padding: 0 16px;
+  height: 42px;
+  font-size: 14px;
+}
+
+.medium {
+  padding: 0 24px;
+  height: 50px;
+  font-size: 16px;
+}
+
+.big {
+  padding: 0 30px;
+  height: 54px;
+  font-size: 18px;
+}
+
+// Color prop
+.orange {
+  color: $white;
+  background: $maincolor-lt;
+
+  &:hover, &:active {
+    color: $white;
+    background: $maincolor-bd;
+  }
+
+  &[disabled] {
+    color: $white;
+    background: $grey-disabled;
+  }
+
+  &:active {
+    transform: translate(0, 1px);
+  }
+
+  &.submitting {
+    color: $white;
+    background: $maincolor-bd;
+    transform: translate(0, 0);
+  }
+}
+
+// Color prop
+.red {
+  color: $white;
+  background: $redPale;
+
+  &:hover, &:active {
+    color: $white;
+    background: $redPaleHover;
+  }
+
+  &[disabled] {
+    color: $white;
+    background: $grey-disabled;
+  }
+
+  &:active {
+    transform: translate(0, 1px);
+  }
+
+  &.submitting {
+    color: $white;
+    background: $redPaleHover;
+    transform: translate(0, 0);
+  }
+}
+
+.transparent {
+  color: $maincolor-lt;
+  border-color: $maincolor-lt;
+  background: $white;
+
+  &:hover, &:active {
+    color: $maincolor-bd;
+    border-color: $maincolor-bd;
+    background: $white;
+  }
+
+  &[disabled] {
+    color: $grey-disabled;
+    border-color: $grey-disabled;
+  }
+
+  &:active {
+    transform: translate(0, 1px);
+  }
+
+  &.submitting {
+    color: $maincolor-lt;
+    border-color: $maincolor-lt;
+    background: $white;
+    transform: translate(0, 0);
+
+    .submittingIcon {
+      svg {
+        fill: $maincolor-lt;
+      }
+    }
+  }
+}
+
+// fontWeight Prop
+.regular {
+  font-weight: 400;
+}
+
+.semiBold {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.submittingIcon {
+  svg {
+    fill: $white;
+    width: 18px;
+  }
+}
+
+// Kind
+.group {
+  font-size: 14px;
+  border-radius: 3px;
+
+  &.active {
+    font-weight: 500;
+  }
+
+  &:active {
+    transform: translate(0, 0);
+  }
+}

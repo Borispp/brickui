@@ -1,0 +1,4 @@
+config/
+scripts/
+src/translations.js
+src/registerServiceWorker.js

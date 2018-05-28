@@ -1,0 +1,32 @@
+.wrapper {
+  min-width: 350px;
+}
+
+.contentWrapper {
+  display: flex;
+  min-height: calc(100% - 60px);
+  background: $noncolor-t10;
+}
+
+.aside {
+  flex: 0 0 250px;
+  background: $white;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.content {
+  flex: 1;
+}
+
+@media (max-width: 930px) {
+  .contentWrapper {
+    display: block;
+  }
+
+  .aside {
+    width: 100%;
+    margin-bottom: -10px;
+    padding: 18px 20px 8px;
+  }
+}

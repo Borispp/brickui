@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  font-size: 13px;
+  color: $noncolor-t22;
+  align-items: flex-start;
+}
+
+.content {
+  margin-right: 10px;
+}
+
+.icon {
+  line-height: 0;
+
+  svg {
+    fill: $noncolor-t20;
+  }
+}

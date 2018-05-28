@@ -1,0 +1,35 @@
+@mixin link {
+  position: relative;
+  color: $linkColor;
+  transition: color .15s ease-in-out;
+  text-transform: none;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $maincolor-lt;
+    text-decoration: underline;
+  }
+
+  &:active {
+    top: 1px;
+  }
+}
+
+@mixin linkOrange {
+  position: relative;
+  color: $maincolor-lt;
+  transition: color .15s ease-in-out;
+  text-transform: none;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $maincolor-bd;
+    text-decoration: underline;
+  }
+
+  &:active {
+    top: 1px;
+  }
+}

@@ -1,0 +1,40 @@
+.wrapper {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.formStatusWrapper {
+  padding: 10px 0 0;
+}
+
+.fieldsWrapper {
+  margin-bottom: 36px;
+}
+
+.formField {
+  margin-bottom: 20px;
+}
+
+.forgotPasswordWrapper {
+  padding-top: 12px;
+}
+
+.forgotPasswordLink {
+  @include link;
+}
+
+.button {
+  min-width: 140px;
+  text-align: center;
+}
+
+.message {
+  justify-content: center;
+  padding-left: 0;
+  padding-bottom: 12px;
+}
+
+.classNameText {
+  margin-right: 0;
+  flex: 0 0 auto;
+}

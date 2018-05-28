@@ -1,0 +1,36 @@
+.wrapper {
+  text-align: center;
+}
+
+.popupContain {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  @include linkOrange;
+}
+
+.userEmail {
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.popupFooter {
+  padding: 0 0 0;
+}
+
+.popupContent {
+  padding-bottom: 52px !important;
+}
+
+.messageWrappper {
+  margin: 12px -30px 0;
+}
+
+.email {
+  font-weight: 600;
+}

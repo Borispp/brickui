@@ -1,0 +1,22 @@
+.dropdownButton {
+  cursor: pointer;
+}
+
+.formStatusWrapper {
+  padding: 10px 0 0;
+}
+
+.formStatus {
+  &.success {
+    color: $color-laurel-dk;
+  }
+
+  &.error {
+    color: $color-red-dk;
+  }
+}
+
+.popupContain {
+  display: flex;
+  justify-content: center;
+}

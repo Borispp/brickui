@@ -1,0 +1,58 @@
+.modal {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  outline: none;
+  border-radius: 4px;
+  background: $white;
+  width: 500px;
+  max-width: calc(100% - 30px);
+  max-height: calc(100% - 30px);
+  overflow-y: auto;
+  text-align: center;
+
+  &.big {
+    width: 800px;
+  }
+
+  &.calendar {
+    width: 360px;
+  }
+
+  &.small {
+    width: 360px;
+  }
+}
+
+.modalClose {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  line-height: 0;
+  height: 40px;
+  top: 18px;
+  right: 12px;
+  cursor: pointer;
+  opacity: 0.5;
+  transform: translate(0, -2px);
+  transition: opacity .15s ease-in-out;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: $black;
+    transition: fill .1s ease-in-out;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.modalBody {
+  border-radius: 4px;
+}
