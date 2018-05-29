@@ -34,6 +34,7 @@ class InterviewQuestionsForm extends React.PureComponent {
       // eslint-disable-next-line
       audios: {},
       error: false,
+      submitting: false,
     };
   }
 
@@ -63,6 +64,8 @@ class InterviewQuestionsForm extends React.PureComponent {
       }
     });
 
+    this.setState({ submitting: true });
+
     if (error) {
       this.setState({ error: true });
     } else {
@@ -72,11 +75,13 @@ class InterviewQuestionsForm extends React.PureComponent {
       await putMediaRequest(withParams(api.interview.putInterviewAnswers, { tokenId: this.props.tokenId }), formData);
       await this.props.getInterview(this.props.tokenId);
     }
+
+    this.setState({ submitting: false });
   };
 
   render() {
     const { className, data, translations } = this.props;
-    const { error } = this.state;
+    const { error, submitting } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -106,7 +111,7 @@ class InterviewQuestionsForm extends React.PureComponent {
         )}
 
         <Block className={styles.controls}>
-          <Button color="orange" className={styles.controlsSubmit} onClick={this.onSubmit}>
+          <Button color="orange" className={styles.controlsSubmit} submitting={submitting} onClick={this.onSubmit}>
             Save
           </Button>
         </Block>
