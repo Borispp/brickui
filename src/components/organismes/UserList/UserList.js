@@ -6,6 +6,7 @@ import map from 'lodash/map';
 import get from 'lodash/get';
 
 import Block from 'components/atoms/Block';
+import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
@@ -23,6 +24,9 @@ import { getCompanyUserList as getCompanyUserListSelector } from 'modules/compan
 import { getTranslations } from 'modules/systemData/selectors';
 
 import roles from 'utils/roleHelper';
+
+import app from 'routes/app';
+import { withParams } from 'utils/url';
 
 import styles from './UserList.scss';
 
@@ -120,6 +124,17 @@ class UserList extends React.PureComponent {
                 </Block>
 
                 <Block className={styles.listItemRight}>
+                  <Link
+                    target="_blank"
+                    href={withParams(app.account.invitedUser, {
+                      inviteId: invite._id,
+                      token: invite.verificationToken,
+                    })}
+                    className={classNames(styles.link, styles.controlButtonWrapper)}
+                  >
+                    <Svg type="link" className={styles.controlButtonIcon} />
+                    <Text className={styles.controlName}>{translations.genericRegisterLink}</Text>
+                  </Link>
                   {!(get(invite, 'role.name') === roles.admin) && (
                     <Block onClick={this.onInviteDelete(invite._id)} className={styles.deleteWrapper}>
                       <Svg type="close" className={styles.deleteIcon} />

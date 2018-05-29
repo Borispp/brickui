@@ -38,6 +38,8 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+  flex: 0 0 220px;
+  justify-content: flex-end;
 }
 
 .userRole {
@@ -79,6 +81,58 @@
   }
 }
 
+.controlButtonWrapper {
+  @include link();
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 6px;
+  transform: translate(0, 1px);
+  transition: color .15s ease-in-out, opacity .15s ease-in-out;
+
+  span {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    span {
+      text-decoration: none;
+    }
+
+    svg {
+      fill: $maincolor-lt;
+    }
+  }
+}
+.controlButtonIcon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 15px;
+    fill: $linkColor;
+    transition: fill .15s ease-in-out;
+  }
+}
+
 .noUsers {
   opacity: .7;
+}
+
+
+@media (max-width: 600px) {
+  .controlName {
+    display: none;
+  }
+
+  .listItemRight {
+    flex: 0;
+  }
 }

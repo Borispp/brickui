@@ -40,6 +40,7 @@ export default {
   genericUpdateSuccess: 'The information was successfully updated',
   genericAllFieldsIsRequired: 'All fields is required',
   genericAllQuestionsIsRequired: 'Not all questions answered',
+  genericRegisterLink: 'Register link',
 
   // Form
   formRegisterSuccess: 'Registred successfully',

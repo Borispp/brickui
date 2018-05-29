@@ -38,8 +38,6 @@ class InterviewQuestionsForm extends React.PureComponent {
     };
   }
 
-  // onChange = name => data => this.setState({ audios[name]: data });
-
   onChange = name => data => {
     this.setState(() => ({
       audios: {
