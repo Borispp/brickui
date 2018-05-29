@@ -81,7 +81,7 @@ class UserList extends React.PureComponent {
             {map(get(userList, 'users'), user => (
               <Block
                 className={classNames(styles.listWrapperItem, {
-                  [styles.isAdmin]: get(user, 'local.role.name') === roles.admin,
+                  [styles.isAdmin]: [roles.admin, roles.globalAdmin].includes(get(user, 'local.role.name')),
                 })}
                 key={user._id}
               >
@@ -93,7 +93,7 @@ class UserList extends React.PureComponent {
                   {get(user, 'local.role.name') === roles.admin && (
                     <Text className={styles.userRole}>{roles.admin}</Text>
                   )}
-                  {!(get(user, 'local.role.name') === roles.admin) && (
+                  {![roles.admin, roles.globalAdmin].includes(get(user, 'local.role.name')) && (
                     <Block onClick={this.onUserDelete(user._id)} className={styles.deleteWrapper}>
                       <Svg type="close" className={styles.deleteIcon} />
                     </Block>

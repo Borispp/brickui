@@ -99,7 +99,7 @@ class CompaniesList extends React.PureComponent {
     return (
       <Block className={classNames(styles.wrapper, className)}>
         <Block className={styles.companiesListWrapper}>
-          {map(companiesList, ({ _id, name, expiresAt }) => (
+          {map(companiesList, ({ _id, name, expiresAt, isMain }) => (
             <Block key={_id} className={styles.companiesListItem}>
               <Link
                 href={withParams(appRoutes.dashboard.questionnairesList, { companyId: _id })}
@@ -123,10 +123,12 @@ class CompaniesList extends React.PureComponent {
                 <Text className={styles.controlName}>Users</Text>
               </Block>
 
-              <Block onClick={this.onCompanyDeleteModalOpen(_id)} className={styles.deleteWrapper}>
-                <Svg type="close" className={styles.deleteIcon} />
-                <Text className={styles.controlName}>Delete</Text>
-              </Block>
+              {!isMain && (
+                <Block onClick={this.onCompanyDeleteModalOpen(_id)} className={styles.deleteWrapper}>
+                  <Svg type="close" className={styles.deleteIcon} />
+                  <Text className={styles.controlName}>Delete</Text>
+                </Block>
+              )}
             </Block>
           ))}
         </Block>
@@ -188,6 +190,7 @@ CompaniesList.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string,
       name: PropTypes.string,
+      isMain: PropTypes.bool,
       expiresAt: PropTypes.string,
     }),
   ),
