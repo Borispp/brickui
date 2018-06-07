@@ -52,9 +52,11 @@ class CompaniesListPage extends React.PureComponent {
           <CompaniesList />
           <br />
           <br />
-          <Button className={styles.button} size="medium" color="orange" onClick={this.onAddCompanyModalOpen}>
-            {translations.companyAddButton}
-          </Button>
+          <Block className={styles.submitWrapper}>
+            <Button className={styles.button} size="medium" color="orange" onClick={this.onAddCompanyModalOpen}>
+              {translations.companyAddButton}
+            </Button>
+          </Block>
 
           <Modal isOpen={isAddCompanyModalOpen} onModalClose={this.onAddCompanyModalClose}>
             <ModalContainer title={translations.companyAddButton} type="centred">

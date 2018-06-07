@@ -1,5 +1,5 @@
 .companiesListWrapper {
-  margin: 0;
+  margin: 0 -30px;
 }
 
 .companiesListItem {
@@ -12,6 +12,11 @@
   &:nth-child(odd) {
     background: $white;
   }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
 }
 
 .companyName {
@@ -45,6 +50,7 @@
   font-weight: 400;
   cursor: pointer;
   padding: 6px;
+  height: 24px;
   transform: translate(0, 1px);
   color: $red;
   opacity: .7;
@@ -71,13 +77,16 @@
 
 
 .usersIcon {
-  margin-right: 6px;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
 
   svg {
-    width: 16px;
+    width: 15px;
     fill: $linkColor;
-    opacity: .4;
-    transition: opacity .15s ease-in-out;
+    transition: fill .15s ease-in-out;
   }
 }
 
@@ -89,11 +98,31 @@
   cursor: pointer;
   padding: 6px;
   margin-left: 20px;
+
+  &:hover {
+    opacity: 1;
+
+    span {
+      text-decoration: none;
+    }
+
+    svg {
+      fill: $maincolor-lt;
+    }
+  }
 }
 
 .openExpireLink,
-.usersWrapper .controlName {
+.usersWrapper {
   @include link();
+}
+
+.openExpireLink {
+  width: 80px;
+
+  &.expired {
+    color: $red;
+  }
 }
 
 .companyToChangeExpiration {
@@ -131,11 +160,14 @@
 
 @media (max-width: 600px) {
   .companiesListWrapper {
-    margin: 0 -30px;
+    margin: 0 -15px;
   }
 
   .companyName {
-    width: 260px;
+    width: auto;
+    flex: 1;
+    font-size: 15px;
+    margin-right: 10px;
   }
 
   .controlName {
@@ -143,6 +175,29 @@
   }
 
   .companiesListItem {
-    padding-right: 4px;
+    padding-left: 15px;
+    padding-right: 0;
+  }
+
+  .usersWrapper {
+    margin-left: 2px;
+  }
+
+  .controls {
+    flex: 0 0 150px;
+  }
+
+  .openExpireLink {
+    flex: 0 0 80px;
+    font-size: 13px;
+  }
+
+  .deleteWrapper {
+    margin-left: 0;
+  }
+
+  .submitWrapper {
+    display: flex;
+    justify-content: center;
   }
 }

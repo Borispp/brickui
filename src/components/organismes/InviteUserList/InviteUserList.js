@@ -10,6 +10,7 @@ import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
+import Strong from 'components/atoms/Strong';
 import Svg from 'components/atoms/Svg';
 import Modal from 'components/atoms/Modal';
 
@@ -23,6 +24,7 @@ import { getInterviewUserPassedList, getInterviewUserIsntPassedList } from 'modu
 import { getTranslations } from 'modules/systemData/selectors';
 import { postRequest } from 'modules/api/actions';
 
+import { interpolate } from 'utils/text';
 import api from 'routes/api';
 import app from 'routes/app';
 import { withParams } from 'utils/url';
@@ -38,7 +40,7 @@ class InviteUserList extends React.PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { companyId, questionnaireId } = this.props;
     this.props.getInterviewUserList({ companyId, questionnaireId });
   }
@@ -74,7 +76,15 @@ class InviteUserList extends React.PureComponent {
   };
 
   render() {
-    const { className, userListPassed, userListIsntPassed, translations, questionnaireId, companyId } = this.props;
+    const {
+      className,
+      userListPassed,
+      userListIsntPassed,
+      translations,
+      questionnaireId,
+      companyId,
+      questionnaireName,
+    } = this.props;
     const { isInviteFormOpen } = this.state;
 
     return (
@@ -84,20 +94,28 @@ class InviteUserList extends React.PureComponent {
             {translations.userListPassedInterviewHeadline}
           </Heading>
           <Block className={styles.list}>
-            {map(userListPassed, user => (
-              <Block className={styles.listWrapperItem} key={user._id}>
+            {map(userListPassed, interview => (
+              <Block className={styles.listWrapperItem} key={interview._id}>
                 <Block className={classNames(styles.listItemName)}>
-                  {get(user, 'fullName')} ({get(user, 'email')})
+                  <Text className={styles.dateText}>{interview.updatedAt}</Text>
+                  <Strong>
+                    {get(interview, 'userName')} ({get(interview, 'email')})
+                  </Strong>
                 </Block>
 
                 <Block className={styles.listItemRight}>
                   <Link
                     target="_blank"
-                    href={withParams(app.interview.main, { questionnaireId, tokenId: user.token })}
+                    href={withParams(app.interview.review, {
+                      companyId: interview.company,
+                      interviewId: interview._id,
+                    })}
                     className={classNames(styles.link, styles.controlButtonWrapper)}
                   >
                     <Svg type="link" className={styles.controlButtonIcon} />
-                    <Text className={styles.controlName}>{translations.genericDirectLink}</Text>
+                    <Text className={styles.controlName}>
+                      {interview.isReviewed ? translations.genericReviewChange : translations.genericReview}
+                    </Text>
                   </Link>
                 </Block>
               </Block>
@@ -112,16 +130,19 @@ class InviteUserList extends React.PureComponent {
             {translations.userListInterviewInvitedHeadline}
           </Heading>
           <Block className={styles.list}>
-            {map(userListIsntPassed, user => (
-              <Block className={styles.listWrapperItem} key={user._id}>
+            {map(userListIsntPassed, interview => (
+              <Block className={styles.listWrapperItem} key={interview._id}>
                 <Block className={classNames(styles.listItemName)}>
-                  {get(user, 'fullName')} ({get(user, 'email')})
+                  <Text className={styles.dateText}>{interview.createdAt}</Text>
+                  <Strong>
+                    {get(interview, 'fullName')} ({get(interview, 'email')})
+                  </Strong>
                 </Block>
 
                 <Block className={styles.listItemRight}>
                   <Link
                     target="_blank"
-                    href={withParams(app.interview.main, { questionnaireId, tokenId: user.token })}
+                    href={withParams(app.interview.main, { questionnaireId, tokenId: interview.token })}
                     className={classNames(styles.link, styles.controlButtonWrapper)}
                   >
                     <Svg type="link" className={styles.controlButtonIcon} />
@@ -129,13 +150,13 @@ class InviteUserList extends React.PureComponent {
                   </Link>
                   <Block
                     className={classNames(styles.link, styles.controlButtonWrapper)}
-                    onClick={this.resendInvitation({ tokenId: user.token })}
+                    onClick={this.resendInvitation({ tokenId: interview.token })}
                   >
                     <Svg type="resend" className={styles.controlButtonIcon} />
                     <Text className={styles.controlName}>{translations.resendInterviewInvitation}</Text>
                   </Block>
                   <Block
-                    onClick={this.onInterviewInviteDelete(user.token)}
+                    onClick={this.onInterviewInviteDelete(interview.token)}
                     className={classNames(styles.controlButtonWrapper, styles.delete)}
                   >
                     <Svg type="close" className={styles.controlButtonIcon} />
@@ -148,12 +169,17 @@ class InviteUserList extends React.PureComponent {
             userListIsntPassed.length === 0 && <Block className={styles.noUsers}>{translations.userInvitedNone}</Block>}
         </Block>
 
-        <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
-          {translations.usersInviteUser}
-        </Button>
+        <Block className={styles.controlWrapper}>
+          <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
+            {translations.usersInviteUser}
+          </Button>
+        </Block>
 
         <Modal isOpen={isInviteFormOpen} onModalClose={this.onInviteFormModalClose}>
-          <ModalContainer title={translations.usersSendInvitationTitle} type="centred">
+          <ModalContainer
+            title={interpolate(translations.usersSendInvitationTitle, { questionnaireName })}
+            type="centred"
+          >
             <InterviewInviteForm
               onClose={this.onInviteFormModalClose}
               companyId={companyId}
@@ -166,24 +192,29 @@ class InviteUserList extends React.PureComponent {
   }
 }
 
-const userList = PropTypes.shape({
+const interview = PropTypes.shape({
   _id: PropTypes.string,
   email: PropTypes.string,
-  fullName: PropTypes.string,
+  userName: PropTypes.string,
   token: PropTypes.string,
+  company: PropTypes.string,
+  updatedAt: PropTypes.string,
+  createdAt: PropTypes.string,
   isSaved: PropTypes.bool,
+  isReviewed: PropTypes.bool,
 });
 
 InviteUserList.propTypes = {
   className: PropTypes.string,
   companyId: PropTypes.string.isRequired,
   questionnaireId: PropTypes.string.isRequired,
+  questionnaireName: PropTypes.string.isRequired,
   getInterviewUserList: PropTypes.func.isRequired,
   interviewDelete: PropTypes.func.isRequired,
   setNotificationSuccess: PropTypes.func.isRequired,
   setNotificationError: PropTypes.func.isRequired,
-  userListPassed: PropTypes.arrayOf(userList),
-  userListIsntPassed: PropTypes.arrayOf(userList),
+  userListPassed: PropTypes.arrayOf(interview),
+  userListIsntPassed: PropTypes.arrayOf(interview),
   translations: PropTypes.object.isRequired,
 };
 

@@ -8,12 +8,12 @@ import appRoutes from 'routes/app';
 import { isUserAuthenticated } from 'modules/account/selectors';
 
 export default WrappedComponent => {
-  const IsAuthenticated = ({ isAuthenticated }) => {
+  const IsAuthenticated = ({ isAuthenticated, ...props }) => {
     if (!isAuthenticated) {
       return <Redirect to={appRoutes.account.signIn} />;
     }
 
-    return <WrappedComponent />;
+    return <WrappedComponent {...props} />;
   };
 
   IsAuthenticated.propTypes = {

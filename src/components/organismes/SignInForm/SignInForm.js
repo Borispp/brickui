@@ -94,7 +94,7 @@ class SignInForm extends React.PureComponent {
         <Block className={styles.fieldsWrapper}>
           <Block>
             <FormField
-              name="email"
+              name="username"
               id="email"
               component={InputText}
               type="email"
@@ -204,7 +204,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           minLength: props.translations.messagePasswordTooShort,
         },
       },
-      email: {
+      username: {
         rules: {
           required: true,
           format: 'email',

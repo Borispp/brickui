@@ -152,6 +152,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     className: styles.inviteUserForm,
     initialValues: {
       questionnaireId: props.questionnaireId,
+      companyId: props.companyId,
       roleName: roles.user,
     },
     onSubmit,

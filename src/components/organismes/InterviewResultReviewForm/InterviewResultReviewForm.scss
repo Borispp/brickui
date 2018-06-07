@@ -1,0 +1,35 @@
+.mainHeadline {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.formField {
+  margin-bottom: 15px;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.textArea {
+  height: 100px;
+}
+
+.interviewResultReviewFormHeading {
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+
+@media (max-width: 600px) {
+  .mainHeadline {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .submitWrapper {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -10,3 +10,7 @@ export const getQuestionnaire = createSelector(getQuestionnaires, questionnaires
 export const getQuestionnaireList = createSelector(getQuestionnaires, questionnaires =>
   get(questionnaires, 'questionnaireList'),
 );
+
+export const getQuestionnaireInterviewUserDetails = createSelector(getQuestionnaires, questionnaires =>
+  get(questionnaires, 'questionnaireUserDetails'),
+);

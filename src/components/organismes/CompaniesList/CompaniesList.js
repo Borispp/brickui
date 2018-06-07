@@ -49,12 +49,12 @@ class CompaniesList extends React.PureComponent {
   }
 
   onCompanyDelete = async () => {
-    await this.props.companyDelete(this.state.companyToDelete);
+    await this.props.companyDelete(this.state.companyToDelete._id);
     this.setState({ companyToDelete: null });
     this.props.setNotificationSuccess({ content: this.props.translations.companyDeleteDescription });
   };
 
-  onCompanyDeleteModalOpen = _id => () => this.setState({ companyToDelete: _id });
+  onCompanyDeleteModalOpen = ({ _id, name }) => () => this.setState({ companyToDelete: { _id, name } });
 
   onCompanyDeleteModalClose = () => this.setState({ companyToDelete: null });
 
@@ -108,27 +108,30 @@ class CompaniesList extends React.PureComponent {
                 {name}
               </Link>
 
-              <Block
-                onClick={this.onCompanyExpirationModalOpen({
-                  _id,
-                  name,
-                  expiresAt: moment(expiresAt),
-                })}
-                className={styles.openExpireLink}
-              >
-                <Strong>Expire:</Strong> {moment(expiresAt).format('DD/MM/YYYY')}
-              </Block>
-              <Block onClick={this.onCompanyUsersModalOpen(_id, name)} className={styles.usersWrapper}>
-                <Svg type="users" className={styles.usersIcon} />
-                <Text className={styles.controlName}>Users</Text>
-              </Block>
-
-              {!isMain && (
-                <Block onClick={this.onCompanyDeleteModalOpen(_id)} className={styles.deleteWrapper}>
-                  <Svg type="close" className={styles.deleteIcon} />
-                  <Text className={styles.controlName}>Delete</Text>
+              <Block className={styles.controls}>
+                <Block
+                  onClick={this.onCompanyExpirationModalOpen({
+                    _id,
+                    name,
+                    expiresAt: moment(expiresAt),
+                  })}
+                  className={classNames(styles.openExpireLink, { [styles.expired]: moment() > moment(expiresAt) })}
+                >
+                  <Strong>{moment() > moment(expiresAt) ? 'Expired' : 'Expire'}</Strong>{' '}
+                  {moment(expiresAt).format('DD/MM/YYYY')}
                 </Block>
-              )}
+                <Block onClick={this.onCompanyUsersModalOpen(_id, name)} className={styles.usersWrapper}>
+                  <Svg type="users" className={styles.usersIcon} />
+                  <Text className={styles.controlName}>Users</Text>
+                </Block>
+
+                {!isMain && (
+                  <Block onClick={this.onCompanyDeleteModalOpen({ _id, name })} className={styles.deleteWrapper}>
+                    <Svg type="close" className={styles.deleteIcon} />
+                    <Text className={styles.controlName}>Delete</Text>
+                  </Block>
+                )}
+              </Block>
             </Block>
           ))}
         </Block>
@@ -156,14 +159,19 @@ class CompaniesList extends React.PureComponent {
           </Modal>
         )}
 
-        <Modal isOpen={!!companyToDelete} onModalClose={this.onCompanyDeleteModalClose}>
-          <ModalContainer title={translations.companyConfirmDelete} type="centred">
-            <Paragraph>{translations.companyConfirmDeleteDescription}</Paragraph>
-            <Button color="red" size="medium" onClick={this.onCompanyDelete} className={styles.companyDeleteButton}>
-              {translations.buttonDeleteCompany}
-            </Button>
-          </ModalContainer>
-        </Modal>
+        {!!companyToDelete && (
+          <Modal isOpen={!!companyToDelete} onModalClose={this.onCompanyDeleteModalClose}>
+            <ModalContainer
+              title={interpolate(translations.companyConfirmDelete, { companyName: companyToDelete.name })}
+              type="centred"
+            >
+              <Paragraph>{translations.companyConfirmDeleteDescription}</Paragraph>
+              <Button color="red" size="medium" onClick={this.onCompanyDelete} className={styles.companyDeleteButton}>
+                {translations.buttonDeleteCompany}
+              </Button>
+            </ModalContainer>
+          </Modal>
+        )}
 
         <Modal isOpen={!!companyUserList} onModalClose={this.onCompanyUsersModalClose}>
           <ModalContainer

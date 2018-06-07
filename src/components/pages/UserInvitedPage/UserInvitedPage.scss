@@ -17,7 +17,8 @@
 }
 
 .logo {
-  width: 100px;
+  width: 240px;
+  margin-bottom: 22px;
 }
 
 .headline {
@@ -29,6 +30,7 @@
 .headlineDescription {
   margin: 0;
   font-size: 14px;
+  line-height: 20px;
 }
 
 .headlineWrapper {
@@ -47,4 +49,15 @@
   text-align: center;
   padding: 0 15px;
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .headline {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .headlineWrapper {
+    padding: 0 12px;
+  }
 }

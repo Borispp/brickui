@@ -10,12 +10,12 @@ import { withParams } from 'utils/url';
 import { isUserAuthenticated, getUserRole, getUserCompanyId } from 'modules/account/selectors';
 
 export default WrappedComponent => {
-  const isGlobalAdmin = ({ isAuthenticated, userRole, companyId }) => {
+  const isGlobalAdmin = ({ isAuthenticated, userRole, companyId, ...props }) => {
     if (isAuthenticated && userRole !== roles.globalAdmin) {
       return <Redirect to={withParams(appRoutes.dashboard.questionnairesList, { companyId })} />;
     }
 
-    return <WrappedComponent />;
+    return <WrappedComponent {...props} />;
   };
 
   isGlobalAdmin.propTypes = {

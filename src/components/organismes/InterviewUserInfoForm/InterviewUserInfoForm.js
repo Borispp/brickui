@@ -142,6 +142,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       userName: {
         required: true,
       },
+      phone: {
+        required: true,
+      },
       email: {
         rules: {
           required: true,

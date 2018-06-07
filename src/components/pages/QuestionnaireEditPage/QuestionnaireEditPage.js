@@ -25,7 +25,7 @@ class QuestionnaireEditPage extends React.PureComponent {
     };
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const { match: { params: { questionnaireId } } } = this.props;
     const { status, message } = await this.props.getQuestionnaireSingle(questionnaireId);
 

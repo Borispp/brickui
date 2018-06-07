@@ -14,7 +14,7 @@ import AllRightsReservedBlock from 'components/atoms/AllRightsReservedBlock';
 import ResetPasswordForm from 'components/organismes/ResetPasswordForm';
 import { getTranslations } from 'modules/systemData/selectors';
 
-import logo from 'images/logo.png';
+import logo from 'images/logo_y_big.png';
 
 import isAnonymous from 'utils/isAnonymous';
 

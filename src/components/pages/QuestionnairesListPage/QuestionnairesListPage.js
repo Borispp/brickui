@@ -19,14 +19,17 @@ import Modal from 'components/atoms/Modal';
 import ModalContainer from 'components/molecules/ModalContainer';
 
 import InviteUserList from 'components/organismes/InviteUserList';
+import InterviewInviteForm from 'components/organismes/InterviewInviteForm';
 
-import { getQuestionnaireList, questionnaireDelete } from 'modules/questionnaires/actions';
+import { getQuestionnaireList, clearQuestionnaireList, questionnaireDelete } from 'modules/questionnaires/actions';
 import { setNotificationSuccess, setNotificationError } from 'modules/app/actions';
 import { getQuestionnaireList as getQuestionnaireListSelector } from 'modules/questionnaires/selectors';
 import { getTranslations } from 'modules/systemData/selectors';
+import { getUserRole } from 'modules/account/selectors';
 
 import { withParams } from 'utils/url';
 import { interpolate } from 'utils/text';
+import roles from 'utils/roleHelper';
 
 import appRoutes from 'routes/app';
 
@@ -39,10 +42,11 @@ class QuestionnairesListPage extends React.PureComponent {
     this.state = {
       error: null,
       questionnaireUserList: null,
+      questionnaire: null,
     };
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const { status, message } = await this.props.getQuestionnaireList(get(this.props.match, 'params.companyId'));
 
     if (status === 'error') {
@@ -52,12 +56,32 @@ class QuestionnairesListPage extends React.PureComponent {
     }
   };
 
+  componentDidUpdate = async prevProps => {
+    if (get(prevProps, 'match.params.companyId') !== get(this.props, 'match.params.companyId')) {
+      const { status, message } = await this.props.getQuestionnaireList(get(this.props, 'match.params.companyId'));
+
+      if (status === 'error') {
+        this.setState({
+          error: message,
+        });
+      }
+    }
+  };
+
+  componentWillUnmount() {
+    this.props.clearQuestionnaireList();
+  }
+
+  onInviteFormModalOpen = questionnaire => () => this.setState({ questionnaire });
+
+  onInviteFormModalClose = () => this.setState({ questionnaire: null });
+
   onQuestionnaireUserListModalOpen = questionnaire => () => this.setState({ questionnaireUserList: questionnaire });
 
   onQuestionnaireUserListModalClose = () => this.setState({ questionnaireUserList: null });
 
-  onQuestionnaireDelete = questionnaireId => async () => {
-    const { status, message } = await this.props.questionnaireDelete(questionnaireId);
+  onQuestionnaireDelete = ({ _id, company }) => async () => {
+    const { status, message } = await this.props.questionnaireDelete({ questionnaireId: _id, companyId: company });
     if (status === 'error') {
       this.props.setNotificationError({ content: message });
       return;
@@ -68,8 +92,8 @@ class QuestionnairesListPage extends React.PureComponent {
   };
 
   render() {
-    const { className, translations, questionnaireList, match: { params: { companyId } } } = this.props;
-    const { error, questionnaireUserList } = this.state;
+    const { className, translations, questionnaireList, userRole, match: { params: { companyId } } } = this.props;
+    const { error, questionnaireUserList, questionnaire } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -90,7 +114,7 @@ class QuestionnairesListPage extends React.PureComponent {
         )}
 
         <Block className={styles.questionnaireListWrapper}>
-          {map(questionnaireList, ({ _id, title }) => (
+          {map(questionnaireList, ({ _id, title, company }) => (
             <Block key={_id} className={styles.questionnaireListItem}>
               <Link
                 href={withParams(appRoutes.dashboard.questionnaireEdit, { companyId, questionnaireId: _id })}
@@ -100,30 +124,50 @@ class QuestionnairesListPage extends React.PureComponent {
               </Link>
 
               <Block className={styles.questionnaireListControls}>
+                {[roles.globalAdmin, roles.admin].includes(userRole) && (
+                  <Link
+                    href={withParams(appRoutes.interview.allReviews, { companyId, questionnaireId: _id })}
+                    className={styles.controlButtonWrapper}
+                  >
+                    <Svg type="feedback" className={styles.controlButtonIcon} />
+                    <Text className={styles.controlName}>{translations.allInterviewers}</Text>
+                  </Link>
+                )}
+                <Block
+                  onClick={this.onInviteFormModalOpen({ _id, title, company })}
+                  className={styles.controlButtonWrapper}
+                >
+                  <Svg type="invite" className={styles.controlButtonIcon} />
+                  <Text className={styles.controlName}>{translations.usersInviteUser}</Text>
+                </Block>
                 <Block
                   onClick={this.onQuestionnaireUserListModalOpen({ _id, title })}
                   className={styles.controlButtonWrapper}
                 >
-                  <Svg type="invite" className={styles.controlButtonIcon} />
-                  <Text className={styles.controlName}>{translations.usersSendInvitation}</Text>
+                  <Svg type="users" className={styles.controlButtonIcon} />
+                  <Text className={styles.controlName}>{translations.candidateManagement}</Text>
                 </Block>
 
-                <Block
-                  onClick={this.onQuestionnaireDelete(_id)}
-                  className={classNames(styles.controlButtonWrapper, styles.delete)}
-                >
-                  <Svg type="close" className={styles.controlButtonIcon} />
-                  <Text className={styles.controlName}>{translations.genericDelete}</Text>
-                </Block>
+                {[roles.globalAdmin, roles.admin].includes(userRole) && (
+                  <Block
+                    onClick={this.onQuestionnaireDelete({ _id, company })}
+                    className={classNames(styles.controlButtonWrapper, styles.delete)}
+                  >
+                    <Svg type="close" className={styles.controlButtonIcon} />
+                    <Text className={styles.controlName}>{translations.genericDelete}</Text>
+                  </Block>
+                )}
               </Block>
             </Block>
           ))}
         </Block>
 
         {!error && (
-          <Button color="orange" href={withParams(appRoutes.dashboard.questionnaireAdd, { companyId })}>
-            {translations.questionnaireAddButton}
-          </Button>
+          <Block className={styles.submitWrapper}>
+            <Button color="orange" size="medium" href={withParams(appRoutes.dashboard.questionnaireAdd, { companyId })}>
+              {translations.questionnaireAddButton}
+            </Button>
+          </Block>
         )}
 
         <Modal isOpen={!!questionnaireUserList} onModalClose={this.onQuestionnaireUserListModalClose}>
@@ -136,10 +180,29 @@ class QuestionnairesListPage extends React.PureComponent {
               <InviteUserList
                 companyId={this.props.match.params.companyId}
                 questionnaireId={get(questionnaireUserList, '_id')}
+                questionnaireName={get(questionnaireUserList, 'title')}
               />
             )}
           </ModalContainer>
         </Modal>
+
+        {questionnaire && (
+          <Modal isOpen={!!questionnaire} onModalClose={this.onInviteFormModalClose}>
+            <ModalContainer
+              title={
+                questionnaire &&
+                interpolate(translations.usersSendInvitationTitle, { questionnaireName: questionnaire.title })
+              }
+              type="centred"
+            >
+              <InterviewInviteForm
+                onClose={this.onInviteFormModalClose}
+                companyId={questionnaire.company}
+                questionnaireId={questionnaire._id}
+              />
+            </ModalContainer>
+          </Modal>
+        )}
       </Block>
     );
   }
@@ -148,6 +211,7 @@ class QuestionnairesListPage extends React.PureComponent {
 QuestionnairesListPage.propTypes = {
   className: PropTypes.string,
   getQuestionnaireList: PropTypes.func.isRequired,
+  clearQuestionnaireList: PropTypes.func.isRequired,
   questionnaireDelete: PropTypes.func.isRequired,
   setNotificationSuccess: PropTypes.func.isRequired,
   setNotificationError: PropTypes.func.isRequired,
@@ -155,6 +219,7 @@ QuestionnairesListPage.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string,
       title: PropTypes.string,
+      company: PropTypes.string,
     }),
   ),
   translations: PropTypes.object.isRequired,
@@ -164,6 +229,7 @@ QuestionnairesListPage.propTypes = {
       questionnaireId: PropTypes.string,
     }),
   }),
+  userRole: PropTypes.string.isRequired,
 };
 
 QuestionnairesListPage.defaultProps = {
@@ -174,11 +240,13 @@ QuestionnairesListPage.defaultProps = {
 
 const mapStateToProps = state => ({
   questionnaireList: getQuestionnaireListSelector(state),
+  userRole: getUserRole(state),
   translations: getTranslations(state),
 });
 
 const mapDispatchToProps = {
   getQuestionnaireList,
+  clearQuestionnaireList,
   questionnaireDelete,
   setNotificationSuccess,
   setNotificationError,

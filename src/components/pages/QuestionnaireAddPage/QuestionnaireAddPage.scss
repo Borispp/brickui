@@ -7,3 +7,17 @@
   margin-top: 0;
   margin-bottom: 24px;
 }
+
+@media (max-width: 600px) {
+  .wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+
+  .mainHeadline {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+}

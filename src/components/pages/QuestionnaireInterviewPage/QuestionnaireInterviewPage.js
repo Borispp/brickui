@@ -8,6 +8,8 @@ import Block from 'components/atoms/Block';
 import Heading from 'components/atoms/Heading';
 import Message from 'components/atoms/Message';
 import Modal from 'components/atoms/Modal';
+import Svg from 'components/atoms/Svg';
+import WarningModal from 'components/atoms/WarningModal';
 
 import ModalContainer from 'components/molecules/ModalContainer';
 
@@ -19,6 +21,8 @@ import { getInterview } from 'modules/interview/actions';
 import { getInterview as getInterviewSelector, getQuestionnaire } from 'modules/interview/selectors';
 import { getTranslations } from 'modules/systemData/selectors';
 
+import { iOS, iOSversion, isSafari } from 'utils/validationHelpers';
+
 import styles from './QuestionnaireInterviewPage.scss';
 
 class QuestionnaireInterviewPage extends React.PureComponent {
@@ -28,14 +32,23 @@ class QuestionnaireInterviewPage extends React.PureComponent {
     this.state = {
       error: null,
       isUserInfoModalOpen: false,
+      isIosBlocked: false,
     };
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const { match: { params: { tokenId } } } = this.props;
     await this.props.getInterview(tokenId);
     if (!this.props.interview.phone) {
       this.setState({ isUserInfoModalOpen: true });
+    }
+
+    const iOSversionNum = iOSversion();
+
+    if ((iOS && iOSversionNum < 11) || (iOS && !isSafari)) {
+      this.setState({
+        isIosBlocked: true,
+      });
     }
   };
 
@@ -43,7 +56,7 @@ class QuestionnaireInterviewPage extends React.PureComponent {
 
   render() {
     const { className, translations, questionnaire, interview, match } = this.props;
-    const { error, isUserInfoModalOpen } = this.state;
+    const { error, isUserInfoModalOpen, isIosBlocked } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -73,7 +86,7 @@ class QuestionnaireInterviewPage extends React.PureComponent {
 
         {questionnaire && interview.isSaved && <InterviewResult questionnaire={questionnaire} interview={interview} />}
 
-        <Modal isOpen={isUserInfoModalOpen} onModalClose={false}>
+        <Modal isOpen={!isIosBlocked && isUserInfoModalOpen} onModalClose={false}>
           <ModalContainer title={translations.interviewUserInfoTitle} type="centred">
             <InterviewUserInfoForm
               tokenId={interview.token}
@@ -81,6 +94,15 @@ class QuestionnaireInterviewPage extends React.PureComponent {
               onClose={this.onUserInfoModalClose}
             />
           </ModalContainer>
+        </Modal>
+
+        <Modal isOpen={isIosBlocked} onModalClose={false} className={styles.modal}>
+          <WarningModal>
+            <Block className={styles.warningWrapper}>
+              <Svg type="alert" className={styles.warningIcon} />
+              {translations.iosWarning}
+            </Block>
+          </WarningModal>
         </Modal>
       </Block>
     );

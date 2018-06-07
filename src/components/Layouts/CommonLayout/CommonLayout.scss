@@ -1,10 +1,10 @@
 .wrapper {
-  min-width: 350px;
+  min-width: 320px;
 }
 
 .contentWrapper {
   display: flex;
-  min-height: calc(100% - 60px);
+  min-height: calc(100% - 150px);
   background: $noncolor-t10;
 }
 
@@ -13,10 +13,12 @@
   background: $white;
   box-sizing: border-box;
   padding: 30px;
+  border-right: 1px solid $grey-border;
 }
 
 .content {
-  flex: 1;
+  flex: 0 0 calc(100% - 250px);
+  width: calc(100% - 250px);
 }
 
 @media (max-width: 930px) {
@@ -27,6 +29,12 @@
   .aside {
     width: 100%;
     margin-bottom: -10px;
-    padding: 18px 20px 8px;
+    padding: 18px 6px 8px;
+    border-right: 0;
+  }
+
+  .content {
+    flex: 1;
+    width: 100%;
   }
 }

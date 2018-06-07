@@ -16,7 +16,7 @@ import { getTranslations } from 'modules/systemData/selectors';
 
 import isAnonymous from 'utils/isAnonymous';
 
-import logo from 'images/logo.png';
+import logo from 'images/logo_y_big.png';
 
 import styles from './ForgotPasswordPage.scss';
 

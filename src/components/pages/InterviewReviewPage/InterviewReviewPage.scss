@@ -1,0 +1,14 @@
+.wrapper {
+  padding: 0 30px 30px;
+}
+
+.interviewResultReviewForm {
+  margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

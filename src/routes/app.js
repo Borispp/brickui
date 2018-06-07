@@ -18,5 +18,7 @@ export default {
   },
   interview: {
     main: `${prefix}interview/:questionnaireId/token/:tokenId`,
+    review: `${prefix}company/:companyId/interview/:interviewId/review`,
+    allReviews: `${prefix}company/:companyId/questionnaire/:questionnaireId/reviews`,
   },
 };

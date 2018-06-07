@@ -16,7 +16,7 @@ import SignUpForm from 'components/organismes/SignUpForm';
 
 import isAnonymous from 'utils/isAnonymous';
 
-import logo from 'images/logo.png';
+import logo from 'images/logo_y_big.png';
 
 import styles from './SignupPage.scss';
 
@@ -33,13 +33,13 @@ class SignupPage extends PureComponent {
         <Block className="side-form">
           <Block className="head">
             <Link href="/">
-              <Image src={logo} alt="Hutwork" />
+              <Image src={logo} alt="YRBI" className={styles.logo} />
             </Link>
           </Block>
           <Block className="section-from">
             <Block className="container-sign">
               <Block className="top">
-                <h1>{translations.signUpGetStartedWithHutwork}</h1>
+                <h1>{translations.signUpGetStartedWithBrick}</h1>
                 <Paragraph>
                   {`${translations.signUpCreateAccountPart1} ${translations.signUpCreateAccountPart2}`}
                 </Paragraph>

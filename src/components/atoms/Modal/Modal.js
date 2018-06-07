@@ -9,12 +9,12 @@ import Svg from '../Svg';
 
 import styles from './Modal.scss';
 
-const Modal = ({ isOpen, children, onModalClose, size, ...props }) => (
+const Modal = ({ className, isOpen, children, onModalClose, size, ...props }) => (
   <ReactModal
     {...props}
     isOpen={isOpen}
     onRequestClose={onModalClose || null}
-    className={classNames(styles.modal, styles[size])}
+    className={classNames(className, styles.modal, styles[size])}
     ariaHideApp={false}
   >
     {onModalClose && (
@@ -27,13 +27,15 @@ const Modal = ({ isOpen, children, onModalClose, size, ...props }) => (
 );
 
 Modal.propTypes = {
+  className: PropsTypes.string,
   isOpen: PropsTypes.bool.isRequired,
   children: PropsTypes.node.isRequired,
-  size: PropsTypes.oneOf(['calendar', 'small']),
+  size: PropsTypes.oneOf(['calendar', 'small', 'big']),
   onModalClose: PropsTypes.oneOfType([PropsTypes.func, PropsTypes.bool]).isRequired,
 };
 
 Modal.defaultProps = {
+  className: null,
   size: null,
 };
 

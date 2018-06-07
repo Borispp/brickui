@@ -9,7 +9,7 @@
 }
 
 .questionnaireListWrapper {
-  margin: 0 0 30px;
+  margin: 0 -30px 30px;
 }
 
 .questionnaireListItem {
@@ -26,6 +26,11 @@
 
 .questionnaireListControls {
   display: flex;
+}
+
+.submitWrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .questionnaireListName {
@@ -96,12 +101,26 @@
 }
 
 @media (max-width: 600px) {
+  .wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   .questionnaireListWrapper {
-    margin: 0 -30px 30px;
+    margin: 0 -15px 30px;
+  }
+
+  .mainHeadline {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
   }
 
   .questionnaireListName {
-    width: 260px;
+    width: auto;
+    flex: 1;
+    font-size: 15px;
+    margin-right: 4px;
   }
 
   .controlName {
@@ -110,5 +129,6 @@
 
   .questionnaireListItem {
     padding-right: 4px;
+    padding-left: 15px;
   }
 }

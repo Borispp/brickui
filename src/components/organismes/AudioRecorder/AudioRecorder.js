@@ -130,7 +130,7 @@ class AudioRecorder extends PureComponent {
                   ref={this.setRef('timer')}
                   className={classNames(styles.timer, { [styles.hide]: !isRecording })}
                   onStop={this.onStop}
-                  limit={5}
+                  limit={60}
                 />
                 <Svg type="microphone" className={styles.controlButtonIcon} />
               </Block>

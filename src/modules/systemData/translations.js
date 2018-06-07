@@ -17,7 +17,6 @@ export default {
   genericJoin: 'Join',
   genericDelete: 'Delete',
   genericJoined: 'Joined',
-  genericPrivacyPolicy: 'Privacy Policy',
   genericAllRightsReserved: 'All Rights Reserved.',
   genericTermsOfService: 'Terms of Service',
   genericBySigningUpAccept: 'By signing up, you accept our',
@@ -26,6 +25,7 @@ export default {
   genericFormSending: 'Sending...',
   genericLoadingError: 'Sorry, there was a problem loading the page.',
   genericLogin: 'Login',
+  genericSignIn: 'Sign In',
   genericSignUp: 'Sign Up',
   genericWeak: 'Weak',
   genericMedium: 'Medium',
@@ -41,10 +41,29 @@ export default {
   genericAllFieldsIsRequired: 'All fields is required',
   genericAllQuestionsIsRequired: 'Not all questions answered',
   genericRegisterLink: 'Register link',
+  genericReview: 'Add Review',
+  genericReviewChange: 'Change Review',
+  genericRate: 'Rate',
+  genericNoData: 'No data',
+  genericTermsOfUse: 'Terms of use',
+  genericPrivacyPolicy: 'Privacy Policy',
+  genericGodToKnow: 'Good to know',
+  genericPaymentMethod: 'Payment method',
 
   // Form
   formRegisterSuccess: 'Registred successfully',
   formRegisterRedirect: 'redirecting to sign in page...',
+
+  // Rate field
+  rateFieldReject: 'Reject',
+  rateFieldPause: 'Pause',
+  rateFieldHr: 'HR',
+  rateFieldHm: 'HM',
+
+  // Interview review
+  interviewResultReviewFormHeading: 'Your feedback',
+  interviewAllReviews: 'All reviews',
+  allInterviewers: 'All candidates',
 
   // New Company Form
   companyName: 'Company Name',
@@ -95,6 +114,8 @@ export default {
   // sign in
   signInWelcome: 'Welcome back',
   signInLoginHere: 'Login into your account here',
+  signInLoginDescription:
+    'Once logged, you can define the name of your recruitment project and start using the application.',
   signInVerificationLinkSent: 'Verification link was sent to',
   signInKeepMeLoggedIn: 'Keep me Logged in',
   signInForgotPassword: 'Forgot your password?',
@@ -115,7 +136,7 @@ export default {
   companiesListHeading: 'Companies List',
   companyJoinCompanyName: 'Join company',
   companyExistingUserAddSuccess: 'You have been successfully added to companyKey company',
-  companyConfirmDelete: 'Confirm deletion of the campaign',
+  companyConfirmDelete: 'Confirm deletion of the campaign %{companyName}',
   companyConfirmDeleteDescription: 'Company with all company users will be deleted',
   companyDeleteDescription: 'Company with all company users was deleted',
   companyUserList: 'User list of %{company}',
@@ -132,8 +153,8 @@ export default {
   signUpVerifyEmailApply: 'Verify your email to apply the changes.',
   signUpEmailSentTo: 'An email has been sent to:',
   signUpDidNotReceiveEmail: 'Didn’t receive the email?',
-  signUpGetStartedWithHutwork: 'Get Started with Brick!',
   signUpAlmostThere: 'Verify your email',
+  signUpGetStartedWithBrick: 'Get Started with Brick!',
   signUpEmailResend: 'Resend Email Verification',
   signUpSendReset: 'Send reset link',
   signUpBackToLogin: 'Back to Login',
@@ -150,8 +171,9 @@ export default {
   // users
   usersInvite: 'Invite',
   usersInviteUser: 'Invite User',
-  usersSendInvitation: 'Send interview invite',
-  usersSendInvitationTitle: 'Send interview invite',
+  usersSendInvitation: 'Send invitation',
+  candidateManagement: 'Candidate management',
+  usersSendInvitationTitle: 'Send invite in %{questionnaireName}',
   userListHeadline: 'List of users',
   userNone: 'No users',
   userInvitedListHeadline: 'List of invited users (not registred)',
@@ -163,6 +185,7 @@ export default {
   buttonCancelKeepAccount: 'Cancel, keep Account',
   buttonDeleteAccount: 'Yes, delete Account',
   deleteAccountWarning: 'Deleting your account cannot be undone',
+  iosWarning: 'Audio recording is supported only in iOS version >= 11 and Safari browser.',
   deleteAccountSuccess: 'Your account was successfully deleted',
   deleteAccountDescription:
     'Everything inside your Brick account will be deleted, that includes all your Roadmaps, Users, Your Profile and Company Profile details.',
@@ -170,6 +193,23 @@ export default {
   // Interview
   resendInterviewInvitation: 'Resend',
   interviewUserInfoTitle: 'Information about you',
+  interviewReviewsTitle: 'Reviews for %{userName}',
+  reviewRateLabel: 'Review decision',
+  reviewTextLabel: 'Description:',
+
+  // Table
+  tableNoData: 'No data',
+  candidateName: 'Candidate Name',
+  candidatePhone: 'Phone',
+  candidateEmail: 'Email',
+  savedAt: 'Saved',
+  rejectCount: 'Reject',
+  pauseCount: 'Pause',
+  hrCount: 'HR',
+  hmCount: 'HM',
+
+  // Expired popup
+  expiredTitle: 'Your company plan was expired',
 
   // Page titles
   dashboardPageTitle: 'Dashboard',
@@ -188,5 +228,6 @@ export default {
   questionnaireAddTitle: 'Add Questionarie',
   questionnaireEditTitle: 'Edit Questionarie',
   questionnairesListTitle: 'Questionnaires list',
+  questionnairesAllInterviewsTitle: 'All candidates for %{questionnaireName}',
   interviewTitle: 'Interview',
 };

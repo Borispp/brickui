@@ -62,9 +62,12 @@ const questionItem = ({ fields, question, index, translations }) => (
 const renderQuestions = ({ fields, translations }) => (
   <Block className={styles.fieldsArrayWrapper}>
     <Block>{fields.map((question, index) => questionItem({ fields, question, index, translations }))}</Block>
-    <Button type="button" color="transparent" onClick={() => fields.push({})}>
-      {translations.questionAddButton}
-    </Button>
+
+    <Block className={styles.submitWrapper}>
+      <Button type="button" color="transparent" onClick={() => fields.push({})}>
+        {translations.questionAddButton}
+      </Button>
+    </Block>
   </Block>
 );
 
@@ -128,7 +131,7 @@ class QuestionnaireForm extends React.PureComponent {
 
         <FieldArray name="questions" component={renderQuestions} translations={translations} />
         <Block className={styles.controlWrapper}>
-          <Button type="submit" className={styles.button} color="orange" size="big" submitting={submitting}>
+          <Button type="submit" className={styles.button} color="orange" size="medium" submitting={submitting}>
             {translations.genericSave}
           </Button>
           <Block className={styles.formStatus}>

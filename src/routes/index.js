@@ -179,14 +179,40 @@ const routes = [
     ],
   },
   {
-    path: '/',
+    path: appRoutes.interview.review,
     component: CommonLayout,
+    routes: [
+      {
+        path: appRoutes.interview.review,
+        exact: true,
+        component: componentLoader({
+          loader: () => import('components/pages/InterviewReviewPage'),
+        }),
+      },
+    ],
+  },
+  {
+    path: appRoutes.interview.allReviews,
+    component: CommonLayout,
+    routes: [
+      {
+        path: appRoutes.interview.allReviews,
+        exact: true,
+        component: componentLoader({
+          loader: () => import('components/pages/QuestionnairesAllInterviewsPage'),
+        }),
+      },
+    ],
+  },
+  {
+    path: '/',
+    component: EmptyLayout,
     routes: [
       {
         path: '/',
         exact: true,
         component: componentLoader({
-          loader: () => import('components/pages/SigninPage'),
+          loader: () => import('components/pages/MainPage'),
         }),
       },
     ],

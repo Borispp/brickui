@@ -12,6 +12,21 @@ export const overrideDefaultValidationRuleMessages = () => {
   overrideRuleMessage('minLength', 'minimum is %{expected} characters');
 };
 
+export const iOSversion = () => {
+  if (/iP(hone|od|ad)/.test(navigator.platform)) {
+    // supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
+    const v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
+    return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+  }
+
+  return false;
+};
+
+export const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
+// eslint-disable-next-line
+export const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
 export const checkRepetition = (rLen, str) => {
   let res = '';
   let repeated = false;

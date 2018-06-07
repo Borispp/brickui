@@ -21,6 +21,7 @@ class DatePicker extends React.PureComponent {
           focused
           onFocusChange={() => {}} // PropTypes.func.isRequired
           id={id}
+          displayFormat="DD/MM/YYYY"
         />
       </Block>
     );

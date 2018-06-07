@@ -83,7 +83,9 @@ class InterviewQuestionsForm extends React.PureComponent {
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
-        <Heading type="h1">{get(data, 'title')}</Heading>
+        <Heading type="h1" className={styles.mainHeadline}>
+          {get(data, 'title')}
+        </Heading>
 
         <Block className={styles.description}>
           <Strong>Description:</Strong> {get(data, 'description')}
@@ -109,7 +111,13 @@ class InterviewQuestionsForm extends React.PureComponent {
         )}
 
         <Block className={styles.controls}>
-          <Button color="orange" className={styles.controlsSubmit} submitting={submitting} onClick={this.onSubmit}>
+          <Button
+            color="orange"
+            size="medium"
+            className={styles.controlsSubmit}
+            submitting={submitting}
+            onClick={this.onSubmit}
+          >
             Save
           </Button>
         </Block>

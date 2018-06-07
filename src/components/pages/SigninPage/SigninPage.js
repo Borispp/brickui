@@ -17,7 +17,7 @@ import SignInForm from 'components/organismes/SignInForm';
 
 import isAnonymous from 'utils/isAnonymous';
 
-import logo from 'images/logo.png';
+import logo from 'images/logo_y_big.png';
 
 import styles from './SigninPage.scss';
 
@@ -42,7 +42,11 @@ class SigninPage extends PureComponent {
                 <Heading type="h2" className={styles.headline}>
                   {translations.signInWelcome}
                 </Heading>
-                <Paragraph className={styles.headlineDescription}>{translations.signInLoginHere}</Paragraph>
+                <Paragraph className={styles.headlineDescription}>
+                  {translations.signInLoginHere}
+                  <br />
+                  {translations.signInLoginDescription}
+                </Paragraph>
               </Block>
               <Block>
                 <Block className={styles.formWrapper}>

@@ -36,6 +36,7 @@ class TableSorting extends React.PureComponent {
           minRows={minRows}
           loading={loading}
           showPagination={pages > 1}
+          minWidth={1200}
           {...props}
         />
       </Block>

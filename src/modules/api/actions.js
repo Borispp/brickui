@@ -7,7 +7,6 @@ import { withParams } from 'utils/url';
 import { signOut } from 'modules/account/actions';
 
 const baseUrl = process.env.REACT_APP_API_PUBLIC_URL || '';
-console.log(baseUrl);
 
 const getDefaultHeaders = () => {
   const headers = {

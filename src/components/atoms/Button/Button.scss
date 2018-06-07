@@ -6,7 +6,8 @@ $content: '';
   justify-content: center;
   border-radius: 30px;
   line-height: 24px;
-  font-family: 'proxima-nova', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600 !important;
   cursor: pointer;
   position: relative;
   outline: none;
@@ -36,25 +37,25 @@ $content: '';
 
 // Size
 .small {
-  padding: 0 20px;
+  padding: 0 24px;
   height: 36px;
   font-size: 13px;
 }
 
 .normal {
-  padding: 0 16px;
+  padding: 0 24px;
   height: 42px;
   font-size: 14px;
 }
 
 .medium {
-  padding: 0 24px;
+  padding: 0 36px;
   height: 50px;
   font-size: 16px;
 }
 
 .big {
-  padding: 0 30px;
+  padding: 0 40px;
   height: 54px;
   font-size: 18px;
 }

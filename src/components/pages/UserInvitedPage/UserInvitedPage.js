@@ -19,7 +19,7 @@ import { getTranslations } from 'modules/systemData/selectors';
 // import roles from 'utils/roleHelper';
 
 import appRoutes from 'routes/app';
-import logo from 'images/logo.png';
+import logo from 'images/logo_y_big.png';
 import getInvitedUserInfo from './store/actions';
 
 import styles from './UserInvitedPage.scss';
@@ -39,7 +39,7 @@ class UserInvitedPage extends Component {
       userNotFound: false,
     };
   }
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const { match: { params: { inviteId, token } = {} } } = this.props;
 
     const response = await this.props.getInvitedUserInfo({

@@ -1,9 +1,12 @@
 import { createSelector } from 'reselect';
+import moment from 'moment';
 import get from 'lodash/get';
 
 export const getUser = state => state.user;
 
 export const isUserAuthenticated = createSelector(getUser, user => !!get(user, '_id'));
+
+export const isExpired = createSelector(getUser, user => moment() > moment(get(user, 'local.company.expiresAt')));
 
 export const getUserId = createSelector(getUser, user => get(user, '_id'));
 

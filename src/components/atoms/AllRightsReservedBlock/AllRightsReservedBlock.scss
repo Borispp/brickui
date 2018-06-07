@@ -1,6 +1,18 @@
 .wrapper {
   font-size: 13px;
   line-height: 18px;
+
+  &.footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    color: $white;
+
+    .link {
+      @include linkOrange;
+      margin: 0 10px;
+    }
+  }
 }
 
 .copyright {
@@ -9,5 +21,36 @@
 
 .link {
   @include link;
-  margin: 0 4px;
+  margin: 0 5px;
+}
+
+.paymentWrapper {
+  line-height: 20px;
+
+  h2 {
+    font-size: 24px;
+    margin: 12px 0 16px;
+  }
+
+  h3 {
+    font-size: 18px;
+    margin: 18px 0 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    &.footer {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .linksWrapper {
+    text-align: center;
+  }
+
+  .link {
+    display: inline-block;
+  }
 }

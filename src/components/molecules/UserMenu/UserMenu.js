@@ -37,7 +37,7 @@ class UserMenu extends PureComponent {
               </NavLink>
             </ListItem>
           )}
-          {roleName === roles.admin && (
+          {roles.admin === roleName && (
             <ListItem className={styles.item}>
               <NavLink
                 href={withParams(appRoutes.dashboard.userList)}
@@ -48,7 +48,7 @@ class UserMenu extends PureComponent {
               </NavLink>
             </ListItem>
           )}
-          {roleName === roles.admin && (
+          {[roles.admin, roles.user].includes(roleName) && (
             <ListItem className={styles.item}>
               <NavLink
                 href={withParams(appRoutes.dashboard.questionnairesList, { companyId })}
@@ -59,7 +59,7 @@ class UserMenu extends PureComponent {
               </NavLink>
             </ListItem>
           )}
-          {roleName === roles.admin && (
+          {[roles.admin, roles.user].includes(roleName) && (
             <ListItem className={styles.item}>
               <NavLink
                 href={withParams(appRoutes.dashboard.questionnaireAdd, { companyId })}

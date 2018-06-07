@@ -8,6 +8,7 @@ import get from 'lodash/get';
 import Block from 'components/atoms/Block';
 import Link from 'components/atoms/Link';
 import Text from 'components/atoms/Text';
+import Strong from 'components/atoms/Strong';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
 import Svg from 'components/atoms/Svg';
@@ -39,7 +40,7 @@ class UserList extends React.PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getCompanyUserList(this.props.companyId);
   }
 
@@ -120,7 +121,10 @@ class UserList extends React.PureComponent {
             {map(get(userList, 'invites'), invite => (
               <Block className={styles.listWrapperItem} key={invite._id}>
                 <Block className={styles.listItemName}>
-                  {invite.fullName} ({invite.email})
+                  <Text className={styles.dateText}>{invite.Created_date}</Text>
+                  <Strong>
+                    {invite.fullName} ({invite.email})
+                  </Strong>
                 </Block>
 
                 <Block className={styles.listItemRight}>
@@ -150,9 +154,11 @@ class UserList extends React.PureComponent {
             )}
         </Block>
 
-        <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
-          {translations.usersInviteUser}
-        </Button>
+        <Block className={styles.controlWrapper}>
+          <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
+            {translations.usersInviteUser}
+          </Button>
+        </Block>
 
         <Modal isOpen={isInviteFormOpen} size="small" onModalClose={this.onInviteFormModalClose}>
           <ModalContainer title={translations.usersInviteUser} type="centred">

@@ -4,28 +4,38 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import Block from 'components/atoms/Block';
+import Link from 'components/atoms/Link';
 import Strong from 'components/atoms/Strong';
 import Text from 'components/atoms/Text';
 import Header from 'components/atoms/Header';
 
 import { signOut as signOutAction } from 'modules/account/actions';
-import { getUserEmail, getUserCompanyName, getUserCompanyExpireDate, getUserRole } from 'modules/account/selectors';
+import {
+  getUserEmail,
+  getUserCompanyName,
+  getUserCompanyId,
+  getUserCompanyExpireDate,
+  getUserRole,
+} from 'modules/account/selectors';
 import { getTranslations } from 'modules/systemData/selectors';
 
 import isAuthenticated from 'utils/isAuthenticated';
+import isExpired from 'utils/isExpired';
+import appRoutes from 'routes/app';
+import { withParams } from 'utils/url';
 
 import styles from './Header.scss';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class HeaderComponent extends React.PureComponent {
   render() {
-    const { userEmail, companyName, companyExpireDate, roleName, signOut, translations } = this.props;
+    const { userEmail, companyName, companyId, companyExpireDate, roleName, signOut, translations } = this.props;
 
     return (
       <Header className={styles.wrapper}>
         <Block className={styles.controls}>
           <Block className={styles.left}>
-            <Block className={styles.logo} />
+            <Link href={withParams(appRoutes.dashboard.questionnairesList, { companyId })} className={styles.logo} />
             <Block className={styles.userDataWrapper}>
               <Strong>
                 {userEmail}, {roleName}
@@ -57,6 +67,7 @@ class HeaderComponent extends React.PureComponent {
 
 HeaderComponent.propTypes = {
   userEmail: PropTypes.string,
+  companyId: PropTypes.string,
   companyName: PropTypes.string,
   companyExpireDate: PropTypes.string,
   roleName: PropTypes.string,
@@ -65,6 +76,7 @@ HeaderComponent.propTypes = {
 };
 HeaderComponent.defaultProps = {
   userEmail: null,
+  companyId: null,
   companyName: null,
   companyExpireDate: null,
   roleName: null,
@@ -72,6 +84,7 @@ HeaderComponent.defaultProps = {
 
 const mapStateToProps = state => ({
   userEmail: getUserEmail(state),
+  companyId: getUserCompanyId(state),
   companyName: getUserCompanyName(state),
   companyExpireDate: getUserCompanyExpireDate(state),
   roleName: getUserRole(state),
@@ -82,4 +95,4 @@ const mapDispatchToProps = {
   signOut: signOutAction,
 };
 
-export default isAuthenticated(connect(mapStateToProps, mapDispatchToProps)(HeaderComponent));
+export default isAuthenticated(isExpired(connect(mapStateToProps, mapDispatchToProps)(HeaderComponent)));
