@@ -32,7 +32,7 @@ class MainPage extends React.PureComponent {
       <Block className={classNames(styles.wrapper)}>
         <Block className={classNames(styles.section, styles.topSection)} style={{ backgroundImage: `url(${mainPic})` }}>
           <Block className={styles.topSectionOverlayVideo}>
-            <video loop autoPlay className={styles.video}>
+            <video className={styles.video} autoPlay loop muted>
               <source src="https://s3.envato.com/h264-video-previews/1148750.mp4" type="video/mp4" />
             </video>
           </Block>
@@ -40,10 +40,11 @@ class MainPage extends React.PureComponent {
           <Block className={classNames(styles.topSectionWrapper, styles.sectionContent)}>
             <Image src={logo} alt="Brick.ro" className={styles.logo} />
             <Block className={styles.topSectionDescriptionBig}>
-              Help your organization in the recruitment process by using our approach on smart recruiting.
+              Help your organization in the <Strong>recruitment process</Strong> by using our approach on smart
+              recruiting.
             </Block>
             <Block className={styles.topSectionDescription}>
-              “Time” is the key word, so win it our way!
+              <Strong>“Time”</Strong> is the key word, so win it our way!
               <br />
               Try replacing telephone screening and soon face-to-face interviewing with YVBI.
               <br />
