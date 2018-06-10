@@ -3,6 +3,7 @@ import { renderRoutes } from 'react-router-config';
 
 import Block from 'components/atoms/Block';
 import Notification from 'components/organismes/Notification';
+import CookieConsent from 'components/organismes/CookieConsent';
 
 const EmptyLayout = (
   { route }, // eslint-disable-line
@@ -10,6 +11,7 @@ const EmptyLayout = (
   <Block>
     <Notification />
     <React.Fragment>{renderRoutes(route.routes)}</React.Fragment>
+    <CookieConsent />
   </Block>
 );
 

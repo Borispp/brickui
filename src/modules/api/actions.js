@@ -6,6 +6,7 @@ import { withParams } from 'utils/url';
 
 import { signOut } from 'modules/account/actions';
 
+// const baseUrl = 'http://192.168.100.6:3011';
 const baseUrl = process.env.REACT_APP_API_PUBLIC_URL || '';
 
 const getDefaultHeaders = () => {

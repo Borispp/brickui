@@ -32,7 +32,7 @@ class MainPage extends React.PureComponent {
       <Block className={classNames(styles.wrapper)}>
         <Block className={classNames(styles.section, styles.topSection)} style={{ backgroundImage: `url(${mainPic})` }}>
           <Block className={styles.topSectionOverlayVideo}>
-            <video className={styles.video} autoPlay loop muted>
+            <video autoPlay loop muted className={styles.video}>
               <source src="https://s3.envato.com/h264-video-previews/1148750.mp4" type="video/mp4" />
             </video>
           </Block>
