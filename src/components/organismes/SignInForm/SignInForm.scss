@@ -16,11 +16,18 @@
 }
 
 .forgotPasswordWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 24px;
   padding-top: 12px;
+  justify-content: center;
 }
 
-.forgotPasswordLink {
+.forgotPasswordLink,
+.signUpLink,
+.link {
   @include link;
+  margin: 0 4px;
 }
 
 .button {

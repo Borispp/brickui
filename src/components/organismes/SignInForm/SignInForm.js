@@ -10,6 +10,8 @@ import Link from 'components/atoms/Link';
 import InputText from 'components/atoms/InputText';
 import Message from 'components/atoms/Message';
 import Button from 'components/atoms/Button';
+import Modal from 'components/atoms/Modal';
+import ModalContainer from 'components/molecules/ModalContainer';
 
 import { getTranslations } from 'modules/systemData/selectors';
 import { loginUser, clearVerificationPendingEmail, clearVerificationStatus } from 'modules/account/actions';
@@ -27,6 +29,7 @@ class SignInForm extends React.PureComponent {
 
     this.state = {
       isVerificationMessageOpen: false,
+      isSignUpOpen: false,
       verificationStatus: this.props.verificationStatus || {},
     };
   }
@@ -57,11 +60,14 @@ class SignInForm extends React.PureComponent {
     });
   };
 
+  onSignUpModalOpen = () => this.setState({ isSignUpOpen: true });
+  onSignUpModalClose = () => this.setState({ isSignUpOpen: false });
+
   resetForm = () => this.props.reset();
 
   render() {
     const { submitting, submitSucceeded, error, verificationPendingEmail, translations } = this.props;
-    const { isVerificationMessageOpen, verificationStatus: { status, message, user } = {} } = this.state;
+    const { isSignUpOpen, isVerificationMessageOpen, verificationStatus: { status, message, user } = {} } = this.state;
 
     let verificationStatusType = false;
 
@@ -140,10 +146,24 @@ class SignInForm extends React.PureComponent {
         </Block>
 
         <Block className={styles.forgotPasswordWrapper}>
+          <Block className={styles.signUpLink} onClick={this.onSignUpModalOpen}>
+            {translations.genericDontHaveAccount}
+          </Block>
           <Link href={appRoutes.account.forgotPassword} className={styles.forgotPasswordLink}>
             {translations.signInForgotPassword}
           </Link>
         </Block>
+
+        <Modal isOpen={isSignUpOpen} size="big" onModalClose={this.onSignUpModalClose}>
+          <ModalContainer title={translations.genericSignUpTitle}>
+            <Block className={styles.paymentWrapper}>
+              Please, contact our support for creating company account:
+              <Link href="mailto:support@brick.ro" className={styles.link}>
+                support@brick.ro
+              </Link>
+            </Block>
+          </ModalContainer>
+        </Modal>
       </Block>
     );
   }

@@ -49,6 +49,8 @@ export default {
   genericPrivacyPolicy: 'Privacy Policy',
   genericGodToKnow: 'Good to know',
   genericPaymentMethod: 'Payment method',
+  genericDontHaveAccount: "Don't have account yet?",
+  genericSignUpTitle: "Don't have account yet?",
 
   // Form
   formRegisterSuccess: 'Registred successfully',
