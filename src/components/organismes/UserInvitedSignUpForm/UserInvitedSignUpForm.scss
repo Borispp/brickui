@@ -15,6 +15,17 @@
   margin-bottom: 20px;
 }
 
+.link {
+  display: inline-block;
+  @include link;
+}
+
+.termsAcceptWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .button {
   min-width: 190px;
   text-align: center;

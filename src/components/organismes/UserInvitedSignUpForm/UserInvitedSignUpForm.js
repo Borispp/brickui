@@ -5,6 +5,7 @@ import appRoutes from 'routes/app';
 import { Redirect } from 'react-router';
 import FormBuilder from 'components/atoms/FormBuilder';
 import FormField from 'components/atoms/FormField';
+import CheckBox from 'components/atoms/CheckBox';
 import Block from 'components/atoms/Block';
 import Button from 'components/atoms/Button';
 import InputText from 'components/atoms/InputText';
@@ -24,6 +25,10 @@ class UserInvitedSignUpForm extends React.PureComponent {
     };
   }
 
+  componentDidMount() {
+    this.openTerms = new Event('openTerms');
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!nextProps.submitting && nextProps.submitSucceeded) {
       setTimeout(() => {
@@ -33,8 +38,12 @@ class UserInvitedSignUpForm extends React.PureComponent {
     }
   }
 
+  onOpenTerms = () => {
+    document.dispatchEvent(this.openTerms);
+  };
+
   render() {
-    const { submitting, submitSucceeded, error, translations, company } = this.props;
+    const { submitting, submitSucceeded, error, translations, company, valid } = this.props;
 
     return (
       <Block className={styles.wrapper}>
@@ -89,6 +98,15 @@ class UserInvitedSignUpForm extends React.PureComponent {
               className={styles.formField}
             />
           </Block>
+
+          <Block className={styles.termsAcceptWrapper}>
+            <FormField name="confirmTerms" id="confirmTerms" component={CheckBox}>
+              {"I've read and accepted the"}
+            </FormField>
+            <Block className={styles.link} onClick={this.onOpenTerms}>
+              Terms of use
+            </Block>.
+          </Block>
         </Block>
 
         {!submitting &&
@@ -110,7 +128,14 @@ class UserInvitedSignUpForm extends React.PureComponent {
 
         {!(!submitting && submitSucceeded) && (
           <Block>
-            <Button type="submit" className={styles.button} color="orange" size="big" submitting={submitting}>
+            <Button
+              type="submit"
+              disabled={!valid}
+              className={styles.button}
+              color="orange"
+              size="big"
+              submitting={submitting}
+            >
               {translations.translate('companyJoinCompanyName', { company: company.name })}
             </Button>
           </Block>
@@ -199,6 +224,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           messages: {
             format: props.translations.messageInvalidEmail,
           },
+        },
+        confirmTerms: {
+          required: true,
         },
       },
     };

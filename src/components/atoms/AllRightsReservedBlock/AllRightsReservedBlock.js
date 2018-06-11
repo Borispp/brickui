@@ -25,7 +25,18 @@ class AllRightsReservedBlock extends React.PureComponent {
     };
   }
 
-  onTermsModalOpen = () => this.setState({ isTermsModalOpen: true });
+  componentDidMount() {
+    document.addEventListener('openTerms', this.onTermsModalOpen);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('openTerms', this.onTermsModalOpen);
+  }
+
+  onTermsModalOpen = () => {
+    console.log('open');
+    this.setState({ isTermsModalOpen: true });
+  };
   onTermsModalClose = () => this.setState({ isTermsModalOpen: false });
 
   onPrivacyModalOpen = () => this.setState({ isPrivacyModalOpen: true });
@@ -45,7 +56,7 @@ class AllRightsReservedBlock extends React.PureComponent {
         </Block>
         <Block className={styles.linksWrapper}>
           <Link className={styles.link} onClick={this.onTermsModalOpen}>
-            {translations.genericTermsOfService}
+            {translations.genericTermsOfUse}
           </Link>
           <Link className={styles.link} onClick={this.onPrivacyModalOpen}>
             {translations.genericPrivacyPolicy}

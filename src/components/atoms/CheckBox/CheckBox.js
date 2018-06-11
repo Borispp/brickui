@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Label from '../Label';
 import Block from '../Block';
 import Text from '../Text';
+import Svg from '../Svg';
 
 import styles from './CheckBox.scss';
 
@@ -21,6 +22,8 @@ const CheckBox = ({ children, className, textClassName, id, input: { name, check
     />
 
     <Block className={styles.labelBody}>
+      <Svg type="success" className={styles.checkedIcon} />
+
       {children && <Text className={classNames(styles.checkboxText, textClassName)}>{children}</Text>}
     </Block>
   </Label>

@@ -1,6 +1,5 @@
 .labelBody {
-  display: block;
-  align-items: center;
+  display: inline-block;
   position: relative;
   min-height: 14px;
   padding: 0 10px 0 26px;
@@ -25,6 +24,8 @@
 }
 
 .checkboxLabel {
+  display: block;
+  text-align: left;
   cursor: pointer;
 }
 
@@ -35,10 +36,26 @@
     + .labelBody:before {
       background-position: 2px -87px;
       background-repeat: no-repeat;
-      background-color: #2d88d8;
+      background-color: $maincolor-lt;
       border-width: 0;
       border-radius: 4px;
       padding: 1px 1px 0 1px;
     }
+
+    + .labelBody .checkedIcon {
+      display: block;
+    }
+  }
+}
+
+.checkedIcon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: none;
+
+  svg {
+    fill: $white;
+    width: 12px;
   }
 }
