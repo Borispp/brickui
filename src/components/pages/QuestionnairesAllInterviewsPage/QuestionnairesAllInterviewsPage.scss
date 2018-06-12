@@ -80,7 +80,12 @@
     background: $success;
   }
   &.hm {
-    background: $success;
+    background: $blue-light;
+  }
+
+  &.zero {
+    opacity: .3;
+    background: $greyMedium;
   }
 }
 

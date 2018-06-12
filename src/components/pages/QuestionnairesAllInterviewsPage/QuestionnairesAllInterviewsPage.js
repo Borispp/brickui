@@ -103,7 +103,9 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       accessor: 'reject',
       Cell: props => (
         <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.reject)}>{props.value}</Text>
+          <Text className={classNames(styles.countItem, styles.reject, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
         </Block>
       ),
     },
@@ -112,7 +114,9 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       accessor: 'pause',
       Cell: props => (
         <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.pause)}>{props.value}</Text>
+          <Text className={classNames(styles.countItem, styles.pause, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
         </Block>
       ),
     },
@@ -121,7 +125,9 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       accessor: 'hr',
       Cell: props => (
         <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.hr)}>{props.value}</Text>
+          <Text className={classNames(styles.countItem, styles.hr, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
         </Block>
       ),
     },
@@ -130,7 +136,9 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       accessor: 'hm',
       Cell: props => (
         <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.hm)}>{props.value}</Text>
+          <Text className={classNames(styles.countItem, styles.hm, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
         </Block>
       ),
     },
