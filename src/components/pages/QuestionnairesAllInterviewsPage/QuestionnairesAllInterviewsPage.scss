@@ -89,6 +89,57 @@
   }
 }
 
+.allReviews {
+  margin: 0 4px 0 12px;
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+}
+
+.controlButtonWrapper {
+  @include link();
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 6px 3px;
+  transform: translate(0, 1px);
+  transition: color .15s ease-in-out, opacity .15s ease-in-out;
+
+  span {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    span {
+      text-decoration: none;
+    }
+
+    svg {
+      fill: $maincolor-lt;
+    }
+  }
+}
+
+.controlButtonIcon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 15px;
+    fill: $linkColor;
+    transition: fill .15s ease-in-out;
+  }
+}
+
 
 @media (max-width: 930px) {
   .reviewsListWrapper {
@@ -117,5 +168,11 @@
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .controlName {
+    display: none;
   }
 }

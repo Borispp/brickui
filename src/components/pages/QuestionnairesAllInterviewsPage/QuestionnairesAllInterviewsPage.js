@@ -8,9 +8,12 @@ import get from 'lodash/get';
 import { Helmet } from 'react-helmet';
 
 import Block from 'components/atoms/Block';
+import Link from 'components/atoms/Link';
+import Svg from 'components/atoms/Svg';
 import Heading from 'components/atoms/Heading';
 import TableSorting from 'components/atoms/TableSorting';
 import Text from 'components/atoms/Text';
+import Strong from 'components/atoms/Strong';
 import Message from 'components/atoms/Message';
 import Modal from 'components/atoms/Modal';
 
@@ -34,6 +37,9 @@ import { getTranslations } from 'modules/systemData/selectors';
 import { interpolate } from 'utils/text';
 
 import isAdmin from 'utils/isAdmin';
+
+import { withParams } from 'utils/url';
+import app from 'routes/app';
 
 import styles from './QuestionnairesAllInterviewsPage.scss';
 
@@ -75,8 +81,26 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       Header: () => <Block>{this.props.translations.candidateName}</Block>,
       accessor: 'userName',
       Cell: props => (
-        <Block className={styles.link} onClick={this.onInterviewReviewsModalOpen(props.original)}>
-          {props.value}
+        <Block className={classNames(styles.userName)}>
+          <Strong>{props.value}</Strong>
+
+          <Block
+            className={classNames(styles.link, styles.allReviews)}
+            onClick={this.onInterviewReviewsModalOpen(props.original)}
+          >
+            {this.props.translations.interviewAllReviews}
+          </Block>
+          <Link
+            target="_blank"
+            href={withParams(app.interview.main, {
+              questionnaireId: this.props.questionnaire._id,
+              tokenId: props.original.token,
+            })}
+            className={classNames(styles.link, styles.controlButtonWrapper)}
+          >
+            <Svg type="link" className={styles.controlButtonIcon} />
+            <Text className={styles.controlName}>{this.props.translations.genericDirectLink}</Text>
+          </Link>
         </Block>
       ),
     },
@@ -215,6 +239,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string,
       userName: PropTypes.string,
+      token: PropTypes.string,
       email: PropTypes.string,
       company: PropTypes.string,
       phone: PropTypes.string,
@@ -225,6 +250,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
     }),
   ),
   questionnaire: PropTypes.shape({
+    _id: PropTypes.string,
     title: PropTypes.string,
   }),
   translations: PropTypes.object.isRequired,
