@@ -83,7 +83,14 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       Cell: props => (
         <Block className={classNames(styles.userName)}>
           <Strong>{props.value}</Strong>
-
+        </Block>
+      ),
+    },
+    {
+      Header: () => <Block>Actions</Block>,
+      accessor: 'userName',
+      Cell: props => (
+        <Block className={classNames(styles.userName)}>
           <Block
             className={classNames(styles.link, styles.allReviews)}
             onClick={this.onInterviewReviewsModalOpen(props.original)}
@@ -103,6 +110,7 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           </Link>
         </Block>
       ),
+      sortable: false,
     },
     {
       Header: this.props.translations.savedAt,

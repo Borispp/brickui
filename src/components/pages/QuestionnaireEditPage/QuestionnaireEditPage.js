@@ -10,7 +10,7 @@ import Message from 'components/atoms/Message';
 
 import QuestionnaireForm from 'components/organismes/QuestionnaireForm';
 
-import { getQuestionnaireSingle } from 'modules/questionnaires/actions';
+import { getQuestionnaireSingle, clearQuestionnaire } from 'modules/questionnaires/actions';
 import { getQuestionnaire } from 'modules/questionnaires/selectors';
 import { getTranslations } from 'modules/systemData/selectors';
 
@@ -35,6 +35,10 @@ class QuestionnaireEditPage extends React.PureComponent {
       });
     }
   };
+
+  componentWillUnmount() {
+    this.props.clearQuestionnaire();
+  }
 
   render() {
     const { className, translations, questionnaire } = this.props;
@@ -67,6 +71,7 @@ QuestionnaireEditPage.propTypes = {
   className: PropTypes.string,
   translations: PropTypes.object.isRequired,
   getQuestionnaireSingle: PropTypes.func.isRequired,
+  clearQuestionnaire: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       companyId: PropTypes.string,
@@ -88,6 +93,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getQuestionnaireSingle,
+  clearQuestionnaire,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionnaireEditPage);

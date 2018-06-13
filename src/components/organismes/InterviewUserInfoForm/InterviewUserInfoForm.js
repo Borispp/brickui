@@ -143,7 +143,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         required: true,
       },
       phone: {
-        required: true,
+        rules: {
+          required: true,
+          pattern: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+        },
+        messages: {
+          pattern: 'Wrong phone format',
+        },
       },
       email: {
         rules: {

@@ -86,6 +86,14 @@ class QuestionnaireInterviewPage extends React.PureComponent {
 
         {questionnaire && interview.isSaved && <InterviewResult questionnaire={questionnaire} interview={interview} />}
 
+        {questionnaire &&
+          interview.isSaved && (
+            <Block className={styles.interviewSaved}>
+              <Svg type="success" className={styles.successIcon} />
+              {translations.interviewSavedSuccess}
+            </Block>
+          )}
+
         <Modal isOpen={!isIosBlocked && isUserInfoModalOpen} onModalClose={false}>
           <ModalContainer title={translations.interviewUserInfoTitle} type="centred">
             <InterviewUserInfoForm

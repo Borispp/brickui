@@ -224,6 +224,12 @@ export default withRouter(
               questionErrors.title = 'Required';
               questionsArrayErrors[index] = questionErrors;
             }
+
+            if (question && question.title && question.title.length > 60) {
+              questionErrors.title = 'Maximum 60 characters allowed';
+              questionsArrayErrors[index] = questionErrors;
+            }
+
             if (!question || !question.text) {
               questionErrors.text = 'Required';
               questionsArrayErrors[index] = questionErrors;

@@ -1,5 +1,6 @@
 import {
   UPDATE_QUESTIONNAIRE,
+  CLEAR_QUESTIONNAIRE,
   UPDATE_QUESTIONNAIRE_LIST,
   CLEAR_QUESTIONNAIRE_LIST,
   UPDATE_QUESTIONNAIRE_USER_DETAILS_LIST,
@@ -10,6 +11,8 @@ export default function(state = {}, action) {
   switch (action.type) {
     case UPDATE_QUESTIONNAIRE:
       return { ...state, questionnaire: action.payload };
+    case CLEAR_QUESTIONNAIRE:
+      return { ...state, questionnaire: null };
     case UPDATE_QUESTIONNAIRE_LIST:
       return { ...state, questionnaireList: action.payload };
     case CLEAR_QUESTIONNAIRE_LIST:

@@ -34,7 +34,6 @@ class AllRightsReservedBlock extends React.PureComponent {
   }
 
   onTermsModalOpen = () => {
-    console.log('open');
     this.setState({ isTermsModalOpen: true });
   };
   onTermsModalClose = () => this.setState({ isTermsModalOpen: false });

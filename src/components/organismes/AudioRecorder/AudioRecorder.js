@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-// import MediaStreamRecorder from 'msr';
+import { connect } from 'react-redux';
 
 import Svg from 'components/atoms/Svg';
 import Block from 'components/atoms/Block';
 import Button from 'components/atoms/Button';
 import Timer from 'components/atoms/Timer';
+
+import { setNotificationError } from 'modules/app/actions';
+import { getTranslations } from 'modules/systemData/selectors';
 
 import styles from './AudioRecorder.scss';
 
@@ -29,7 +32,8 @@ class AudioRecorder extends PureComponent {
 
   onFail = e => {
     // eslint-disable-next-line no-console
-    console.log('onFail', e);
+    console.log(e);
+    this.props.setNotificationError({ content: this.props.translations.audioBlockWarning });
   };
 
   onSuccess = s => {
@@ -40,23 +44,23 @@ class AudioRecorder extends PureComponent {
     // eslint-disable-next-line no-undef
     this.recorder = new Recorder(mediaStreamSource);
     this.recorder.record();
+
+    this.setState({
+      isRecording: true,
+    });
+
+    if (this.timer) {
+      this.timer.onStart();
+    }
   };
 
   onStart = () => {
     if (!this.state.isRecording) {
-      this.setState({
-        isRecording: true,
-      });
-
       if (navigator.getUserMedia) {
         navigator.getUserMedia({ audio: true }, this.onSuccess, this.onFail);
       } else {
         // eslint-disable-next-line no-console
         console.warn('navigator.getUserMedia not present');
-      }
-
-      if (this.timer) {
-        this.timer.onStart();
       }
     }
   };
@@ -130,7 +134,7 @@ class AudioRecorder extends PureComponent {
                   ref={this.setRef('timer')}
                   className={classNames(styles.timer, { [styles.hide]: !isRecording })}
                   onStop={this.onStop}
-                  limit={60}
+                  limit={300}
                 />
                 <Svg type="microphone" className={styles.controlButtonIcon} />
               </Block>
@@ -161,11 +165,21 @@ class AudioRecorder extends PureComponent {
 
 AudioRecorder.propTypes = {
   className: PropTypes.string,
+  translations: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  setNotificationError: PropTypes.func.isRequired,
 };
 
 AudioRecorder.defaultProps = {
   className: null,
 };
 
-export default AudioRecorder;
+const mapStateToProps = state => ({
+  translations: getTranslations(state),
+});
+
+const mapDispatchToProps = {
+  setNotificationError,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AudioRecorder);

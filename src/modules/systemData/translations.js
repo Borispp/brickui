@@ -188,6 +188,7 @@ export default {
   buttonDeleteAccount: 'Yes, delete Account',
   deleteAccountWarning: 'Deleting your account cannot be undone',
   iosWarning: 'Audio recording is supported only in iOS version >= 11 and Safari browser.',
+  audioBlockWarning: 'To use the application, please allow access to the microphone',
   deleteAccountSuccess: 'Your account was successfully deleted',
   deleteAccountDescription:
     'Everything inside your Brick account will be deleted, that includes all your Roadmaps, Users, Your Profile and Company Profile details.',
@@ -198,6 +199,7 @@ export default {
   interviewReviewsTitle: 'Reviews for %{userName}',
   reviewRateLabel: 'Review decision',
   reviewTextLabel: 'Description:',
+  interviewSavedSuccess: 'Thank you for submitting. Now you are in preview mode.',
 
   // Table
   tableNoData: 'No data',

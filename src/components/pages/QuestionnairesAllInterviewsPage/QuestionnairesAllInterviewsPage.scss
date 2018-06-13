@@ -4,7 +4,7 @@
   :global {
     .rt-thead,
     .rt-tbody {
-      min-width: 1000px !important;
+      min-width: 1200px !important;
     }
 
     .ReactTable .rt-tr {
@@ -13,22 +13,30 @@
 
     .rt-tr .rt-th,
     .rt-tr .rt-td {
+      &:nth-child(1) {
+        flex: 0 0 170px !important;
+        width: 170px !important;
+      }
       &:nth-child(2) {
-        flex: 0 0 120px !important;
-        width: 120px !important;
+        flex: 0 0 220px !important;
+        width: 220px !important;
       }
       &:nth-child(3) {
         flex: 0 0 120px !important;
         width: 120px !important;
       }
-      &:nth-child(5),
-      &:nth-child(6) {
+      &:nth-child(4) {
+        flex: 0 0 150px !important;
+        width: 150px !important;
+      }
+      &:nth-child(6),
+      &:nth-child(7) {
         flex: 0 0 96px !important;
         width: 96px !important;
       }
 
-      &:nth-child(7),
-      &:nth-child(8) {
+      &:nth-child(8),
+      &:nth-child(9) {
         flex: 0 0 80px !important;
         width: 80px !important;
       }
@@ -84,7 +92,7 @@
   }
 
   &.zero {
-    opacity: .3;
+    opacity: 0.3;
     background: $greyMedium;
   }
 }
@@ -107,7 +115,7 @@
   cursor: pointer;
   padding: 6px 3px;
   transform: translate(0, 1px);
-  transition: color .15s ease-in-out, opacity .15s ease-in-out;
+  transition: color 0.15s ease-in-out, opacity 0.15s ease-in-out;
 
   span {
     text-decoration: underline;
@@ -136,10 +144,9 @@
   svg {
     width: 15px;
     fill: $linkColor;
-    transition: fill .15s ease-in-out;
+    transition: fill 0.15s ease-in-out;
   }
 }
-
 
 @media (max-width: 930px) {
   .reviewsListWrapper {
@@ -174,5 +181,17 @@
 @media (max-width: 600px) {
   .controlName {
     display: none;
+  }
+
+  .wrapper {
+    :global {
+      .rt-tr .rt-th,
+      .rt-tr .rt-td {
+        &:nth-child(2) {
+          width: 150px !important;
+          flex: 0 0 150px !important;
+        }
+      }
+    }
   }
 }

@@ -23,12 +23,29 @@
   background: $redPale;
 }
 
+.interviewSaved {
+  display: flex;
+  align-items: center;
+  color: $success;
+  font-size: 14px;
+  margin: 12px 0;
+  font-weight: 500;
+}
+
+.successIcon {
+  margin-right: 8px;
+
+  svg {
+    width: 16px;
+    fill: $success;
+  }
+}
+
 @media (max-width: 600px) {
   .wrapper {
     padding-left: 15px;
     padding-right: 15px;
   }
-
 
   .mainHeadline {
     font-size: 18px;

@@ -3,12 +3,14 @@ import { getRequest, deleteRequest } from 'modules/api/actions';
 import { withParams } from 'utils/url';
 
 export const UPDATE_QUESTIONNAIRE = 'UPDATE_QUESTIONNAIRE';
+export const CLEAR_QUESTIONNAIRE = 'CLEAR_QUESTIONNAIRE';
 export const UPDATE_QUESTIONNAIRE_LIST = 'UPDATE_QUESTIONNAIRE_LIST';
 export const CLEAR_QUESTIONNAIRE_LIST = 'CLEAR_QUESTIONNAIRE_LIST';
 export const UPDATE_QUESTIONNAIRE_USER_DETAILS_LIST = 'UPDATE_QUESTIONNAIRE_USER_DETAILS_LIST';
 export const CLEAR_QUESTIONNAIRE_USER_DETAILS_LIST = 'CLEAR_QUESTIONNAIRE_USER_DETAILS_LIST';
 
 export const updateQuestionnaire = payload => ({ type: UPDATE_QUESTIONNAIRE, payload });
+export const clearQuestionnaire = () => ({ type: CLEAR_QUESTIONNAIRE });
 export const updateQuestionnaireList = payload => ({ type: UPDATE_QUESTIONNAIRE_LIST, payload });
 export const clearQuestionnaireList = () => ({ type: CLEAR_QUESTIONNAIRE_LIST });
 
