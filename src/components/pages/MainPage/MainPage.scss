@@ -170,6 +170,12 @@
   }
 }
 
+@media (max-width: 992px) {
+  .topSectionOverlayVideo {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .logo {
     width: 180px;

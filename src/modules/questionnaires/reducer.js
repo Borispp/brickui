@@ -12,7 +12,7 @@ export default function(state = {}, action) {
     case UPDATE_QUESTIONNAIRE:
       return { ...state, questionnaire: action.payload };
     case CLEAR_QUESTIONNAIRE:
-      return { ...state, questionnaire: null };
+      return { ...state, questionnaire: {} };
     case UPDATE_QUESTIONNAIRE_LIST:
       return { ...state, questionnaireList: action.payload };
     case CLEAR_QUESTIONNAIRE_LIST:

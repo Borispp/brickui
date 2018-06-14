@@ -2,7 +2,7 @@
   padding-top: 75px;
 
   &:empty {
-    padding-top: 0;
+    padding-top: 0 !important;
   }
 
   :global {
@@ -39,4 +39,16 @@
 
 .cookieDescription {
   line-height: 24px;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    padding-top: 91px;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    padding-top: 149px;
+  }
 }
