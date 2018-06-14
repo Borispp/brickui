@@ -21,7 +21,7 @@
   padding: 16px 30px 6px;
 
   textarea {
-    height: 80px;
+    min-height: 100px;
   }
 }
 
@@ -51,7 +51,7 @@
 }
 
 .questionText {
-  height: 80px;
+  min-height: 100px;
 }
 
 .questionHeadline {

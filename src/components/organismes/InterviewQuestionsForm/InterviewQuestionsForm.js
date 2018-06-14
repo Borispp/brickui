@@ -120,6 +120,11 @@ class InterviewQuestionsForm extends React.PureComponent {
           >
             Save
           </Button>
+
+          <Block className={styles.note}>
+            <Svg type="note" className={styles.noteIcon} />
+            After submitting you will not be able to edit the interview
+          </Block>
         </Block>
       </Block>
     );

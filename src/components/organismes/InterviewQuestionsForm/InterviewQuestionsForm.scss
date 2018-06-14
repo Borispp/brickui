@@ -42,6 +42,16 @@
   margin-bottom: 30px;
 }
 
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+
+  .note {
+    margin-left: 12px;
+    margin-top: 0;
+  }
+}
+
 .controlsSubmit {
   width: 165px;
 }
@@ -62,5 +72,11 @@
   .controls {
     display: flex;
     justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    .note {
+      margin-bottom: 12px;
+    }
   }
 }

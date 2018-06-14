@@ -69,7 +69,8 @@
     &:focus,
     &:active {
       background: $grey-border;
-      box-shadow: 0 0 0 1px $grey-border;
+      box-shadow: 0 0 0 1px $error;
+      border-color: $grey-border;
     }
   }
 }

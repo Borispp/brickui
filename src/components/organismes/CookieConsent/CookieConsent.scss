@@ -1,5 +1,9 @@
 .wrapper {
-  padding-top: 76px;
+  padding-top: 75px;
+
+  &:empty {
+    padding-top: 0;
+  }
 
   :global {
     button {
