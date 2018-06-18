@@ -14,8 +14,8 @@
     .rt-tr .rt-th,
     .rt-tr .rt-td {
       &:nth-child(1) {
-        flex: 0 0 170px !important;
-        width: 170px !important;
+        flex: 0 0 190px !important;
+        width: 190px !important;
       }
       &:nth-child(2) {
         flex: 0 0 215px !important;
@@ -26,19 +26,19 @@
         width: 120px !important;
       }
       &:nth-child(4) {
-        flex: 0 0 135px !important;
-        width: 135px !important;
+        flex: 0 0 125px !important;
+        width: 125px !important;
       }
       &:nth-child(6),
       &:nth-child(7) {
-        flex: 0 0 96px !important;
-        width: 96px !important;
+        flex: 0 0 92px !important;
+        width: 92px !important;
       }
 
       &:nth-child(8),
       &:nth-child(9) {
-        flex: 0 0 80px !important;
-        width: 80px !important;
+        flex: 0 0 75px !important;
+        width: 75px !important;
       }
     }
   }
@@ -106,6 +106,14 @@
   align-items: center;
 }
 
+.withSelected {
+  color: $grey-disabled;
+
+  &.isSelected {
+    color: $success;
+  }
+}
+
 .controlButtonWrapper {
   @include link();
   display: flex;
@@ -148,6 +156,10 @@
   }
 }
 
+.controls {
+  margin-top: 18px;
+}
+
 @media (max-width: 930px) {
   .reviewsListWrapper {
     margin: 0 -30px;
@@ -163,6 +175,14 @@
       .ReactTable .rt-tr {
         padding-left: 0;
       }
+
+      .rt-tr .rt-th,
+      .rt-tr .rt-td {
+        &:nth-child(2) {
+          width: 150px !important;
+          flex: 0 0 150px !important;
+        }
+      }
     }
   }
 
@@ -176,22 +196,8 @@
     margin-top: 0;
     margin-bottom: 20px;
   }
-}
 
-@media (max-width: 600px) {
   .controlName {
     display: none;
-  }
-
-  .wrapper {
-    :global {
-      .rt-tr .rt-th,
-      .rt-tr .rt-td {
-        &:nth-child(2) {
-          width: 150px !important;
-          flex: 0 0 150px !important;
-        }
-      }
-    }
   }
 }

@@ -114,14 +114,22 @@ class QuestionnairesListPage extends React.PureComponent {
         )}
 
         <Block className={styles.questionnaireListWrapper}>
-          {map(questionnaireList, ({ _id, title, company }) => (
+          {map(questionnaireList, ({ _id, title, company, isClosed }) => (
             <Block key={_id} className={styles.questionnaireListItem}>
-              <Link
-                href={withParams(appRoutes.dashboard.questionnaireEdit, { companyId, questionnaireId: _id })}
-                className={styles.questionnaireListName}
-              >
-                {title}
-              </Link>
+              {!isClosed && (
+                <Link
+                  href={withParams(appRoutes.dashboard.questionnaireEdit, { companyId, questionnaireId: _id })}
+                  className={styles.questionnaireListName}
+                >
+                  {title}
+                </Link>
+              )}
+
+              {isClosed && (
+                <Text className={styles.isQuestionnaireClosed}>
+                  {title} <Text>(closed)</Text>
+                </Text>
+              )}
 
               <Block className={styles.questionnaireListControls}>
                 {[roles.globalAdmin, roles.admin].includes(userRole) && (
@@ -133,20 +141,24 @@ class QuestionnairesListPage extends React.PureComponent {
                     <Text className={styles.controlName}>{translations.allInterviewers}</Text>
                   </Link>
                 )}
-                <Block
-                  onClick={this.onInviteFormModalOpen({ _id, title, company })}
-                  className={styles.controlButtonWrapper}
-                >
-                  <Svg type="invite" className={styles.controlButtonIcon} />
-                  <Text className={styles.controlName}>{translations.interviewInviteCandidate}</Text>
-                </Block>
-                <Block
-                  onClick={this.onQuestionnaireUserListModalOpen({ _id, title })}
-                  className={styles.controlButtonWrapper}
-                >
-                  <Svg type="users" className={styles.controlButtonIcon} />
-                  <Text className={styles.controlName}>{translations.candidateManagement}</Text>
-                </Block>
+                {!isClosed && (
+                  <Block
+                    onClick={this.onInviteFormModalOpen({ _id, title, company })}
+                    className={styles.controlButtonWrapper}
+                  >
+                    <Svg type="invite" className={styles.controlButtonIcon} />
+                    <Text className={styles.controlName}>{translations.interviewInviteCandidate}</Text>
+                  </Block>
+                )}
+                {!isClosed && (
+                  <Block
+                    onClick={this.onQuestionnaireUserListModalOpen({ _id, title })}
+                    className={styles.controlButtonWrapper}
+                  >
+                    <Svg type="users" className={styles.controlButtonIcon} />
+                    <Text className={styles.controlName}>{translations.candidateManagement}</Text>
+                  </Block>
+                )}
 
                 {[roles.globalAdmin, roles.admin].includes(userRole) && (
                   <Block
@@ -220,6 +232,7 @@ QuestionnairesListPage.propTypes = {
       _id: PropTypes.string,
       title: PropTypes.string,
       company: PropTypes.string,
+      isClosed: PropTypes.bool,
     }),
   ),
   translations: PropTypes.object.isRequired,

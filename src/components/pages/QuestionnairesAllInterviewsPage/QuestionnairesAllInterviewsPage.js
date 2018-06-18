@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 import { Helmet } from 'react-helmet';
 
 import Block from 'components/atoms/Block';
 import Link from 'components/atoms/Link';
+import Button from 'components/atoms/Button';
 import Svg from 'components/atoms/Svg';
 import Heading from 'components/atoms/Heading';
 import TableSorting from 'components/atoms/TableSorting';
@@ -16,6 +18,7 @@ import Text from 'components/atoms/Text';
 import Strong from 'components/atoms/Strong';
 import Message from 'components/atoms/Message';
 import Modal from 'components/atoms/Modal';
+import CheckBox from 'components/atoms/CheckBox';
 
 import ModalContainer from 'components/molecules/ModalContainer';
 
@@ -26,6 +29,7 @@ import {
   clearQuestionnaireInterviewUserDetails,
   getQuestionnaireSingle,
 } from 'modules/questionnaires/actions';
+import { setNotificationSuccess, setNotificationError } from 'modules/app/actions';
 
 import {
   getQuestionnaireInterviewUserDetails as getQuestionnaireInterviewUserDetailsSelector,
@@ -38,8 +42,11 @@ import { interpolate } from 'utils/text';
 
 import isAdmin from 'utils/isAdmin';
 
+import appRoutes from 'routes/app';
+
+import { postRequest } from 'modules/api/actions';
+import api from 'routes/api';
 import { withParams } from 'utils/url';
-import app from 'routes/app';
 
 import styles from './QuestionnairesAllInterviewsPage.scss';
 
@@ -50,6 +57,7 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
     this.state = {
       error: null,
       interview: null,
+      usersChecked: {},
     };
   }
 
@@ -76,13 +84,62 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
 
   onInterviewReviewsModalClose = () => this.setState({ interview: null });
 
+  onUserSelect = id => () => {
+    const usersChecked = { ...this.state.usersChecked };
+
+    if (usersChecked[id]) {
+      delete usersChecked[id];
+    } else {
+      usersChecked[id] = true;
+    }
+
+    this.setState({
+      usersChecked: {
+        ...usersChecked,
+      },
+    });
+  };
+
+  onSelectCandidates = async () => {
+    const companyId = get(this.props.match, 'params.companyId');
+    const questionnaireId = get(this.props.match, 'params.questionnaireId');
+    const users = Object.keys(this.state.usersChecked);
+
+    const result = await postRequest(
+      withParams(api.questionnaire.questionnaireSelectUsers, { companyId, questionnaireId }),
+      { users },
+    );
+
+    if (result.status !== 'error') {
+      this.props.history.push(withParams(appRoutes.dashboard.questionnairesList, { companyId }));
+    } else {
+      this.props.setNotificationError({ content: result.message });
+    }
+  };
+
   columns = () => [
     {
       Header: () => <Block>{this.props.translations.candidateName}</Block>,
       accessor: 'userName',
       Cell: props => (
         <Block className={classNames(styles.userName)}>
-          <Strong>{props.value}</Strong>
+          {!('isSelected' in props.original) && (
+            <CheckBox
+              input={{
+                name: props.original._id,
+                onChange: this.onUserSelect(props.original._id),
+                checked: this.state.usersChecked[props.original._id] || false,
+              }}
+            >
+              <Strong>{props.value}</Strong>
+            </CheckBox>
+          )}
+
+          {'isSelected' in props.original && (
+            <Strong className={classNames(styles.withSelected, { [styles.isSelected]: props.original.isSelected })}>
+              {props.value}
+            </Strong>
+          )}
         </Block>
       ),
     },
@@ -99,7 +156,7 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           </Block>
           <Link
             target="_blank"
-            href={withParams(app.interview.review, {
+            href={withParams(appRoutes.interview.review, {
               companyId: get(this.props.match, 'params.companyId'),
               interviewId: props.original._id,
             })}
@@ -178,7 +235,7 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
 
   render() {
     const { className, translations, interviewUserDetails, questionnaire } = this.props;
-    const { error, interview } = this.state;
+    const { error, interview, usersChecked } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -222,6 +279,15 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           </Block>
         )}
 
+        {questionnaire &&
+          !questionnaire.isClosed && (
+            <Block className={styles.controls}>
+              <Button onClick={this.onSelectCandidates} disabled={isEmpty(usersChecked)}>
+                {translations.questionnaireCandidatesSelectAndClose}
+              </Button>
+            </Block>
+          )}
+
         {interview && (
           <Modal isOpen={!!interview} onModalClose={this.onInterviewReviewsModalClose}>
             <ModalContainer
@@ -242,7 +308,11 @@ QuestionnairesAllInterviewsPage.propTypes = {
   className: PropTypes.string,
   getQuestionnaireInterviewUserDetails: PropTypes.func.isRequired,
   clearQuestionnaireInterviewUserDetails: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
+  setNotificationSuccess: PropTypes.func.isRequired,
+  setNotificationError: PropTypes.func.isRequired,
   getQuestionnaireSingle: PropTypes.func.isRequired,
+  history: PropTypes.object,
   interviewUserDetails: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string,
@@ -250,6 +320,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
       token: PropTypes.string,
       email: PropTypes.string,
       company: PropTypes.string,
+      isSelected: PropTypes.bool,
       phone: PropTypes.string,
       reject: PropTypes.number,
       pause: PropTypes.number,
@@ -260,6 +331,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
   questionnaire: PropTypes.shape({
     _id: PropTypes.string,
     title: PropTypes.string,
+    isClosed: PropTypes.bool,
   }),
   translations: PropTypes.object.isRequired,
   match: PropTypes.shape({
@@ -272,6 +344,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
 
 QuestionnairesAllInterviewsPage.defaultProps = {
   className: null,
+  history: null,
   interviewUserDetails: [],
   questionnaire: {},
   match: {},
@@ -287,6 +360,8 @@ const mapDispatchToProps = {
   getQuestionnaireInterviewUserDetails,
   getQuestionnaireSingle,
   clearQuestionnaireInterviewUserDetails,
+  setNotificationSuccess,
+  setNotificationError,
 };
 
 export default isAdmin(withRouter(connect(mapStateToProps, mapDispatchToProps)(QuestionnairesAllInterviewsPage)));

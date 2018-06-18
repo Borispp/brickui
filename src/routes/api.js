@@ -30,6 +30,7 @@ export default {
     questionnaireList: 'api/company/:companyId/questionnaire/questionnaire_list',
     questionnaireSingle: 'api/questionnaire/:questionnaireId',
     questionnaireEdit: 'api/company/:companyId/questionnaire/edit/:questionnaireId',
+    questionnaireSelectUsers: 'api/company/:companyId/questionnaire/:questionnaireId/select_users',
     getUserDetailsList: 'api/company/:companyId/questionnaire/:questionnaireId/user_details',
   },
   interview: {

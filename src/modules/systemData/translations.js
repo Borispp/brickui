@@ -133,6 +133,7 @@ export default {
   questionTitle: 'Title',
   questionText: 'Question',
   questionnaireCandidatesList: 'Candidates list of %{questionnaireName}',
+  questionnaireCandidatesSelectAndClose: 'Select Candidates and Close Questionnaire',
 
   // company
   companyInvitedToJoin: 'requestedBy has invited you to join company Company.',

@@ -59,6 +59,25 @@
   }
 }
 
+.isQuestionnaireClosed {
+  color: $greyMedium;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  width: 300px;
+  margin-right: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  span {
+    display: inline-block;
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
 .controlButtonWrapper {
   @include link();
   display: flex;
@@ -97,6 +116,13 @@
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+@media (min-width: 601px) {
+  .questionnaireListControls {
+    flex: 0 0 580px;
+    justify-content: flex-end;
   }
 }
 
