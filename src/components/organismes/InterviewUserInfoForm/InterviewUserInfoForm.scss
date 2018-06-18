@@ -1,3 +1,21 @@
 .formField {
   margin-bottom: 15px;
 }
+
+.participants {
+  background: $body;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  margin: 0 -20px 12px;
+}
+
+.participantsList {
+  padding: 10px 0 10px 15px;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .participants {
+    margin: 0 -15px 12px;
+  }
+}

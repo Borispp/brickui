@@ -11,6 +11,8 @@ export const UPDATE_INTERVIEW_BY_ID = 'UPDATE_INTERVIEW_BY_ID';
 export const CLEAR_INTERVIEW_BY_ID = 'CLEAR_INTERVIEW_BY_ID';
 export const UPDATE_ALL_REVIEWS = 'UPDATE_ALL_REVIEWS';
 export const CLEAR_ALL_REVIEWS = 'CLEAR_ALL_REVIEWS';
+export const UPDATE_INTERVIEW_PARTICIPANTS = 'UPDATE_INTERVIEW_PARTICIPANTS';
+export const CLEAR_INTERVIEW_PARTICIPANTS = 'CLEAR_INTERVIEW_PARTICIPANTS';
 
 export const updateInterviewUserList = payload => ({ type: UPDATE_INTERVIEW_USER_LIST, payload });
 export const updateInterview = payload => ({ type: UPDATE_INTERVIEW, payload });
@@ -19,6 +21,8 @@ export const clearInterviewReview = () => ({ type: CLEAR_INTERVIEW_REVIEW });
 export const updateInterviewById = payload => ({ type: UPDATE_INTERVIEW_BY_ID, payload });
 export const clearInterviewById = () => ({ type: CLEAR_INTERVIEW_BY_ID });
 export const updateQuestionnaire = payload => ({ type: UPDATE_INTERVIEW_QUESTIONNAIRE, payload });
+export const updateParticipants = payload => ({ type: UPDATE_INTERVIEW_PARTICIPANTS, payload });
+export const clearParticipants = payload => ({ type: CLEAR_INTERVIEW_PARTICIPANTS, payload });
 export const updateAllReviews = payload => ({ type: UPDATE_ALL_REVIEWS, payload });
 export const clearAllReviews = payload => ({ type: CLEAR_ALL_REVIEWS, payload });
 
@@ -37,6 +41,16 @@ export const getInterview = tokenId => async dispatch => {
     dispatch(updateInterview(interview));
     dispatch(updateQuestionnaire(questionnaire));
   }
+};
+
+export const getParticipants = tokenId => async dispatch => {
+  const result = await getRequest(withParams(api.interview.getParticipants, { tokenId }));
+
+  if (result && result.status !== 'error') {
+    dispatch(updateParticipants(result));
+  }
+
+  return result;
 };
 
 export const getInterviewReview = ({ companyId, interviewId }) => async dispatch => {

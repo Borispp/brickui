@@ -75,6 +75,15 @@
       transform: translate(0, 0);
     }
   }
+
+  &.isRecordingSection {
+    border-color: $grey-border;
+    color: $grey-disabled;
+
+    .controlButtonIcon svg {
+      fill: $grey-disabled;
+    }
+  }
 }
 
 .audioWrapper {

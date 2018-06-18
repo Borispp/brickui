@@ -8,6 +8,8 @@ import {
   CLEAR_INTERVIEW_BY_ID,
   UPDATE_ALL_REVIEWS,
   CLEAR_ALL_REVIEWS,
+  UPDATE_INTERVIEW_PARTICIPANTS,
+  CLEAR_INTERVIEW_PARTICIPANTS,
 } from './actions';
 
 export default function(state = {}, action) {
@@ -30,6 +32,10 @@ export default function(state = {}, action) {
       return { ...state, allReviews: action.payload };
     case CLEAR_ALL_REVIEWS:
       return { ...state, allReviews: [] };
+    case UPDATE_INTERVIEW_PARTICIPANTS:
+      return { ...state, participants: action.payload };
+    case CLEAR_INTERVIEW_PARTICIPANTS:
+      return { ...state, participants: [] };
     default:
       return state;
   }

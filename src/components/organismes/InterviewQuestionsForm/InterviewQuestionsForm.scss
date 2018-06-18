@@ -56,6 +56,18 @@
   width: 165px;
 }
 
+.participants {
+  background: $white;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  margin: 0 -30px 30px;
+}
+
+.participantsList {
+  padding: 10px 0 10px 15px;
+  margin: 0;
+}
+
 @media (max-width: 600px) {
   .mainHeadline {
     font-size: 18px;

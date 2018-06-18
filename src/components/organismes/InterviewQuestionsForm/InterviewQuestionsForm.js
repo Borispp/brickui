@@ -7,6 +7,8 @@ import map from 'lodash/map';
 import get from 'lodash/get';
 
 import Block from 'components/atoms/Block';
+import List from 'components/atoms/List';
+import ListItem from 'components/atoms/ListItem';
 import Strong from 'components/atoms/Strong';
 import Heading from 'components/atoms/Heading';
 import Svg from 'components/atoms/Svg';
@@ -35,6 +37,7 @@ class InterviewQuestionsForm extends React.PureComponent {
       audios: {},
       error: false,
       submitting: false,
+      isRecording: false,
     };
   }
 
@@ -46,6 +49,9 @@ class InterviewQuestionsForm extends React.PureComponent {
       },
     }));
   };
+
+  onRecordStart = () => this.setState({ isRecording: true });
+  onRecordStop = () => this.setState({ isRecording: false });
 
   onSubmit = async () => {
     const formData = new FormData();
@@ -78,8 +84,8 @@ class InterviewQuestionsForm extends React.PureComponent {
   };
 
   render() {
-    const { className, data, translations } = this.props;
-    const { error, submitting } = this.state;
+    const { className, data, translations, companyName, participants } = this.props;
+    const { error, submitting, isRecording } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -100,7 +106,12 @@ class InterviewQuestionsForm extends React.PureComponent {
             <Heading type="h3">{title}</Heading>
             <Paragraph>{text}</Paragraph>
 
-            <AudioRecorder onChange={this.onChange(_id)} />
+            <AudioRecorder
+              onChange={this.onChange(_id)}
+              onRecordStart={this.onRecordStart}
+              onRecordStop={this.onRecordStop}
+              isRecordingSection={isRecording}
+            />
           </Block>
         ))}
 
@@ -109,6 +120,23 @@ class InterviewQuestionsForm extends React.PureComponent {
             {translations.genericAllQuestionsIsRequired}
           </Message>
         )}
+
+        <Block className={styles.participants}>
+          <Strong>{translations.genericDataReviewPersons}</Strong>
+          <br />
+          <List className={styles.participantsList}>
+            {map(participants, ({ fullName, role }, i) => (
+              <ListItem key={i}>
+                {fullName}
+                {'\u00A0'}
+                {role === 'USER' && '(HR)'}
+                {role === 'ADMIN' && '(Admin)'}
+              </ListItem>
+            ))}
+            <ListItem>BRICK HUMAN RESOURCE CONSULTING (owner of YVBI)</ListItem>
+          </List>
+          and new HRs from <Strong>{companyName}</Strong>
+        </Block>
 
         <Block className={styles.controls}>
           <Button
@@ -148,11 +176,20 @@ InterviewQuestionsForm.propTypes = {
     ),
   }),
   tokenId: PropTypes.string.isRequired,
+  companyName: PropTypes.string,
+  participants: PropTypes.arrayOf(
+    PropTypes.shape({
+      fullName: PropTypes.string,
+      role: PropTypes.string,
+    }),
+  ),
 };
 
 InterviewQuestionsForm.defaultProps = {
   className: null,
   data: null,
+  companyName: null,
+  participants: [],
 };
 
 const mapStateToProps = state => ({

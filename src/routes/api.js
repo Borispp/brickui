@@ -38,6 +38,7 @@ export default {
     resendEmail: 'api/interview/company/:companyId/token/:tokenId/resendInterviewInvite',
     interviewDelete: 'api/interview/interviewDelete/:tokenId',
     getInterview: 'api/interview/:tokenId',
+    getParticipants: 'api/interview/:tokenId/participants',
     getInterviewById: 'api/company/:companyId/interview/:interviewId',
     updateInterview: 'api/interview/:tokenId',
     putInterviewAnswers: 'api/interview_answers/:tokenId',

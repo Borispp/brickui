@@ -29,9 +29,9 @@ import api from 'routes/api';
 import app from 'routes/app';
 import { withParams } from 'utils/url';
 
-import styles from './InviteUserList.scss';
+import styles from './InviteCandidatesList.scss';
 
-class InviteUserList extends React.PureComponent {
+class InviteCandidatesList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -91,7 +91,7 @@ class InviteUserList extends React.PureComponent {
       <Block className={classNames(styles.wrapper, className)}>
         <Block className={styles.listWrapper}>
           <Heading type="h3" className={styles.listHeadline}>
-            {translations.userListPassedInterviewHeadline}
+            {translations.candidatesListPassedInterviewHeadline}
           </Heading>
           <Block className={styles.list}>
             {map(userListPassed, interview => (
@@ -112,9 +112,9 @@ class InviteUserList extends React.PureComponent {
                     })}
                     className={classNames(styles.link, styles.controlButtonWrapper)}
                   >
-                    <Svg type="link" className={styles.controlButtonIcon} />
+                    <Svg type="feedback" className={styles.controlButtonIcon} />
                     <Text className={styles.controlName}>
-                      {interview.isReviewed ? translations.genericReviewChange : translations.genericReview}
+                      {interview.isReviewed ? translations.genericReviewChange : translations.genericAddReview}
                     </Text>
                   </Link>
                 </Block>
@@ -127,7 +127,7 @@ class InviteUserList extends React.PureComponent {
 
         <Block className={styles.listWrapper}>
           <Heading type="h3" className={styles.listHeadline}>
-            {translations.userListInterviewInvitedHeadline}
+            {translations.candidatesListInterviewInvitedHeadline}
           </Heading>
           <Block className={styles.list}>
             {map(userListIsntPassed, interview => (
@@ -171,7 +171,7 @@ class InviteUserList extends React.PureComponent {
 
         <Block className={styles.controlWrapper}>
           <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
-            {translations.usersInviteUser}
+            {translations.interviewInviteCandidate}
           </Button>
         </Block>
 
@@ -204,7 +204,7 @@ const interview = PropTypes.shape({
   isReviewed: PropTypes.bool,
 });
 
-InviteUserList.propTypes = {
+InviteCandidatesList.propTypes = {
   className: PropTypes.string,
   companyId: PropTypes.string.isRequired,
   questionnaireId: PropTypes.string.isRequired,
@@ -218,7 +218,7 @@ InviteUserList.propTypes = {
   translations: PropTypes.object.isRequired,
 };
 
-InviteUserList.defaultProps = {
+InviteCandidatesList.defaultProps = {
   className: null,
   userListPassed: [],
   userListIsntPassed: [],
@@ -237,4 +237,4 @@ const mapDispatchToProps = {
   setNotificationError,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InviteUserList);
+export default connect(mapStateToProps, mapDispatchToProps)(InviteCandidatesList);

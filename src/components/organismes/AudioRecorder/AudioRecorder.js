@@ -45,6 +45,8 @@ class AudioRecorder extends PureComponent {
     this.recorder = new Recorder(mediaStreamSource);
     this.recorder.record();
 
+    this.props.onRecordStart();
+
     this.setState({
       isRecording: true,
     });
@@ -55,7 +57,7 @@ class AudioRecorder extends PureComponent {
   };
 
   onStart = () => {
-    if (!this.state.isRecording) {
+    if (!this.state.isRecording && !this.props.isRecordingSection) {
       if (navigator.getUserMedia) {
         navigator.getUserMedia({ audio: true }, this.onSuccess, this.onFail);
       } else {
@@ -67,6 +69,8 @@ class AudioRecorder extends PureComponent {
 
   onStop = () => {
     if (this.state.isRecording && this.recorder) {
+      this.props.onRecordStop();
+
       this.setState({
         isRecording: false,
       });
@@ -103,12 +107,16 @@ class AudioRecorder extends PureComponent {
     }
   };
 
+  onAudionContextMenu = e => {
+    e.preventDefault();
+  };
+
   setRef = name => el => {
     this[name] = el;
   };
 
   render() {
-    const { className } = this.props;
+    const { className, isRecordingSection } = this.props;
     const { audioSrc, isRecording } = this.state;
 
     return (
@@ -117,7 +125,7 @@ class AudioRecorder extends PureComponent {
           {audioSrc && (
             <Block className={styles.audioWrapper}>
               {/* eslint-disable jsx-a11y/media-has-caption */}
-              <audio src={audioSrc} controls controlsList="nodownload" />
+              <audio src={audioSrc} controls controlsList="nodownload" onContextMenu={this.onAudionContextMenu} />
               {/* eslint-enable jsx-a11y/media-has-caption */}
             </Block>
           )}
@@ -127,7 +135,11 @@ class AudioRecorder extends PureComponent {
               onClick={this.onStart}
               size="small"
               color="transparent"
-              className={classNames(styles.controlButton, styles.recordButton, { [styles.isRecording]: isRecording })}
+              className={classNames(styles.controlButton, styles.recordButton, {
+                [styles.isRecording]: isRecording,
+                [styles.isRecordingSection]: isRecordingSection,
+              })}
+              disabled={isRecordingSection}
             >
               <Block className={styles.buttonStartInfo}>
                 <Timer
@@ -167,11 +179,17 @@ AudioRecorder.propTypes = {
   className: PropTypes.string,
   translations: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  onRecordStart: PropTypes.func,
+  onRecordStop: PropTypes.func,
+  isRecordingSection: PropTypes.bool,
   setNotificationError: PropTypes.func.isRequired,
 };
 
 AudioRecorder.defaultProps = {
   className: null,
+  onRecordStart: null,
+  onRecordStop: null,
+  isRecordingSection: null,
 };
 
 const mapStateToProps = state => ({

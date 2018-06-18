@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import get from 'lodash/get';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
@@ -17,8 +18,12 @@ import InterviewQuestionsForm from 'components/organismes/InterviewQuestionsForm
 import InterviewUserInfoForm from 'components/organismes/InterviewUserInfoForm';
 import InterviewResult from 'components/organismes/InterviewResult';
 
-import { getInterview } from 'modules/interview/actions';
-import { getInterview as getInterviewSelector, getQuestionnaire } from 'modules/interview/selectors';
+import { getInterview, getParticipants, clearParticipants } from 'modules/interview/actions';
+import {
+  getInterview as getInterviewSelector,
+  getQuestionnaire,
+  getInterviewParticipants,
+} from 'modules/interview/selectors';
 import { getTranslations } from 'modules/systemData/selectors';
 
 import { iOS, iOSversion, isSafari } from 'utils/validationHelpers';
@@ -38,7 +43,8 @@ class QuestionnaireInterviewPage extends React.PureComponent {
 
   componentDidMount = async () => {
     const { match: { params: { tokenId } } } = this.props;
-    await this.props.getInterview(tokenId);
+    await Promise.all([this.props.getParticipants(tokenId), this.props.getInterview(tokenId)]);
+
     if (!this.props.interview.phone) {
       this.setState({ isUserInfoModalOpen: true });
     }
@@ -52,10 +58,22 @@ class QuestionnaireInterviewPage extends React.PureComponent {
     }
   };
 
+  componentWillUnmount() {
+    this.props.clearParticipants();
+  }
+
   onUserInfoModalClose = () => this.setState({ isUserInfoModalOpen: false });
 
   render() {
-    const { className, translations, questionnaire, interview, match } = this.props;
+    const {
+      className,
+      translations,
+      questionnaire,
+      interview,
+      interview: { company },
+      match,
+      participants,
+    } = this.props;
     const { error, isUserInfoModalOpen, isIosBlocked } = this.state;
 
     return (
@@ -79,6 +97,8 @@ class QuestionnaireInterviewPage extends React.PureComponent {
           !interview.isSaved && (
             <InterviewQuestionsForm
               tokenId={match.params.tokenId}
+              companyName={get(company, 'name')}
+              participants={participants}
               data={questionnaire}
               getInterview={this.props.getInterview}
             />
@@ -98,6 +118,8 @@ class QuestionnaireInterviewPage extends React.PureComponent {
           <ModalContainer title={translations.interviewUserInfoTitle} type="centred">
             <InterviewUserInfoForm
               tokenId={interview.token}
+              companyName={get(company, 'name')}
+              participants={participants}
               initialValues={{ userName: interview.userName, email: interview.email }}
               onClose={this.onUserInfoModalClose}
             />
@@ -121,6 +143,8 @@ QuestionnaireInterviewPage.propTypes = {
   className: PropTypes.string,
   translations: PropTypes.object.isRequired,
   getInterview: PropTypes.func.isRequired,
+  getParticipants: PropTypes.func.isRequired,
+  clearParticipants: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       tokenId: PropTypes.string,
@@ -138,22 +162,32 @@ QuestionnaireInterviewPage.propTypes = {
     isSaved: PropTypes.bool,
   }),
   questionnaire: PropTypes.object,
+  participants: PropTypes.arrayOf(
+    PropTypes.shape({
+      fullName: PropTypes.string,
+      role: PropTypes.string,
+    }),
+  ),
 };
 
 QuestionnaireInterviewPage.defaultProps = {
   className: null,
   interview: {},
   questionnaire: {},
+  participants: [],
 };
 
 const mapStateToProps = state => ({
   translations: getTranslations(state),
   interview: getInterviewSelector(state),
   questionnaire: getQuestionnaire(state),
+  participants: getInterviewParticipants(state),
 });
 
 const mapDispatchToProps = {
   getInterview,
+  getParticipants,
+  clearParticipants,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionnaireInterviewPage);

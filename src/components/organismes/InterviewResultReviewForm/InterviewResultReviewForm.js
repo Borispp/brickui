@@ -62,7 +62,7 @@ class InterviewResultReviewForm extends React.PureComponent {
               name="review"
               id="review"
               component={Textarea}
-              placeholder={translations.genericReview}
+              placeholder={translations.genericAddReview}
               className={classNames(styles.formField, styles.textArea)}
             />
           </Block>

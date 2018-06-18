@@ -99,14 +99,14 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           </Block>
           <Link
             target="_blank"
-            href={withParams(app.interview.main, {
-              questionnaireId: this.props.questionnaire._id,
-              tokenId: props.original.token,
+            href={withParams(app.interview.review, {
+              companyId: get(this.props.match, 'params.companyId'),
+              interviewId: props.original._id,
             })}
             className={classNames(styles.link, styles.controlButtonWrapper)}
           >
-            <Svg type="link" className={styles.controlButtonIcon} />
-            <Text className={styles.controlName}>{this.props.translations.genericDirectLink}</Text>
+            <Svg type="feedback" className={styles.controlButtonIcon} />
+            <Text className={styles.controlName}>{this.props.translations.genericAddReview}</Text>
           </Link>
         </Block>
       ),

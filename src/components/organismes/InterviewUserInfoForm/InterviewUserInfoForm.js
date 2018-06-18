@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import map from 'lodash/map';
 
 import FormBuilder from 'components/atoms/FormBuilder';
 import FormField from 'components/atoms/FormField';
 import Block from 'components/atoms/Block';
+import List from 'components/atoms/List';
+import ListItem from 'components/atoms/ListItem';
+import Strong from 'components/atoms/Strong';
 import Button from 'components/atoms/Button';
 import InputText from 'components/atoms/InputText';
+import CheckBox from 'components/atoms/CheckBox';
 import Message from 'components/atoms/Message';
 
 import { setNotificationSuccess } from 'modules/app/actions';
@@ -30,7 +35,7 @@ class InterviewUserInfoForm extends React.PureComponent {
   resetForm = () => this.props.reset();
 
   render() {
-    const { submitting, translations, submitSucceeded, error } = this.props;
+    const { submitting, translations, submitSucceeded, error, valid, companyName, participants } = this.props;
 
     return (
       <Block className={styles.wrapper}>
@@ -66,6 +71,25 @@ class InterviewUserInfoForm extends React.PureComponent {
           </Block>
         </Block>
 
+        <Block className={styles.participants}>
+          <FormField name="confirmParticipants" id="confirmParticipants" component={CheckBox}>
+            <Strong>{translations.genericDataReviewPersons}</Strong>
+            <br />
+            <List className={styles.participantsList}>
+              {map(participants, ({ fullName, role }, i) => (
+                <ListItem key={i}>
+                  {fullName}
+                  {'\u00A0'}
+                  {role === 'USER' && '(HR)'}
+                  {role === 'ADMIN' && '(Admin)'}
+                </ListItem>
+              ))}
+              <ListItem>BRICK HUMAN RESOURCE CONSULTING (owner of YVBI)</ListItem>
+            </List>
+            and new HRs from <Strong>{companyName}</Strong>
+          </FormField>
+        </Block>
+
         {!submitting &&
           submitSucceeded && (
             <Block>
@@ -84,8 +108,15 @@ class InterviewUserInfoForm extends React.PureComponent {
           )}
         {!(!submitting && submitSucceeded) && (
           <Block>
-            <Button type="submit" size="medium" className={styles.button} color="orange" submitting={submitting}>
-              {translations.usersInviteUser}
+            <Button
+              type="submit"
+              size="medium"
+              disabled={!valid}
+              className={styles.button}
+              color="orange"
+              submitting={submitting}
+            >
+              {translations.genericSave}
             </Button>
           </Block>
         )}
@@ -113,6 +144,13 @@ InterviewUserInfoForm.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   tokenId: PropTypes.string,
   translations: PropTypes.object.isRequired,
+  companyName: PropTypes.string,
+  participants: PropTypes.arrayOf(
+    PropTypes.shape({
+      fullName: PropTypes.string,
+      role: PropTypes.string,
+    }),
+  ),
 };
 
 InterviewUserInfoForm.defaultProps = {
@@ -123,6 +161,8 @@ InterviewUserInfoForm.defaultProps = {
   match: {},
   onClose: null,
   tokenId: null,
+  companyName: null,
+  participants: [],
 };
 
 const mapStateToProps = state => ({
@@ -156,6 +196,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           required: true,
           format: 'email',
         },
+      },
+      confirmParticipants: {
+        required: true,
       },
     },
   }))(InterviewUserInfoForm),

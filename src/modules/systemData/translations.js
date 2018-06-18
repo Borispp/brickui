@@ -41,7 +41,7 @@ export default {
   genericAllFieldsIsRequired: 'All fields is required',
   genericAllQuestionsIsRequired: 'Not all questions answered',
   genericRegisterLink: 'Register link',
-  genericReview: 'Add Review',
+  genericAddReview: 'Add Review',
   genericReviewChange: 'Change Review',
   genericRate: 'Rate',
   genericNoData: 'No data',
@@ -51,6 +51,7 @@ export default {
   genericPaymentMethod: 'Payment method',
   genericDontHaveAccount: "Don't have account yet?",
   genericSignUpTitle: "Don't have account yet?",
+  genericDataReviewPersons: 'Your data will be viewed by the following persons: ',
 
   // Form
   formRegisterSuccess: 'Registred successfully',
@@ -131,6 +132,7 @@ export default {
   questionnaireDescriptionHeading: 'Questionnaire description',
   questionTitle: 'Title',
   questionText: 'Question',
+  questionnaireCandidatesList: 'Candidates list of %{questionnaireName}',
 
   // company
   companyInvitedToJoin: 'requestedBy has invited you to join company Company.',
@@ -142,8 +144,8 @@ export default {
   companyConfirmDeleteDescription: 'Company with all company users will be deleted',
   companyDeleteDescription: 'Company with all company users was deleted',
   companyUserList: 'User list of %{company}',
-  userListPassedInterviewHeadline: 'Users passed the interview',
-  userListInterviewInvitedHeadline: 'Users invited to the interview',
+  candidatesListPassedInterviewHeadline: 'Candidates passed the interview',
+  candidatesListInterviewInvitedHeadline: 'Candidates invited to the interview',
   buttonDeleteCompany: 'Delete company',
   companySelectExpireDate: 'Select expire date for',
 
@@ -197,6 +199,7 @@ export default {
   resendInterviewInvitation: 'Resend',
   interviewUserInfoTitle: 'Information about you',
   interviewReviewsTitle: 'Reviews for %{userName}',
+  interviewInviteCandidate: 'Invite Candidate',
   reviewRateLabel: 'Review decision',
   reviewTextLabel: 'Description:',
   interviewSavedSuccess: 'Thank you for submitting. Now you are in preview mode.',

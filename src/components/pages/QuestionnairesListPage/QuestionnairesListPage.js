@@ -18,7 +18,7 @@ import Modal from 'components/atoms/Modal';
 
 import ModalContainer from 'components/molecules/ModalContainer';
 
-import InviteUserList from 'components/organismes/InviteUserList';
+import InviteCandidatesList from 'components/organismes/InviteCandidatesList';
 import InterviewInviteForm from 'components/organismes/InterviewInviteForm';
 
 import { getQuestionnaireList, clearQuestionnaireList, questionnaireDelete } from 'modules/questionnaires/actions';
@@ -138,7 +138,7 @@ class QuestionnairesListPage extends React.PureComponent {
                   className={styles.controlButtonWrapper}
                 >
                   <Svg type="invite" className={styles.controlButtonIcon} />
-                  <Text className={styles.controlName}>{translations.usersInviteUser}</Text>
+                  <Text className={styles.controlName}>{translations.interviewInviteCandidate}</Text>
                 </Block>
                 <Block
                   onClick={this.onQuestionnaireUserListModalOpen({ _id, title })}
@@ -172,12 +172,12 @@ class QuestionnairesListPage extends React.PureComponent {
 
         <Modal isOpen={!!questionnaireUserList} onModalClose={this.onQuestionnaireUserListModalClose}>
           <ModalContainer
-            title={interpolate(translations.companyUserList, {
-              company: get(questionnaireUserList, 'title'),
+            title={interpolate(translations.questionnaireCandidatesList, {
+              questionnaireName: get(questionnaireUserList, 'title'),
             })}
           >
             {!!questionnaireUserList && (
-              <InviteUserList
+              <InviteCandidatesList
                 companyId={this.props.match.params.companyId}
                 questionnaireId={get(questionnaireUserList, '_id')}
                 questionnaireName={get(questionnaireUserList, 'title')}

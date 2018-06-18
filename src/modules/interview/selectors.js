@@ -33,6 +33,10 @@ export const getInterviewById = createSelector(getInterviewReducer, interview =>
 
 export const getInterviewReview = createSelector(getInterviewReducer, interview => get(interview, 'review'));
 
+export const getInterviewParticipants = createSelector(getInterviewReducer, interview =>
+  get(interview, 'participants'),
+);
+
 export const getInterviewAllReviews = createSelector(getInterviewReducer, interview => {
   const allReviews = get(interview, 'allReviews');
   return map(allReviews, review => {

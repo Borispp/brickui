@@ -12,6 +12,10 @@ import Paragraph from 'components/atoms/Paragraph';
 import styles from './InterviewResult.scss';
 
 class InterviewResult extends React.PureComponent {
+  onAudionContextMenu = e => {
+    e.preventDefault();
+  };
+
   render() {
     const {
       className,
@@ -44,6 +48,7 @@ class InterviewResult extends React.PureComponent {
               src={`${process.env.REACT_APP_API_PUBLIC_URL}/public/audios/${audioSrc}.wav`}
               controls
               controlsList="nodownload"
+              onContextMenu={this.onAudionContextMenu}
             />
             {/* eslint-enable jsx-a11y/media-has-caption */}
           </Block>

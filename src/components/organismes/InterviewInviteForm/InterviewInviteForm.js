@@ -41,7 +41,7 @@ class InterviewInviteForm extends React.PureComponent {
       this.resetForm();
       this.props.setNotificationSuccess({ content: this.props.translations.notificationInviteSendSuccess });
       if (this.props.onClose) {
-        setTimeout(() => this.props.onClose(), 600);
+        // setTimeout(() => this.props.onClose(), 600);
       }
     }
   };
@@ -94,7 +94,7 @@ class InterviewInviteForm extends React.PureComponent {
         {!(!submitting && submitSucceeded) && (
           <Block>
             <Button type="submit" size="medium" className={styles.button} color="orange" submitting={submitting}>
-              {translations.usersInviteUser}
+              {translations.interviewInviteCandidate}
             </Button>
           </Block>
         )}
