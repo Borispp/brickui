@@ -123,7 +123,7 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       accessor: 'userName',
       Cell: props => (
         <Block className={classNames(styles.userName)}>
-          {!('isSelected' in props.original) && (
+          {!('isAccepted' in props.original) && (
             <CheckBox
               input={{
                 name: props.original._id,
@@ -135,8 +135,8 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
             </CheckBox>
           )}
 
-          {'isSelected' in props.original && (
-            <Strong className={classNames(styles.withSelected, { [styles.isSelected]: props.original.isSelected })}>
+          {'isAccepted' in props.original && (
+            <Strong className={classNames(styles.withSelected, { [styles.isAccepted]: props.original.isAccepted })}>
               {props.value}
             </Strong>
           )}
@@ -154,17 +154,20 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           >
             {this.props.translations.interviewAllReviews}
           </Block>
-          <Link
-            target="_blank"
-            href={withParams(appRoutes.interview.review, {
-              companyId: get(this.props.match, 'params.companyId'),
-              interviewId: props.original._id,
-            })}
-            className={classNames(styles.link, styles.controlButtonWrapper)}
-          >
-            <Svg type="feedback" className={styles.controlButtonIcon} />
-            <Text className={styles.controlName}>{this.props.translations.genericAddReview}</Text>
-          </Link>
+
+          {!this.props.questionnaire.isClosed && (
+            <Link
+              target="_blank"
+              href={withParams(appRoutes.interview.review, {
+                companyId: get(this.props.match, 'params.companyId'),
+                interviewId: props.original._id,
+              })}
+              className={classNames(styles.link, styles.controlButtonWrapper)}
+            >
+              <Svg type="feedback" className={styles.controlButtonIcon} />
+              <Text className={styles.controlName}>{this.props.translations.genericAddReview}</Text>
+            </Link>
+          )}
         </Block>
       ),
       sortable: false,
@@ -320,7 +323,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
       token: PropTypes.string,
       email: PropTypes.string,
       company: PropTypes.string,
-      isSelected: PropTypes.bool,
+      isAccepted: PropTypes.bool,
       phone: PropTypes.string,
       reject: PropTypes.number,
       pause: PropTypes.number,

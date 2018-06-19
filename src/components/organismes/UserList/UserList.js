@@ -162,7 +162,7 @@ class UserList extends React.PureComponent {
 
         <Modal isOpen={isInviteFormOpen} size="small" onModalClose={this.onInviteFormModalClose}>
           <ModalContainer title={translations.usersInviteUser} type="centred">
-            <InviteUserForm companyId={companyId} onClose={this.onInviteFormModalClose} />
+            <InviteUserForm companyId={companyId} />
           </ModalContainer>
         </Modal>
       </Block>

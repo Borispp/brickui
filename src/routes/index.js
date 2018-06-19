@@ -166,6 +166,19 @@ const routes = [
     ],
   },
   {
+    path: appRoutes.dashboard.explore,
+    component: CommonLayout,
+    routes: [
+      {
+        path: appRoutes.dashboard.explore,
+        exact: true,
+        component: componentLoader({
+          loader: () => import('components/pages/ExplorePage'),
+        }),
+      },
+    ],
+  },
+  {
     path: appRoutes.interview.main,
     component: EmptyLayout,
     routes: [

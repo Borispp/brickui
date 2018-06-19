@@ -72,6 +72,16 @@ class UserMenu extends PureComponent {
           )}
 
           <ListItem className={styles.item}>
+            <NavLink
+              href={appRoutes.dashboard.explore}
+              activeClassName={styles.active}
+              className={classNames(styles.link, styles.explore)}
+            >
+              <Text className={classNames(styles.linkName)}>{translations.menuExplore}</Text>
+            </NavLink>
+          </ListItem>
+
+          <ListItem className={styles.item}>
             <Link href="/" onClick={signOut} className={styles.link}>
               <Text className={classNames(styles.linkName)}>{translations.menuLogout}</Text>
             </Link>

@@ -11,6 +11,7 @@ export default {
   dashboard: {
     dashboard: `${prefix}dashboard`,
     companiesList: `${prefix}companies`,
+    explore: `${prefix}explore`,
     userList: `${prefix}users`,
     questionnairesList: `${prefix}company/:companyId/questionnaires`,
     questionnaireAdd: `${prefix}company/:companyId/add-questionnaire`,

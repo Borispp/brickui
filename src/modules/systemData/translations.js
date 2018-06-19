@@ -81,6 +81,7 @@ export default {
   menuUserList: 'User List',
   menuQuestionnaireList: 'Questionnaire List',
   menuQuestionnaireAdd: 'Add Questionnaire',
+  menuExplore: 'Explore our service',
   menuLogout: 'Logout',
 
   // label
@@ -238,4 +239,5 @@ export default {
   questionnairesListTitle: 'Questionnaires list',
   questionnairesAllInterviewsTitle: 'All candidates for %{questionnaireName}',
   interviewTitle: 'Interview',
+  exploreTitle: 'Explore Brick',
 };

@@ -4,7 +4,7 @@
   :global {
     .rt-thead,
     .rt-tbody {
-      min-width: 1190px !important;
+      min-width: 1240px !important;
     }
 
     .ReactTable .rt-tr {
@@ -14,8 +14,7 @@
     .rt-tr .rt-th,
     .rt-tr .rt-td {
       &:nth-child(1) {
-        flex: 0 0 190px !important;
-        width: 190px !important;
+        min-width: 250px !important;
       }
       &:nth-child(2) {
         flex: 0 0 215px !important;
@@ -109,7 +108,7 @@
 .withSelected {
   color: $grey-disabled;
 
-  &.isSelected {
+  &.isAccepted {
     color: $success;
   }
 }

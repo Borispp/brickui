@@ -21,6 +21,10 @@
     color: $black;
     text-decoration: none;
   }
+
+  &.explore {
+    color: $maincolor-lt;
+  }
 }
 
 @media (max-width: 930px) {
