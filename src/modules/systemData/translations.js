@@ -14,7 +14,7 @@ export default {
   genericCreate: 'Create',
   genericUser: 'User',
   genericEditors: 'Editors:',
-  genericJoin: 'Join',
+  genericJoin: 'Join YVBI platform',
   genericDelete: 'Delete',
   genericJoined: 'Joined',
   genericAllRightsReserved: 'All Rights Reserved.',
@@ -51,7 +51,7 @@ export default {
   genericPaymentMethod: 'Payment method',
   genericDontHaveAccount: "Don't have account yet?",
   genericSignUpTitle: "Don't have account yet?",
-  genericDataReviewPersons: 'Your data will be viewed by the following persons: ',
+  genericDataReviewPersons: 'Your data will be viewed by representatives of the following parties:',
 
   // Form
   formRegisterSuccess: 'Registred successfully',
@@ -59,9 +59,9 @@ export default {
 
   // Rate field
   rateFieldReject: 'Reject',
-  rateFieldPause: 'Pause',
-  rateFieldHr: 'HR',
-  rateFieldHm: 'HM',
+  rateFieldPause: 'On hold',
+  rateFieldHr: 'HR interview',
+  rateFieldHm: 'Direct Hiring Manager interview',
 
   // Interview review
   interviewResultReviewFormHeading: 'Your feedback',
@@ -85,7 +85,7 @@ export default {
   menuLogout: 'Logout',
 
   // label
-  labelFullName: 'Full Name:',
+  labelFullName: 'Full Name and position:',
   labelPhoneNumber: 'Phone Number:',
   labelEmailAddress: 'Email Address:',
   labelCurentPassword: 'Curent Password:',
@@ -98,7 +98,7 @@ export default {
   placeholderRepeatPassword: 'Repeat Password',
   placeholderSelect: 'Select',
   placeholderEmailAddress: 'Email address',
-  placeholderFullName: 'Full name',
+  placeholderFullName: 'Full name and position',
   placeholderSearchNow: 'Search Now',
 
   // message
@@ -133,11 +133,16 @@ export default {
   questionnaireDescriptionHeading: 'Questionnaire description',
   questionTitle: 'Title',
   questionText: 'Question',
+  questionsExamples: 'Examples of questions',
   questionnaireCandidatesList: 'Candidates list of %{questionnaireName}',
   questionnaireCandidatesSelectAndClose: 'Select Candidates and Close Questionnaire',
+  questionnaireAccessList: 'Access user list',
+  questionnaireConfirmDelete: 'Confirm deletion of the questionnaire %{questionnaireName}',
+  buttonDeleteQuestionnaire: 'Delete questionnaire',
+  questionnaireConfirmDeleteDescription: 'Questionnaire with all interviews and users answers will be deleted',
 
   // company
-  companyInvitedToJoin: 'requestedBy has invited you to join company Company.',
+  companyInvitedToJoin: 'requestedBy has invited you to join YVBI platform.',
   companyCreatedSuccess: 'Company was created and verification email was sent',
   companiesListHeading: 'Companies List',
   companyJoinCompanyName: 'Join company',
@@ -210,10 +215,10 @@ export default {
   tableNoData: 'No data',
   candidateName: 'Candidate Name',
   candidatePhone: 'Phone',
-  candidateEmail: 'Email',
+  candidateEmail: 'Candidate Email',
   savedAt: 'Saved',
   rejectCount: 'Reject',
-  pauseCount: 'Pause',
+  pauseCount: 'Hold',
   hrCount: 'HR',
   hmCount: 'HM',
 

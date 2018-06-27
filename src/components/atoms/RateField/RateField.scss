@@ -6,7 +6,9 @@
 }
 
 .item {
-  flex: 0 0 100px;
+  flex-grow: 0;
+  padding: 0 24px;
+  box-sizing: border-box;
   margin: 4px 2px;
   height: 40px;
   display: flex;
@@ -85,4 +87,10 @@
 .error {
   color: $redPale;
   margin-left: 15px;
+}
+
+@media (max-width: 600px) {
+  .item {
+    flex: 0 0 100%;
+  }
 }

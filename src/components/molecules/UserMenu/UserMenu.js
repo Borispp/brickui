@@ -59,7 +59,7 @@ class UserMenu extends PureComponent {
               </NavLink>
             </ListItem>
           )}
-          {[roles.admin, roles.user].includes(roleName) && (
+          {[roles.admin].includes(roleName) && (
             <ListItem className={styles.item}>
               <NavLink
                 href={withParams(appRoutes.dashboard.questionnaireAdd, { companyId })}

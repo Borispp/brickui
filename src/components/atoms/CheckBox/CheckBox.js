@@ -9,14 +9,14 @@ import Svg from '../Svg';
 
 import styles from './CheckBox.scss';
 
-const CheckBox = ({ children, className, textClassName, id, input: { name, checked, onChange }, ...props }) => (
+const CheckBox = ({ children, className, textClassName, id, input: { name, value, onChange }, ...props }) => (
   <Label htmlFor={id} className={classNames(styles.checkboxLabel, className)}>
     <input
       {...props}
       id={id}
       name={name}
       type="checkbox"
-      checked={checked}
+      checked={value}
       onChange={onChange}
       className={styles.checkboxInput}
     />
@@ -36,7 +36,7 @@ CheckBox.propTypes = {
   id: PropTypes.string,
   input: PropTypes.shape({
     name: PropTypes.string,
-    checked: PropTypes.bool,
+    value: PropTypes.bool,
     onChange: PropTypes.func,
   }).isRequired,
 };

@@ -119,14 +119,14 @@
   }
 }
 
-@media (min-width: 601px) {
+@media (min-width: 1100px) {
   .questionnaireListControls {
     flex: 0 0 580px;
     justify-content: flex-end;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1100px) {
   .wrapper {
     padding-left: 15px;
     padding-right: 15px;
@@ -156,5 +156,6 @@
   .questionnaireListItem {
     padding-right: 4px;
     padding-left: 15px;
+    justify-content: space-between;
   }
 }

@@ -139,9 +139,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     className: styles.interviewResultReviewForm,
     onSubmit,
     validate: {
-      review: {
-        required: true,
-      },
       rate: {
         required: true,
       },

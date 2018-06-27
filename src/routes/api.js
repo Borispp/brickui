@@ -23,6 +23,7 @@ export default {
     companyDelete: 'api/company/company_delete/:companyId',
     companyUserList: 'api/company/company_user_list/:companyId',
     companyUpdateExpireDate: 'api/company/update_expires_date/:companyId',
+    companyParticipants: 'api/company/participants/:companyId',
   },
   questionnaire: {
     questionnaireAdd: 'api/company/:companyId/questionnaire/add_new_questionnaire',

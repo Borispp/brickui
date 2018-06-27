@@ -14,6 +14,21 @@
   margin-bottom: 15px;
 }
 
+.participants {
+  display: flex;
+  padding-bottom: 24px;
+
+  .participantsCheckboxField {
+    margin: 0 12px 12px 0;
+  }
+}
+
+.noUsers {
+  font-size: 13px;
+  margin: -10px 0 0;
+  color: $greyText;
+}
+
 .descriptionFieldsWrapper {
   background: $dark-5;
   margin: 0 -30px 30px;
@@ -25,8 +40,44 @@
   }
 }
 
+.questionsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.questionsArray {
+  flex: 0 0 440px;
+}
+
+.questionsExamples {
+  flex: 1;
+  margin-left: 50px;
+}
+
+.questionsExamplesList {
+  list-style: none;
+  margin: 12px 0 0 0;
+  padding: 0;
+  font-size: 13px;
+
+  li {
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid $grey-border;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    strong {
+      display: block;
+      padding-bottom: 4px;
+    }
+  }
+}
+
 .descriptionFields {
-  max-width: 500px;
+  max-width: 440px;
 }
 
 .questionnaireDescriptionHeading {
@@ -39,7 +90,7 @@
 }
 
 .fieldsArrayItem {
-  max-width: 500px;
+  max-width: 440px;
   border-bottom: 1px solid $grey-border;
   margin-bottom: 10px;
   padding-bottom: 12px;
@@ -71,8 +122,8 @@
   padding: 6px;
   transform: translate(0, 1px);
   color: $red;
-  opacity: .7;
-  transition: color .15s ease-in-out, opacity .15s ease-in-out;
+  opacity: 0.7;
+  transition: color 0.15s ease-in-out, opacity 0.15s ease-in-out;
   margin-left: 6px;
 
   span {
@@ -111,6 +162,62 @@
   margin-left: 12px;
 }
 
+@media (max-width: 1120px) {
+  .questionsArray {
+    flex: 0 0 350px;
+  }
+
+  .descriptionFields,
+  .fieldsArrayItem {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 930px) {
+  .questionsArray {
+    flex: 0 0 400px;
+  }
+
+  .descriptionFields,
+  .fieldsArrayItem {
+    max-width: 400px;
+  }
+}
+@media (max-width: 720px) {
+  .questionsArray {
+    flex: 0 0 100%;
+  }
+
+  .descriptionFields,
+  .fieldsArrayItem {
+    max-width: 100%;
+  }
+
+  .questionsExamples {
+    margin-left: 0;
+    margin-bottom: 12px;
+  }
+
+  .questionsExamples .questionHeadline {
+    cursor: pointer;
+    color: $maincolor-lt;
+    text-decoration: underline;
+  }
+
+  .questionsExamplesList {
+    display: none;
+
+    &.examplesShow {
+      display: block;
+    }
+  }
+}
+
+.link {
+  @include link();
+  color: $maincolor-lt;
+}
+
 @media (max-width: 600px) {
   .descriptionFieldsWrapper {
     padding-left: 15px;
@@ -125,6 +232,10 @@
 
   .submitWrapper {
     display: flex;
+    justify-content: center;
+  }
+
+  .questionsExamples .questionHeadline {
     justify-content: center;
   }
 }

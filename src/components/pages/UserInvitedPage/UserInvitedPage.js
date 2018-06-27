@@ -99,7 +99,7 @@ class UserInvitedPage extends Component {
             <Block>
               <Block className={styles.headlineWrapper}>
                 <Heading type="h2" className={styles.headline}>
-                  {showSuccessMessage ? translations.genericJoined : translations.genericJoin} {company.name}
+                  {showSuccessMessage ? translations.genericJoined : translations.genericJoin}
                 </Heading>
                 <Paragraph className={styles.headlineDescription}>
                   {!showSuccessMessage &&

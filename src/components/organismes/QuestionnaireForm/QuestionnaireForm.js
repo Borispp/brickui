@@ -4,6 +4,7 @@ import { withRouter, Redirect } from 'react-router';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import forEach from 'lodash/forEach';
+import map from 'lodash/map';
 import { reduxForm, FieldArray } from 'redux-form';
 
 import FormField from 'components/atoms/FormField';
@@ -12,13 +13,19 @@ import Form from 'components/atoms/Form';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
 import InputText from 'components/atoms/InputText';
+import CheckBox from 'components/atoms/CheckBox';
 import Textarea from 'components/atoms/Textarea';
 import Svg from 'components/atoms/Svg';
 import Text from 'components/atoms/Text';
 import Message from 'components/atoms/Message';
+import List from 'components/atoms/List';
+import ListItem from 'components/atoms/ListItem';
+import Strong from 'components/atoms/Strong';
 
 import { getTranslations } from 'modules/systemData/selectors';
 import { setNotificationSuccess } from 'modules/app/actions';
+import { getCompanyParticipants } from 'modules/companies/actions';
+import { getCompanyParticipants as getCompanyParticipantsSelector } from 'modules/companies/selectors';
 
 import { withParams } from 'utils/url';
 
@@ -77,8 +84,14 @@ class QuestionnaireForm extends React.PureComponent {
 
     this.state = {
       redirectToQuestionnaireList: false,
+      examplesView: false,
     };
   }
+
+  componentDidMount = async () => {
+    await this.props.getCompanyParticipants(this.props.match.params.companyId);
+    this.resetForm();
+  };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.submitting && nextProps.submitSucceeded) {
@@ -89,6 +102,8 @@ class QuestionnaireForm extends React.PureComponent {
 
   resetForm = () => this.props.reset();
 
+  toggleExamplesView = () => this.setState(() => ({ examplesView: !this.state.examplesView }));
+
   render() {
     const {
       handleSubmit,
@@ -97,14 +112,42 @@ class QuestionnaireForm extends React.PureComponent {
       submitSucceeded,
       error,
       match: { params: { companyId } },
+      companyParticipants,
     } = this.props;
-    const { redirectToQuestionnaireList } = this.state;
+    const { redirectToQuestionnaireList, examplesView } = this.state;
+
+    console.log(companyParticipants);
 
     return (
       <Form className={styles.wrapper} onSubmit={handleSubmit}>
         {redirectToQuestionnaireList && (
           <Redirect to={withParams(appRoutes.dashboard.questionnairesList, { companyId })} />
         )}
+
+        <Heading type="h3" className={styles.subHeadline}>
+          {translations.questionnaireAccessList}
+        </Heading>
+
+        <Block className={styles.participants}>
+          {map(companyParticipants, ({ _id, fullName }) => (
+            <FormField
+              key={_id}
+              name={`participants.${_id}`}
+              id={`participants.${_id}`}
+              component={CheckBox}
+              className={styles.participantsCheckboxField}
+            >
+              {fullName}
+            </FormField>
+          ))}
+
+          {companyParticipants &&
+            companyParticipants.length === 0 && (
+              <Block className={styles.noUsers}>
+                There is no users in your company. Invite new users in <Strong>User List</Strong> page.
+              </Block>
+            )}
+        </Block>
 
         <Block className={styles.descriptionFieldsWrapper}>
           <Heading type="h2" className={styles.questionnaireDescriptionHeading}>
@@ -129,7 +172,45 @@ class QuestionnaireForm extends React.PureComponent {
           </Block>
         </Block>
 
-        <FieldArray name="questions" component={renderQuestions} translations={translations} />
+        <Block className={styles.questionsWrapper}>
+          <Block className={styles.questionsArray}>
+            <FieldArray name="questions" component={renderQuestions} translations={translations} />
+          </Block>
+
+          <Block className={styles.questionsExamples}>
+            <Heading type="h4" className={styles.questionHeadline} onClick={this.toggleExamplesView}>
+              {translations.questionsExamples}
+            </Heading>
+            <List className={classNames(styles.questionsExamplesList, { [styles.examplesShow]: examplesView })}>
+              <ListItem>
+                <Strong>At this moment, how determined are you to make a career change</Strong>
+                How should you answer: what are the criteria you will take into account when you consider changing your
+                job
+              </ListItem>
+              <ListItem>
+                <Strong>What are your expectations for the future employer / job?</Strong>
+                How should you answer: what are the expectations that you have from the future employer, what kind of
+                job you want, how that job should be, relations with the head / colleagues.
+              </ListItem>
+              <ListItem>
+                <Strong>For how many employers have you worked in the last 10 years?</Strong>
+                How should you answer: Specify the fields of activity and / or the names of the employers you worked for
+                and the amount of time spent on them.
+              </ListItem>
+              <ListItem>
+                <Strong>What are the main responsibilities and achievements you have made during this period?</Strong>
+                How should you answer: make a concise synthesis of the main responsibilities and the main achievements.
+              </ListItem>
+              <ListItem>
+                <Strong>What concerns (hobbies) do you have outside the time spent at work</Strong>
+              </ListItem>
+              <ListItem>
+                <Strong>Is there any further information you want to submit? If yes, detail</Strong>
+              </ListItem>
+            </List>
+          </Block>
+        </Block>
+
         <Block className={styles.controlWrapper}>
           <Button type="submit" className={styles.button} color="orange" size="medium" submitting={submitting}>
             {translations.genericSave}
@@ -161,6 +242,7 @@ class QuestionnaireForm extends React.PureComponent {
 QuestionnaireForm.propTypes = {
   reset: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  getCompanyParticipants: PropTypes.func.isRequired,
   error: PropTypes.string,
   submitting: PropTypes.bool,
   submitSucceeded: PropTypes.bool,
@@ -176,6 +258,8 @@ QuestionnaireForm.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   setNotificationSuccess: PropTypes.func.isRequired,
   translations: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  companyParticipants: PropTypes.array,
 };
 
 QuestionnaireForm.defaultProps = {
@@ -188,10 +272,12 @@ QuestionnaireForm.defaultProps = {
 
 const mapStateToProps = state => ({
   translations: getTranslations(state),
+  companyParticipants: getCompanyParticipantsSelector(state),
 });
 
 const mapDispatchToProps = {
   setNotificationSuccess,
+  getCompanyParticipants,
 };
 
 export default withRouter(

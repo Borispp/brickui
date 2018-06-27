@@ -10,6 +10,7 @@ import Heading from 'components/atoms/Heading';
 import QuestionarieForm from 'components/organismes/QuestionnaireForm';
 
 import { getTranslations } from 'modules/systemData/selectors';
+import isAdmin from 'utils/isAdmin';
 
 import styles from './QuestionnaireAddPage.scss';
 
@@ -26,6 +27,7 @@ class QuestionnaireAddPage extends React.PureComponent {
         <Heading type="h1" className={styles.mainHeadline}>
           {translations.questionnaireAddTitle}
         </Heading>
+
         <QuestionarieForm />
       </Block>
     );
@@ -45,4 +47,4 @@ const mapStateToProps = state => ({
   translations: getTranslations(state),
 });
 
-export default connect(mapStateToProps)(QuestionnaireAddPage);
+export default isAdmin(connect(mapStateToProps)(QuestionnaireAddPage));

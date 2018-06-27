@@ -61,11 +61,15 @@ class InterviewReviews extends React.PureComponent {
               </Block>
 
               <Block className={styles.reviewTextWrapper}>
-                <Block className={styles.reviewTextContent}>
-                  <Block className={styles.reviewTextLabel}>{translations.reviewTextLabel}</Block>
-                  {review}
+                {review && (
+                  <Block className={styles.reviewTextContent}>
+                    <Block className={styles.reviewTextLabel}>{translations.reviewTextLabel}</Block>
+                    {review}
+                  </Block>
+                )}
+                <Block className={classNames(styles.revieRateNum, styles[rate])}>
+                  {rate === 'pause' ? 'On hold' : rate}
                 </Block>
-                <Block className={classNames(styles.revieRateNum, styles[rate])}>{rate}</Block>
               </Block>
             </Block>
           ))}

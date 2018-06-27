@@ -43,6 +43,7 @@ class UserInvitedSignUpForm extends React.PureComponent {
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { submitting, submitSucceeded, error, translations, company, valid } = this.props;
 
     return (
@@ -69,7 +70,7 @@ class UserInvitedSignUpForm extends React.PureComponent {
               id="fullName"
               component={InputText}
               type="text"
-              placeholder="Full name"
+              placeholder="Full name and position"
               size="large"
               className={styles.formField}
             />
@@ -136,7 +137,7 @@ class UserInvitedSignUpForm extends React.PureComponent {
               size="big"
               submitting={submitting}
             >
-              {translations.translate('companyJoinCompanyName', { company: company.name })}
+              Join YVBI platform
             </Button>
           </Block>
         )}

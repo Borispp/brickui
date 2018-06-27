@@ -15,6 +15,7 @@ import Svg from 'components/atoms/Svg';
 import Text from 'components/atoms/Text';
 import Message from 'components/atoms/Message';
 import Modal from 'components/atoms/Modal';
+import Paragraph from 'components/atoms/Paragraph';
 
 import ModalContainer from 'components/molecules/ModalContainer';
 
@@ -43,6 +44,7 @@ class QuestionnairesListPage extends React.PureComponent {
       error: null,
       questionnaireUserList: null,
       questionnaire: null,
+      questionnaireToDelete: null,
     };
   }
 
@@ -72,6 +74,11 @@ class QuestionnairesListPage extends React.PureComponent {
     this.props.clearQuestionnaireList();
   }
 
+  onQuestionnaireDeleteModalOpen = ({ _id, name, companyId }) => () =>
+    this.setState({ questionnaireToDelete: { _id, name, companyId } });
+
+  onQuestionnaireDeleteModalClose = () => this.setState({ questionnaireToDelete: null });
+
   onInviteFormModalOpen = questionnaire => () => this.setState({ questionnaire });
 
   onInviteFormModalClose = () => this.setState({ questionnaire: null });
@@ -80,8 +87,11 @@ class QuestionnairesListPage extends React.PureComponent {
 
   onQuestionnaireUserListModalClose = () => this.setState({ questionnaireUserList: null });
 
-  onQuestionnaireDelete = ({ _id, company }) => async () => {
-    const { status, message } = await this.props.questionnaireDelete({ questionnaireId: _id, companyId: company });
+  onQuestionnaireDelete = async () => {
+    const { status, message } = await this.props.questionnaireDelete({
+      questionnaireId: this.state.questionnaireToDelete._id,
+      companyId: this.state.questionnaireToDelete.companyId,
+    });
     if (status === 'error') {
       this.props.setNotificationError({ content: message });
       return;
@@ -89,11 +99,12 @@ class QuestionnairesListPage extends React.PureComponent {
 
     await this.props.getQuestionnaireList(get(this.props.match, 'params.companyId'));
     this.props.setNotificationSuccess({ content: message });
+    this.onQuestionnaireDeleteModalClose();
   };
 
   render() {
     const { className, translations, questionnaireList, userRole, match: { params: { companyId } } } = this.props;
-    const { error, questionnaireUserList, questionnaire } = this.state;
+    const { error, questionnaireUserList, questionnaire, questionnaireToDelete } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -162,7 +173,7 @@ class QuestionnairesListPage extends React.PureComponent {
 
                 {[roles.globalAdmin, roles.admin].includes(userRole) && (
                   <Block
-                    onClick={this.onQuestionnaireDelete({ _id, company })}
+                    onClick={this.onQuestionnaireDeleteModalOpen({ _id, name: title, companyId: company })}
                     className={classNames(styles.controlButtonWrapper, styles.delete)}
                   >
                     <Svg type="close" className={styles.controlButtonIcon} />
@@ -174,13 +185,18 @@ class QuestionnairesListPage extends React.PureComponent {
           ))}
         </Block>
 
-        {!error && (
-          <Block className={styles.submitWrapper}>
-            <Button color="orange" size="medium" href={withParams(appRoutes.dashboard.questionnaireAdd, { companyId })}>
-              {translations.questionnaireAddButton}
-            </Button>
-          </Block>
-        )}
+        {!error &&
+          [roles.globalAdmin, roles.admin].includes(userRole) && (
+            <Block className={styles.submitWrapper}>
+              <Button
+                color="orange"
+                size="medium"
+                href={withParams(appRoutes.dashboard.questionnaireAdd, { companyId })}
+              >
+                {translations.questionnaireAddButton}
+              </Button>
+            </Block>
+          )}
 
         <Modal isOpen={!!questionnaireUserList} onModalClose={this.onQuestionnaireUserListModalClose}>
           <ModalContainer
@@ -200,18 +216,33 @@ class QuestionnairesListPage extends React.PureComponent {
 
         {questionnaire && (
           <Modal isOpen={!!questionnaire} onModalClose={this.onInviteFormModalClose}>
-            <ModalContainer
-              title={
-                questionnaire &&
-                interpolate(translations.usersSendInvitationTitle, { questionnaireName: questionnaire.title })
-              }
-              type="centred"
-            >
+            <ModalContainer title={questionnaire && questionnaire.title} type="centred">
               <InterviewInviteForm
                 onClose={this.onInviteFormModalClose}
                 companyId={questionnaire.company}
                 questionnaireId={questionnaire._id}
               />
+            </ModalContainer>
+          </Modal>
+        )}
+
+        {!!questionnaireToDelete && (
+          <Modal isOpen={!!questionnaireToDelete} onModalClose={this.onQuestionnaireDeleteModalClose}>
+            <ModalContainer
+              title={interpolate(translations.questionnaireConfirmDelete, {
+                questionnaireName: questionnaireToDelete.name,
+              })}
+              type="centred"
+            >
+              <Paragraph>{translations.questionnaireConfirmDeleteDescription}</Paragraph>
+              <Button
+                color="red"
+                size="medium"
+                onClick={this.onQuestionnaireDelete}
+                className={styles.companyDeleteButton}
+              >
+                {translations.buttonDeleteQuestionnaire}
+              </Button>
             </ModalContainer>
           </Modal>
         )}

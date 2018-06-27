@@ -24,7 +24,6 @@ import { getInterviewUserPassedList, getInterviewUserIsntPassedList } from 'modu
 import { getTranslations } from 'modules/systemData/selectors';
 import { postRequest } from 'modules/api/actions';
 
-import { interpolate } from 'utils/text';
 import api from 'routes/api';
 import app from 'routes/app';
 import { withParams } from 'utils/url';
@@ -176,10 +175,7 @@ class InviteCandidatesList extends React.PureComponent {
         </Block>
 
         <Modal isOpen={isInviteFormOpen} onModalClose={this.onInviteFormModalClose}>
-          <ModalContainer
-            title={interpolate(translations.usersSendInvitationTitle, { questionnaireName })}
-            type="centred"
-          >
+          <ModalContainer title={questionnaireName} type="centred">
             <InterviewInviteForm
               onClose={this.onInviteFormModalClose}
               companyId={companyId}

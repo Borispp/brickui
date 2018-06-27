@@ -59,7 +59,7 @@ class InterviewInviteForm extends React.PureComponent {
               name="userName"
               id="userName"
               component={InputText}
-              placeholder={translations.userName}
+              placeholder={translations.candidateName}
               className={styles.formField}
             />
           </Block>
@@ -69,7 +69,7 @@ class InterviewInviteForm extends React.PureComponent {
               name="email"
               id="email"
               component={InputText}
-              placeholder={translations.userEmail}
+              placeholder={translations.candidateEmail}
               className={styles.formField}
             />
           </Block>

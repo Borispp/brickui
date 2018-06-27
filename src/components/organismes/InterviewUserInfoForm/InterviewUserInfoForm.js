@@ -35,6 +35,7 @@ class InterviewUserInfoForm extends React.PureComponent {
   resetForm = () => this.props.reset();
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { submitting, translations, submitSucceeded, error, valid, companyName, participants } = this.props;
 
     return (
@@ -75,6 +76,9 @@ class InterviewUserInfoForm extends React.PureComponent {
           <FormField name="confirmParticipants" id="confirmParticipants" component={CheckBox}>
             <Strong>{translations.genericDataReviewPersons}</Strong>
             <br />
+            <br />
+            <Strong>Employer and the owner of the employment announcement:</Strong>
+            <br />
             <List className={styles.participantsList}>
               {map(participants, ({ fullName, role }, i) => (
                 <ListItem key={i}>
@@ -84,9 +88,15 @@ class InterviewUserInfoForm extends React.PureComponent {
                   {role === 'ADMIN' && '(Admin)'}
                 </ListItem>
               ))}
-              <ListItem>BRICK HUMAN RESOURCE CONSULTING (owner of YVBI)</ListItem>
             </List>
-            and new HRs from <Strong>{companyName}</Strong>
+            <Strong>Platform administrator:</Strong> Brick Human Resource Consulting, owner of YVBI
+            (yourview-beforeinterview.com)
+            <br />
+            <br />
+            Your data will be stored by the platform administrator hosting provider: Amazon Web Services: with the
+            server in one of the EU countries Your data will be permanently deleted by the platform administrator in the
+            shortest period of time from the end of the recruitment project, no more than 60 days from registration. You
+            will receive a confirmation email in this sense.
           </FormField>
         </Block>
 

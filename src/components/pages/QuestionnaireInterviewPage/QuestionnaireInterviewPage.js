@@ -154,7 +154,7 @@ QuestionnaireInterviewPage.propTypes = {
   interview: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.string),
     _id: PropTypes.string,
-    company: PropTypes.string,
+    company: PropTypes.object,
     email: PropTypes.string,
     phone: PropTypes.string,
     questionnaire: PropTypes.string,
