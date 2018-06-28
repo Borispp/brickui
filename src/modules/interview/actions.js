@@ -1,5 +1,5 @@
 import api from 'routes/api';
-import { getRequest, deleteRequest } from 'modules/api/actions';
+import { getRequest, deleteRequest, postMediaRequest, putMediaRequest } from 'modules/api/actions';
 import { withParams } from 'utils/url';
 
 export const UPDATE_INTERVIEW_USER_LIST = 'UPDATE_INTERVIEW_USER_LIST';
@@ -81,6 +81,26 @@ export const getAllReviews = ({ companyId, interviewId }) => async dispatch => {
       return dispatch(updateAllReviews(response));
     }
     return response;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const editUserAvatar = ({ avatar, isExist, tokenId }) => async () => {
+  try {
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+
+    const request = isExist ? putMediaRequest : postMediaRequest;
+    return await request(withParams(api.interview.avatar, { tokenId }), formData, null);
+  } catch (e) {
+    return e;
+  }
+};
+
+export const removeUserAvatar = ({ tokenId }) => async () => {
+  try {
+    return await deleteRequest(withParams(api.interview.avatar, { tokenId }));
   } catch (e) {
     return e;
   }

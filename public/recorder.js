@@ -54,7 +54,6 @@
 
         Object.assign(this.config, cfg);
         this.context = source.context;
-        console.log('this.context.createScriptProcessor');
         this.node = (this.context.createScriptProcessor || this.context.createJavaScriptNode).call(this.context, this.config.bufferLen, this.config.numChannels, this.config.numChannels);
 
         this.node.onaudioprocess = function (e) {

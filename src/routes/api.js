@@ -48,5 +48,6 @@ export default {
     postInterviewReview: 'api/interview/:interviewId/review',
     getInterviewReview: 'api/company/:companyId/interview/:interviewId/review',
     getInterviewAllReviews: 'api/company/:companyId/interview/:interviewId/all_reviews',
+    avatar: 'api/interview/:tokenId/avatar',
   },
 };

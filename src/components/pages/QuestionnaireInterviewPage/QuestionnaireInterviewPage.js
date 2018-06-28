@@ -121,6 +121,7 @@ class QuestionnaireInterviewPage extends React.PureComponent {
               companyName={get(company, 'name')}
               participants={participants}
               initialValues={{ userName: interview.userName, email: interview.email }}
+              avatar={interview.avatar}
               onClose={this.onUserInfoModalClose}
             />
           </ModalContainer>
@@ -159,6 +160,7 @@ QuestionnaireInterviewPage.propTypes = {
     phone: PropTypes.string,
     questionnaire: PropTypes.string,
     userName: PropTypes.string,
+    avatar: PropTypes.string,
     isSaved: PropTypes.bool,
   }),
   questionnaire: PropTypes.object,

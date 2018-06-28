@@ -36,7 +36,7 @@ CheckBox.propTypes = {
   id: PropTypes.string,
   input: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.bool,
+    value: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     onChange: PropTypes.func,
   }).isRequired,
 };

@@ -8,6 +8,7 @@ import Block from 'components/atoms/Block';
 import Strong from 'components/atoms/Strong';
 import Heading from 'components/atoms/Heading';
 import Paragraph from 'components/atoms/Paragraph';
+import Image from 'components/atoms/Image';
 
 import styles from './InterviewResultReview.scss';
 
@@ -19,7 +20,7 @@ class InterviewResultReview extends React.PureComponent {
   render() {
     const {
       className,
-      interview: { userName, email, phone, answers, questions, questionnaire, updatedAt },
+      interview: { userName, email, phone, answers, questions, questionnaire, updatedAt, avatar },
     } = this.props;
 
     return (
@@ -33,6 +34,7 @@ class InterviewResultReview extends React.PureComponent {
           <Heading type="h3" className={styles.headlineSmall}>
             Candidate info
           </Heading>
+          {avatar && <Image src={`data:image/jpeg;base64,${avatar}`} className={styles.image} />}
           <Strong>Name: </Strong> {userName}
           <br />
           <Strong>Email: </Strong> {email}
@@ -82,6 +84,7 @@ export const interviewShape = {
   userName: PropTypes.string,
   isSaved: PropTypes.bool,
   updatedAt: PropTypes.string,
+  avatar: PropTypes.string,
 };
 
 InterviewResultReview.propTypes = {

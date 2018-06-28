@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import map from 'lodash/map';
 
@@ -13,8 +14,10 @@ import Button from 'components/atoms/Button';
 import InputText from 'components/atoms/InputText';
 import CheckBox from 'components/atoms/CheckBox';
 import Message from 'components/atoms/Message';
+import UploadImage from 'components/atoms/UploadImage';
 
 import { setNotificationSuccess } from 'modules/app/actions';
+import { getInterview, editUserAvatar, removeUserAvatar } from 'modules/interview/actions';
 import { getTranslations } from 'modules/systemData/selectors';
 
 import { onSubmit } from './store/actions';
@@ -32,15 +35,31 @@ class InterviewUserInfoForm extends React.PureComponent {
     }
   };
 
+  onAvatarUpload = () => avatar => this.props.editUserAvatar({ avatar, tokenId: this.props.tokenId });
+
+  onAvatarRemove = async () => {
+    await this.props.removeUserAvatar({ tokenId: this.props.tokenId });
+    this.props.getInterview(this.props.tokenId);
+  };
+
   resetForm = () => this.props.reset();
 
   render() {
     // eslint-disable-next-line no-unused-vars
-    const { submitting, translations, submitSucceeded, error, valid, companyName, participants } = this.props;
+    const { submitting, translations, submitSucceeded, error, valid, companyName, participants, avatar } = this.props;
 
     return (
       <Block className={styles.wrapper}>
         <Block className={styles.fieldsWrapper}>
+          <Block className={styles.avatar}>
+            <UploadImage
+              name="avatar"
+              src={avatar}
+              onChange={this.onAvatarUpload('avatar')}
+              onRemove={this.onAvatarRemove}
+            />
+          </Block>
+
           <Block>
             <FormField
               name="userName"
@@ -145,16 +164,20 @@ InterviewUserInfoForm.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   match: PropTypes.shape({
     params: PropTypes.shape({
-      token: PropTypes.string,
+      tokenId: PropTypes.string,
       userId: PropTypes.string,
     }),
   }),
   setNotificationSuccess: PropTypes.func.isRequired,
+  editUserAvatar: PropTypes.func.isRequired,
+  removeUserAvatar: PropTypes.func.isRequired,
+  getInterview: PropTypes.func.isRequired,
   onClose: PropTypes.func,
   // eslint-disable-next-line react/no-unused-prop-types
   tokenId: PropTypes.string,
   translations: PropTypes.object.isRequired,
   companyName: PropTypes.string,
+  avatar: PropTypes.string,
   participants: PropTypes.arrayOf(
     PropTypes.shape({
       fullName: PropTypes.string,
@@ -172,6 +195,7 @@ InterviewUserInfoForm.defaultProps = {
   onClose: null,
   tokenId: null,
   companyName: null,
+  avatar: null,
   participants: [],
 };
 
@@ -181,35 +205,40 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setNotificationSuccess,
+  editUserAvatar,
+  removeUserAvatar,
+  getInterview,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  FormBuilder(() => ({
-    form: 'InterviewUserInfoForm',
-    className: styles.interviewUserInfoForm,
-    onSubmit,
-    validate: {
-      userName: {
-        required: true,
-      },
-      phone: {
-        rules: {
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(
+    FormBuilder(() => ({
+      form: 'InterviewUserInfoForm',
+      className: styles.interviewUserInfoForm,
+      onSubmit,
+      validate: {
+        userName: {
           required: true,
-          pattern: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
         },
-        messages: {
-          pattern: 'Wrong phone format',
+        phone: {
+          rules: {
+            required: true,
+            pattern: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+          },
+          messages: {
+            pattern: 'Wrong phone format',
+          },
         },
-      },
-      email: {
-        rules: {
+        email: {
+          rules: {
+            required: true,
+            format: 'email',
+          },
+        },
+        confirmParticipants: {
           required: true,
-          format: 'email',
         },
       },
-      confirmParticipants: {
-        required: true,
-      },
-    },
-  }))(InterviewUserInfoForm),
+    }))(InterviewUserInfoForm),
+  ),
 );
