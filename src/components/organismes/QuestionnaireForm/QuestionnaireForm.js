@@ -25,9 +25,12 @@ import Strong from 'components/atoms/Strong';
 import { getTranslations } from 'modules/systemData/selectors';
 import { setNotificationSuccess } from 'modules/app/actions';
 import { getCompanyParticipants } from 'modules/companies/actions';
+import { getUserRole } from 'modules/account/selectors';
+
 import { getCompanyParticipants as getCompanyParticipantsSelector } from 'modules/companies/selectors';
 
 import { withParams } from 'utils/url';
+import roles from 'utils/roleHelper';
 
 import appRoutes from 'routes/app';
 
@@ -116,38 +119,40 @@ class QuestionnaireForm extends React.PureComponent {
     } = this.props;
     const { redirectToQuestionnaireList, examplesView } = this.state;
 
-    console.log(companyParticipants);
-
     return (
       <Form className={styles.wrapper} onSubmit={handleSubmit}>
         {redirectToQuestionnaireList && (
           <Redirect to={withParams(appRoutes.dashboard.questionnairesList, { companyId })} />
         )}
 
-        <Heading type="h3" className={styles.subHeadline}>
-          {translations.questionnaireAccessList}
-        </Heading>
+        {roles.user !== this.props.userRole && (
+          <Block>
+            <Heading type="h3" className={styles.subHeadline}>
+              {translations.questionnaireAccessList}
+            </Heading>
 
-        <Block className={styles.participants}>
-          {map(companyParticipants, ({ _id, fullName }) => (
-            <FormField
-              key={_id}
-              name={`participants.${_id}`}
-              id={`participants.${_id}`}
-              component={CheckBox}
-              className={styles.participantsCheckboxField}
-            >
-              {fullName}
-            </FormField>
-          ))}
+            <Block className={styles.participants}>
+              {map(companyParticipants, ({ _id, fullName }) => (
+                <FormField
+                  key={_id}
+                  name={`participants.${_id}`}
+                  id={`participants.${_id}`}
+                  component={CheckBox}
+                  className={styles.participantsCheckboxField}
+                >
+                  {fullName}
+                </FormField>
+              ))}
 
-          {companyParticipants &&
-            companyParticipants.length === 0 && (
-              <Block className={styles.noUsers}>
-                There is no users in your company. Invite new users in <Strong>User List</Strong> page.
-              </Block>
-            )}
-        </Block>
+              {companyParticipants &&
+                companyParticipants.length === 0 && (
+                  <Block className={styles.noUsers}>
+                    There is no users in your company. Invite new users in <Strong>User List</Strong> page.
+                  </Block>
+                )}
+            </Block>
+          </Block>
+        )}
 
         <Block className={styles.descriptionFieldsWrapper}>
           <Heading type="h2" className={styles.questionnaireDescriptionHeading}>
@@ -260,6 +265,7 @@ QuestionnaireForm.propTypes = {
   translations: PropTypes.object.isRequired,
   // eslint-disable-next-line react/require-default-props
   companyParticipants: PropTypes.array,
+  userRole: PropTypes.string,
 };
 
 QuestionnaireForm.defaultProps = {
@@ -268,11 +274,13 @@ QuestionnaireForm.defaultProps = {
   submitSucceeded: null,
   valid: false,
   match: {},
+  userRole: null,
 };
 
 const mapStateToProps = state => ({
   translations: getTranslations(state),
   companyParticipants: getCompanyParticipantsSelector(state),
+  userRole: getUserRole(state),
 });
 
 const mapDispatchToProps = {
