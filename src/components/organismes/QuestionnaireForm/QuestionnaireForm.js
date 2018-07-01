@@ -42,7 +42,7 @@ import styles from './QuestionnaireForm.scss';
 const questionItem = ({ fields, question, index, translations }) => (
   <Block key={index} className={styles.fieldsArrayItem}>
     <Heading type="h4" className={styles.questionHeadline}>
-      <Block>Question #{index + 1}</Block>
+      <Block>Your question #{index + 1}</Block>
 
       {index > 0 && (
         <Block onClick={() => fields.remove(index)} className={styles.deleteWrapper}>
@@ -155,11 +155,10 @@ class QuestionnaireForm extends React.PureComponent {
         )}
 
         <Block className={styles.descriptionFieldsWrapper}>
-          <Heading type="h2" className={styles.questionnaireDescriptionHeading}>
-            {translations.questionnaireDescriptionHeading}
-          </Heading>
-
           <Block className={styles.descriptionFields}>
+            <Heading type="h2" className={styles.questionnaireDescriptionHeading}>
+              {translations.questionnaireDescriptionTitleHeading}
+            </Heading>
             <FormField
               name="title"
               id="title"
@@ -167,6 +166,10 @@ class QuestionnaireForm extends React.PureComponent {
               placeholder={translations.questionnaireTitle}
               className={classNames(styles.formField)}
             />
+
+            <Heading type="h2" className={styles.questionnaireDescriptionHeading}>
+              {translations.questionnaireDescriptionHeading}
+            </Heading>
             <FormField
               name="description"
               id="description"

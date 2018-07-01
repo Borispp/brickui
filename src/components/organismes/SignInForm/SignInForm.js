@@ -11,7 +11,9 @@ import InputText from 'components/atoms/InputText';
 import Message from 'components/atoms/Message';
 import Button from 'components/atoms/Button';
 import Modal from 'components/atoms/Modal';
+
 import ModalContainer from 'components/molecules/ModalContainer';
+import RegisterInfo from 'components/molecules/RegisterInfo';
 
 import { getTranslations } from 'modules/systemData/selectors';
 import { loginUser, clearVerificationPendingEmail, clearVerificationStatus } from 'modules/account/actions';
@@ -156,12 +158,7 @@ class SignInForm extends React.PureComponent {
 
         <Modal isOpen={isSignUpOpen} size="big" onModalClose={this.onSignUpModalClose}>
           <ModalContainer title={translations.genericSignUpTitle}>
-            <Block className={styles.paymentWrapper}>
-              Please, contact our support for creating company account:
-              <Link href="mailto:support@brick.ro" className={styles.link}>
-                support@brick.ro
-              </Link>
-            </Block>
+            <RegisterInfo />
           </ModalContainer>
         </Modal>
       </Block>

@@ -156,6 +156,15 @@ export class Svg extends Component {
             <path d="M15.762 5.664c.318-.303.318-.792.001-1.092l-1.147-1.091c-.315-.303-.828-.303-1.145 0l-5.448 5.26-5.494-5.304c-.316-.303-.828-.303-1.146 0L.237 4.528c-.315.299-.315.79 0 1.092l7.212 6.946c.318.299.831.299 1.147 0l7.166-6.902z" />
           </svg>
         );
+      case 'arrowTop':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+            <path
+              d="M16 4.0938l-6.7188 6.7187 1.4375 1.4063L15 7.9375V28h2V7.9375l4.2813 4.2813 1.4374-1.4063z"
+              fill="#bbb"
+            />
+          </svg>
+        );
       case 'arrowSmall':
         return (
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6">

@@ -142,9 +142,54 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           )}
         </Block>
       ),
+      sortable: false,
     },
     {
-      Header: () => <Block>Actions</Block>,
+      Header: () => <Block>{this.props.translations.hrCount}</Block>,
+      accessor: 'hr',
+      Cell: props => (
+        <Block className={styles.counts}>
+          <Text className={classNames(styles.countItem, styles.hr, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
+        </Block>
+      ),
+    },
+    {
+      Header: () => <Block>{this.props.translations.hmCount}</Block>,
+      accessor: 'hm',
+      Cell: props => (
+        <Block className={styles.counts}>
+          <Text className={classNames(styles.countItem, styles.hm, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
+        </Block>
+      ),
+    },
+    {
+      Header: () => <Block>{this.props.translations.pauseCount}</Block>,
+      accessor: 'pause',
+      Cell: props => (
+        <Block className={styles.counts}>
+          <Text className={classNames(styles.countItem, styles.pause, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
+        </Block>
+      ),
+    },
+    {
+      Header: () => <Block>{this.props.translations.rejectCount}</Block>,
+      accessor: 'reject',
+      Cell: props => (
+        <Block className={styles.counts}>
+          <Text className={classNames(styles.countItem, styles.reject, { [styles.zero]: props.value === 0 })}>
+            {props.value}
+          </Text>
+        </Block>
+      ),
+    },
+    {
+      Header: () => <Block>Status</Block>,
       accessor: 'userName',
       Cell: props => (
         <Block className={classNames(styles.userName)}>
@@ -173,12 +218,6 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       sortable: false,
     },
     {
-      Header: this.props.translations.savedAt,
-      accessor: 'updatedAt',
-      Cell: props => <Block>{moment(props.value).format('DD MMM, YYYY')}</Block>,
-      sortAccessor: props => new Date(props.value).getTime(),
-    },
-    {
       Header: () => <Block>{this.props.translations.candidatePhone}</Block>,
       accessor: 'phone',
       Cell: props => <Block className={styles.cellName}>{props.value}</Block>,
@@ -191,48 +230,10 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       sortable: false,
     },
     {
-      Header: () => <Block>{this.props.translations.rejectCount}</Block>,
-      accessor: 'reject',
-      Cell: props => (
-        <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.reject, { [styles.zero]: props.value === 0 })}>
-            {props.value}
-          </Text>
-        </Block>
-      ),
-    },
-    {
-      Header: () => <Block>{this.props.translations.pauseCount}</Block>,
-      accessor: 'pause',
-      Cell: props => (
-        <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.pause, { [styles.zero]: props.value === 0 })}>
-            {props.value}
-          </Text>
-        </Block>
-      ),
-    },
-    {
-      Header: () => <Block>{this.props.translations.hrCount}</Block>,
-      accessor: 'hr',
-      Cell: props => (
-        <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.hr, { [styles.zero]: props.value === 0 })}>
-            {props.value}
-          </Text>
-        </Block>
-      ),
-    },
-    {
-      Header: () => <Block>{this.props.translations.hmCount}</Block>,
-      accessor: 'hm',
-      Cell: props => (
-        <Block className={styles.counts}>
-          <Text className={classNames(styles.countItem, styles.hm, { [styles.zero]: props.value === 0 })}>
-            {props.value}
-          </Text>
-        </Block>
-      ),
+      Header: this.props.translations.savedAt,
+      accessor: 'updatedAt',
+      Cell: props => <Block>{moment(props.value).format('DD MMM, YYYY')}</Block>,
+      sortable: false,
     },
   ];
 
@@ -288,6 +289,8 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
               <Button onClick={this.onSelectCandidates} disabled={isEmpty(usersChecked)}>
                 {translations.questionnaireCandidatesSelectAndClose}
               </Button>
+              <br />
+              <Text className={styles.selectQuestionnaireInfo}>*Questionnaire will be closed</Text>
             </Block>
           )}
 

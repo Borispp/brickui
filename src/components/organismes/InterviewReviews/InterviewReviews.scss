@@ -50,16 +50,17 @@
 
 .revieRateNum {
   display: flex;
-  width: 90px;
-  flex: 0 0 90px;
+  width: 110px;
+  flex: 0 0 110px;
   margin-right: -8px;
   height: 36px;
   align-items: center;
   justify-content: center;
   color: $white;
   border-radius: 40px;
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.5px;
   text-shadow: 0 1px 1px $dark-20;
   text-transform: uppercase;
 

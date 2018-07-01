@@ -1,16 +1,72 @@
 .section {
   display: flex;
   justify-content: center;
-  padding: 100px 0;
+  padding: 70px 0 100px;
   text-align: center;
+  position: relative;
+  background: $white;
 
   &.white {
     background: $white;
+  }
+
+  &.grey {
+    background: #4d4d4d;
+    color: $white;
+  }
+
+  &.black {
+    background: $black;
+    color: $white;
+  }
+
+  &.flatten {
+    text-align: left;
+  }
+}
+
+.transactionDetailsLetter {
+  text-align: left;
+}
+
+.demarcation {
+  display: block;
+  width: 100%;
+  height: 33px;
+  background-image: url('images/demarcation-multicolors.png');
+  background-repeat: no-repeat;
+  background-size: 900px 28px;
+  background-position: center center;
+  position: absolute;
+  bottom: 0;
+
+  &.red {
+    background-image: url('images/demarcation-red.png');
+  }
+
+  &.orange {
+    background-image: url('images/demarcation-orange.png');
+  }
+
+  &.blue {
+    background-image: url('images/demarcation-blue.png');
+  }
+
+  &.green {
+    background-image: url('images/demarcation-green.png');
   }
 }
 
 .sectionContainer {
   max-width: 900px;
+
+  &.flatten {
+    text-align: left;
+
+    h3 {
+      text-align: center;
+    }
+  }
 }
 
 .sectionContent {
@@ -23,6 +79,8 @@
 
 .sectionContentText {
   flex: 1;
+  font-size: 15px;
+  line-height: 26px;
 }
 
 .sectionContentImageWrapper {
@@ -93,9 +151,21 @@
   align-items: center;
 }
 
+.logoWrapper {
+  background: $white;
+  text-align: center;
+}
+
+.logoWrapper {
+  padding: 100px 0 120px;
+  position: relative;
+}
+
 .logo {
-  width: 240px;
-  margin-bottom: 50px;
+  width: 100%;
+  max-width: 540px;
+  display: block;
+  margin: 0 auto 50px;
 }
 
 .topSectionDescriptionBig {
@@ -136,7 +206,8 @@
 .sectionDescription {
   font-size: 18px;
   line-height: 24px;
-  font-weight: 300;
+  font-weight: 500;
+  padding-bottom: 30px;
 
   &.orange {
     color: $maincolor-lt;
@@ -154,7 +225,7 @@
 }
 
 .headingSection {
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   margin-bottom: 50px;
   position: relative;
 
@@ -167,6 +238,22 @@
     width: 100%;
     transform: translate(-50%, 0);
     border-bottom: 1px solid $grey-border;
+  }
+
+  &.red {
+    color: $redMain;
+  }
+
+  &.orange {
+    color: $maincolor-lt;
+  }
+
+  &.blue {
+    color: $blue;
+  }
+
+  &.green {
+    color: $greenMain;
   }
 }
 
@@ -192,12 +279,16 @@
   }
 
   .section {
-    padding: 40px 0;
+    padding: 40px 0 60px;
   }
 
   .headline {
     font-size: 20px;
     padding-bottom: 20px;
+  }
+
+  .sectionDescription {
+    padding-bottom: 0;
   }
 
   .headingSection {

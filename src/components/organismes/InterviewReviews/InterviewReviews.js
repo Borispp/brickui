@@ -68,7 +68,10 @@ class InterviewReviews extends React.PureComponent {
                   </Block>
                 )}
                 <Block className={classNames(styles.revieRateNum, styles[rate])}>
-                  {rate === 'pause' ? 'On hold' : rate}
+                  {rate === 'pause' && 'On hold'}
+                  {rate === 'reject' && 'Reject'}
+                  {rate === 'hr' && 'HR interview'}
+                  {rate === 'hm' && 'Direct HM'}
                 </Block>
               </Block>
             </Block>

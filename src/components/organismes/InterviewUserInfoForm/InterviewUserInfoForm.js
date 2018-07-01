@@ -92,10 +92,10 @@ class InterviewUserInfoForm extends React.PureComponent {
         </Block>
 
         <Block className={styles.participants}>
+          <Strong>{translations.genericDataReviewPersons}</Strong>
+          <br />
+          <br />
           <FormField name="confirmParticipants" id="confirmParticipants" component={CheckBox}>
-            <Strong>{translations.genericDataReviewPersons}</Strong>
-            <br />
-            <br />
             <Strong>Employer and the owner of the employment announcement:</Strong>
             <br />
             <List className={styles.participantsList}>
@@ -108,10 +108,13 @@ class InterviewUserInfoForm extends React.PureComponent {
                 </ListItem>
               ))}
             </List>
+          </FormField>
+          <FormField name="confirmAdmin" id="confirmAdmin" component={CheckBox}>
             <Strong>Platform administrator:</Strong> Brick Human Resource Consulting, owner of YVBI
             (yourview-beforeinterview.com)
-            <br />
-            <br />
+          </FormField>
+          <br />
+          <FormField name="confirmServer" id="confirmServer" component={CheckBox}>
             Your data will be stored by the platform administrator hosting provider: Amazon Web Services: with the
             server in one of the EU countries Your data will be permanently deleted by the platform administrator in the
             shortest period of time from the end of the recruitment project, no more than 60 days from registration. You
@@ -236,6 +239,12 @@ export default withRouter(
           },
         },
         confirmParticipants: {
+          required: true,
+        },
+        confirmAdmin: {
+          required: true,
+        },
+        confirmServer: {
           required: true,
         },
       },
