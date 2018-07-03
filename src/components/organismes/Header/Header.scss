@@ -45,7 +45,7 @@
 .logout {
   @include linkOrange;
   position: relative;
-  z-index: 1002;
+  //z-index: 1002;
 }
 
 @media (max-width: 600px) {
