@@ -22,6 +22,7 @@ class AllRightsReservedBlock extends React.PureComponent {
       isTermsModalOpen: false,
       isPrivacyModalOpen: false,
       isPaymentMethodModalOpen: false,
+      isPricingModalOpen: false,
     };
   }
 
@@ -44,9 +45,12 @@ class AllRightsReservedBlock extends React.PureComponent {
   onPaymentMethodModalOpen = () => this.setState({ isPaymentMethodModalOpen: true });
   onPaymentMethodModalClose = () => this.setState({ isPaymentMethodModalOpen: false });
 
+  onPricingModalOpen = () => this.setState({ isPricingModalOpen: true });
+  onPricingModalClose = () => this.setState({ isPricingModalOpen: false });
+
   render() {
     const { translations, type, className } = this.props;
-    const { isTermsModalOpen, isPrivacyModalOpen, isPaymentMethodModalOpen } = this.state;
+    const { isTermsModalOpen, isPrivacyModalOpen, isPaymentMethodModalOpen, isPricingModalOpen } = this.state;
 
     return (
       <Block className={classNames(styles.wrapper, styles[type], className)}>
@@ -63,6 +67,9 @@ class AllRightsReservedBlock extends React.PureComponent {
           <Link className={styles.link} onClick={this.onPaymentMethodModalOpen}>
             {translations.genericPaymentMethod}
           </Link>
+          <Link className={styles.link} onClick={this.onPricingModalOpen}>
+            {translations.genericPricing}
+          </Link>
         </Block>
 
         <Modal isOpen={isTermsModalOpen} size="big" onModalClose={this.onTermsModalClose}>
@@ -73,21 +80,34 @@ class AllRightsReservedBlock extends React.PureComponent {
           <ModalContainer title={translations.genericPrivacyPolicy}>privacy</ModalContainer>
         </Modal>
 
+        <Modal isOpen={isPricingModalOpen} size="big" onModalClose={this.onPricingModalClose}>
+          <ModalContainer title={translations.genericPricing}>pricing</ModalContainer>
+        </Modal>
+
         <Modal isOpen={isPaymentMethodModalOpen} size="big" onModalClose={this.onPaymentMethodModalClose}>
           <ModalContainer title={translations.genericPaymentMethod}>
             <Block className={styles.paymentWrapper}>
-              <Heading type="h2">GOOD TO KNOW</Heading>
+              <Heading type="h3">GOOD TO KNOW</Heading>
               The first month of utilization is free, starting with the second month, a new code will be generated only
               after the proof of payment is made. (The estimated time for payment processing is 2-3 working days).
+              <br />
+              <br />
+              <br />
               <Heading type="h3">Payment method</Heading>
               We would prefer to receive the payment directly into our bank account, saving us both time and
               administrative costs. Our account information is detailed below.
               <br />
+              <br />
               <Strong>BANK</Strong>: UNICREDIT BANK SA<br />
               <Strong>IBAN (International Bank Account Number)</Strong>: RO53 BACX 0000 0008 0937 9003<br />
               <Strong>SWIFT/BIC (Bank Identifier Code)</Strong>: BACXROBU
+              <br />
+              <br />
+              <br />
               <Heading type="h3">For your information:</Heading>
               Transaction Details – your company name followed by login code You will receive an invoice by email.
+              <br />
+              <br />
             </Block>
           </ModalContainer>
         </Modal>

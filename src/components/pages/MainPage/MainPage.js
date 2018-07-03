@@ -58,6 +58,14 @@ import styles from './MainPage.scss';
 //   </Block>
 // </Block>`
 
+// `<Block className={styles.logoWrapper}>
+//   <Image src={logo} alt="YRBI" className={styles.logo} />
+//   <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
+//     {translations.genericRegister}
+//   </Button>
+//   <Block className={classNames(styles.demarcation)} />
+// </Block>`
+
 /* eslint-disable jsx-a11y/media-has-caption */
 class MainPage extends React.PureComponent {
   constructor(props) {
@@ -77,54 +85,41 @@ class MainPage extends React.PureComponent {
 
     return (
       <Block className={classNames(styles.wrapper)}>
-        <Block className={styles.logoWrapper}>
-          <Image src={logo} alt="YRBI" className={styles.logo} />
-          <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
-            {translations.genericRegister}
-          </Button>
+        <Block className={classNames(styles.section, styles.topSection)}>
+          <Block className={classNames(styles.topSectionWrapper, styles.sectionContent)}>
+            <Image src={logo} alt="Brick.ro" className={styles.logo} />
+            <Block className={styles.topSectionDescriptionBig}>
+              Help your organization in the <Strong>recruitment process</Strong> by using our approach on smart
+              recruiting.
+            </Block>
+            <Block className={styles.topSectionDescription}>
+              <Strong>“Time”</Strong> is the key word, so win it our way!
+              <br />
+              Try replacing telephone screening and soon face-to-face interviewing with YVBI.
+              <br />
+              Dearfully designed by HR Specialists for the HR world Starting today, YVBI can be the new member of your
+              HR team
+            </Block>
+            <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
+              {translations.genericRegister}
+            </Button>
+          </Block>
           <Block className={classNames(styles.demarcation)} />
         </Block>
 
-        <Block className={classNames(styles.section, styles.white)}>
-          <Block className={styles.sectionContainer}>
-            <Block className={classNames(styles.headingSection, styles.red)}>
-              <Heading type="h2" className={styles.headline}>
-                Help your organization in the recruitment process by using our approach on smart recruiting.
-              </Heading>
-            </Block>
-
-            <Block className={styles.sectionContent}>
-              <Block className={styles.sectionContentText}>
-                <Strong>“Time”</Strong> is the key word, so win it our way!
-                <br />
-                Try replacing telephone screening and soon face-to-face interviewing with YVBI.
-                <br />
-                <br />
-                Dearfully designed by HR Specialists for the HR world
-                <br />
-                Starting today, YVBI can be the new member of your HR team
-              </Block>
-
-              <Block className={styles.sectionContentImageWrapper}>
-                <Image src={Y_LETTER} className={styles.sectionContentImage} />
-              </Block>
-            </Block>
-          </Block>
-          <Block className={classNames(styles.demarcation, styles.red)} />
-        </Block>
         <Block className={styles.section}>
           <Block className={styles.sectionContainer}>
-            <Block className={classNames(styles.headingSection, styles.orange)}>
+            <Block className={classNames(styles.headingSection, styles.red)}>
               <Heading type="h2" className={styles.headline}>
                 LISTEN, NOTE, WAIT FOR YOUR COLLEGUES TO DO THE SAME THING AND THEN TAKE A UNANIMOUS DECISION.
               </Heading>
 
-              <Block className={classNames(styles.sectionDescription, styles.orange)}>
+              <Block className={classNames(styles.sectionDescription, styles.red)}>
                 You, the Employer, should know that by using YVBI you can:
               </Block>
             </Block>
 
-            <Block className={styles.sectionContent}>
+            <Block className={classNames(styles.sectionContent, styles.leftImage)}>
               <Block className={styles.sectionContentText}>
                 <Heading type="h3" className={styles.subHeadline}>
                   1. Post your message for your selected candidates
@@ -163,16 +158,17 @@ class MainPage extends React.PureComponent {
               </Block>
 
               <Block className={styles.sectionContentImageWrapper}>
-                <Image src={v} className={styles.sectionContentImage} />
+                <Image src={Y_LETTER} className={styles.sectionContentImage} />
               </Block>
             </Block>
           </Block>
-          <Block className={classNames(styles.demarcation, styles.orange)} />
+          <Block className={classNames(styles.demarcation, styles.red)} />
         </Block>
+
         <Block className={classNames(styles.section, styles.white)}>
           <Block className={styles.sectionContainer}>
-            <Block className={classNames(styles.headingSection, styles.blue)}>
-              <Block className={classNames(styles.sectionDescription, styles.blue)}>
+            <Block className={classNames(styles.headingSection, styles.orange)}>
+              <Block className={classNames(styles.sectionDescription, styles.orange)}>
                 Whether you are the Sourcer, the Hunter or the Hiring Manager, YVBI involves you directly in the
                 decision making process through it’s scoring system and comments possibility, both available for each
                 candidate interested in the job your company offers.
@@ -202,21 +198,21 @@ class MainPage extends React.PureComponent {
               </Block>
 
               <Block className={styles.sectionContentImageWrapper}>
-                <Image src={b} className={styles.sectionContentImage} />
+                <Image src={v} className={styles.sectionContentImage} />
               </Block>
             </Block>
           </Block>
-          <Block className={classNames(styles.demarcation, styles.blue)} />
+          <Block className={classNames(styles.demarcation, styles.orange)} />
         </Block>
         <Block className={classNames(styles.section)}>
           <Block className={styles.sectionContainer}>
-            <Block className={classNames(styles.headingSection, styles.green)}>
+            <Block className={classNames(styles.headingSection, styles.blue)}>
               <Heading type="h2" className={styles.headline}>
                 3 Reasons to use YVBI when you’re recruiting
               </Heading>
             </Block>
 
-            <Block className={styles.sectionContent}>
+            <Block className={classNames(styles.sectionContent, styles.leftImage)}>
               <Block className={styles.sectionContentText}>
                 <Heading type="h3" className={styles.subHeadline}>
                   1. Time efficiency through increasing active listening
@@ -250,63 +246,47 @@ class MainPage extends React.PureComponent {
               </Block>
 
               <Block className={styles.sectionContentImageWrapper}>
+                <Image src={b} className={styles.sectionContentImage} />
+              </Block>
+            </Block>
+          </Block>
+          <Block className={classNames(styles.demarcation, styles.blue)} />
+        </Block>
+
+        <Block className={classNames(styles.section)}>
+          <Block className={styles.sectionContainer}>
+            <Block className={classNames(styles.headingSection, styles.green)}>
+              <Heading type="h2" className={styles.headline}>
+                YVBI is very simple to use. Take a free tour within a month period of time.
+              </Heading>
+            </Block>
+
+            <Block className={classNames(styles.sectionContent)}>
+              <Block className={styles.sectionContentText}>
+                Write to the <Strong>support@brick.ro</Strong> your name, surname, company, position, phone.
+                <br />
+                <br />
+                After all this information has been saved, a unique code that will represent your application login user
+                will be generated and will be available for 1 month. (For security reasons, this code cannot be
+                recovered in case of losing, so please save it and keep it safe)
+                <br />
+                <br />
+                <Strong>
+                  Once logged, you can define the name of your recruitment project and start using the application.
+                </Strong>
+                <br />
+                <br />
+                <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
+                  {translations.genericRegister}
+                </Button>
+              </Block>
+
+              <Block className={styles.sectionContentImageWrapper}>
                 <Image src={i} className={styles.sectionContentImage} />
               </Block>
             </Block>
           </Block>
           <Block className={classNames(styles.demarcation, styles.green)} />
-        </Block>
-        <Block className={classNames(styles.section, styles.grey)}>
-          <Block className={styles.sectionContainer}>
-            <Strong>YVBI is very simple to use. Take a free tour within a month period of time.</Strong>
-            <br />
-            <br />
-            Write to the <Strong>support@brick.ro</Strong> your name, surname, company, position, phone.
-            <br />
-            <br />
-            After all this information has been saved, a unique code that will represent your application login user
-            will be generated and will be available for 1 month. (For security reasons, this code cannot be recovered in
-            case of losing, so please save it and keep it safe)
-            <br />
-            <br />
-            <Strong>
-              Once logged, you can define the name of your recruitment project and start using the application.
-            </Strong>
-            <br />
-            <br />
-            <br />
-            <Heading type="h2">GOOD TO KNOW</Heading>
-            The first month of utilization is free, starting with the second month, a new code will be generated only
-            after the proof of payment is made. (The estimated time for payment processing is 2-3 working days).
-            <br />
-            <br />
-            <Strong>You will receive an invoice by email</Strong>
-          </Block>
-          <Block className={classNames(styles.demarcation)} />
-        </Block>
-        <Block className={classNames(styles.section, styles.black)}>
-          <Block className={classNames(styles.sectionContainer, styles.flatten)}>
-            <Heading type="h3">Payment method</Heading>
-            We would prefer to receive the payment directly into our bank account, saving us both time and
-            administrative costs. Our account information is detailed below.
-            <br />
-            <br />
-            <br />
-            <br />
-            <Block className={styles.transactionDetailsLetter}>
-              Transaction Details,
-              <br />
-              <br />
-              (YourCompany XXXXXX)
-              <br />
-              ................................................
-            </Block>
-            <br />
-            <br />
-            <br />
-            We look forward to receiving your prompt payment and would appreciate acknowledgement of this letter
-          </Block>
-          <Block className={classNames(styles.demarcation)} />
         </Block>
 
         <Footer />

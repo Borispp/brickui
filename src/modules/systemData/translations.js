@@ -50,6 +50,7 @@ export default {
   genericPrivacyPolicy: 'Privacy Policy',
   genericGodToKnow: 'Good to know',
   genericPaymentMethod: 'Payment method',
+  genericPricing: 'Pricing',
   genericDontHaveAccount: "Don't have account yet?",
   genericSignUpTitle: "Don't have account yet?",
   genericDataReviewPersons: 'Your data will be viewed by representatives of the following parties:',

@@ -5,6 +5,7 @@
   text-align: center;
   position: relative;
   background: $white;
+  color: $black;
 
   &.white {
     background: $white;
@@ -35,7 +36,7 @@
   height: 33px;
   background-image: url('images/demarcation-multicolors.png');
   background-repeat: no-repeat;
-  background-size: 900px 28px;
+  background-size: 700px 22px;
   background-position: center center;
   position: absolute;
   bottom: 0;
@@ -54,6 +55,7 @@
 
   &.green {
     background-image: url('images/demarcation-green.png');
+    bottom: 40px;
   }
 }
 
@@ -75,6 +77,15 @@
   display: flex;
   padding: 0 30px;
   box-sizing: border-box;
+
+  &.leftImage {
+    flex-direction: row-reverse;
+
+    .sectionContentImageWrapper {
+      margin-left: 0;
+      margin-right: 30px;
+    }
+  }
 }
 
 .sectionContentText {
@@ -108,7 +119,7 @@
 }
 
 .topSection {
-  color: $white;
+  color: $black;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -117,7 +128,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 150px);
   max-height: 900px;
 }
 
@@ -163,7 +174,7 @@
 
 .logo {
   width: 100%;
-  max-width: 540px;
+  max-width: 400px;
   display: block;
   margin: 0 auto 50px;
 }
@@ -171,7 +182,7 @@
 .topSectionDescriptionBig {
   font-size: 24px;
   line-height: 30px;
-  padding: 10px 0;
+  padding: 10px 0 30px;
   max-width: 620px;
   font-weight: 300;
 
@@ -266,7 +277,7 @@
 @media (max-width: 600px) {
   .logo {
     width: 180px;
-    margin-top: -30px;
+    margin-top: 0;
     margin-bottom: 24px;
   }
 
@@ -300,7 +311,7 @@
   .sectionContent {
     padding: 0 15px;
     align-items: center;
-    flex-direction: column-reverse;
+    flex-direction: column-reverse !important;
 
     &.topSectionWrapper {
       flex-direction: column;
@@ -310,6 +321,12 @@
   }
 
   .sectionContentImageWrapper {
-    margin: 0 0 30px;
+    margin: 0 0 30px !important;
+  }
+
+  .demarcation {
+    &.green {
+      bottom: 18px;
+    }
   }
 }
