@@ -17,7 +17,7 @@ const RegisterInfo = ({ className }) => (
           support@brick.ro
         </Link>
       </Strong>{' '}
-      your name, surname, company, position, phone.
+      your name, surname, company name, your role, phone.
       <br />
       <br />
       After all this information has been saved, a unique code that will represent your application login user will be

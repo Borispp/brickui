@@ -97,8 +97,8 @@ class MainPage extends React.PureComponent {
               <br />
               Try replacing telephone screening and soon face-to-face interviewing with YVBI.
               <br />
-              Dearfully designed by HR Specialists for the HR world Starting today, YVBI can be the new member of your
-              HR team
+              Dearfully designed by HR Specialists for the HR world. Starting today, YVBI can be the new member of your
+              HR team.
             </Block>
             <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
               {translations.genericRegister}
@@ -263,7 +263,7 @@ class MainPage extends React.PureComponent {
 
             <Block className={classNames(styles.sectionContent)}>
               <Block className={styles.sectionContentText}>
-                Write to the <Strong>support@brick.ro</Strong> your name, surname, company, position, phone.
+                Write to the <Strong>support@brick.ro</Strong> your name, surname, company name, your role, phone.
                 <br />
                 <br />
                 After all this information has been saved, a unique code that will represent your application login user
