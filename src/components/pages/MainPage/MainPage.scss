@@ -311,7 +311,11 @@
   .sectionContent {
     padding: 0 15px;
     align-items: center;
-    flex-direction: column-reverse !important;
+    flex-direction: column-reverse;
+
+    &.leftImage {
+      flex-direction: column-reverse;
+    }
 
     &.topSectionWrapper {
       flex-direction: column;
