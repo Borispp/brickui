@@ -1,5 +1,6 @@
 .wrapper {
   padding: 30px;
+  width: calc(100vw - 310px);
 
   :global {
     .rt-thead,
@@ -181,12 +182,17 @@
   .reviewsListWrapper {
     margin: 0 -30px;
   }
+
+  .wrapper {
+    width: calc(100% - 60px);
+  }
 }
 
 @media (max-width: 600px) {
   .wrapper {
     padding-left: 15px;
     padding-right: 15px;
+    width: calc(100% - 30px);
 
     :global {
       .ReactTable .rt-tr {

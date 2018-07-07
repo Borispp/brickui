@@ -168,6 +168,10 @@ class MainPage extends React.PureComponent {
         <Block className={classNames(styles.section, styles.white)}>
           <Block className={styles.sectionContainer}>
             <Block className={classNames(styles.headingSection, styles.orange)}>
+              <Heading type="h2" className={styles.headline}>
+                Decision making process
+              </Heading>
+
               <Block className={classNames(styles.sectionDescription, styles.orange)}>
                 Whether you are the Sourcer, the Hunter or the Hiring Manager, YVBI involves you directly in the
                 decision making process through it’s scoring system and comments possibility, both available for each
@@ -178,7 +182,7 @@ class MainPage extends React.PureComponent {
             <Block className={styles.sectionContent}>
               <Block className={styles.sectionContentText}>
                 <Heading type="h3" className={styles.subHeadline}>
-                  1.What does YOUR VIEW BEFORE INTERVIEW do for you, the Hiring Manager?
+                  1. What does YOUR VIEW BEFORE INTERVIEW do for you, the Hiring Manager?
                 </Heading>
                 <Block className={styles.sectionText}>
                   It increases the chances of having an efficient face to face meeting by improving the selection of the
