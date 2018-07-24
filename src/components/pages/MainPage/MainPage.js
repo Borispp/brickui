@@ -93,12 +93,13 @@ class MainPage extends React.PureComponent {
               recruiting.
             </Block>
             <Block className={styles.topSectionDescription}>
-              <Strong>“Time”</Strong> is the key word, so win it our way!
+              “Time” is the key word, so win it our way!
               <br />
-              Try replacing telephone screening and soon face-to-face interviewing with YVBI.
+              Try replacing <i>telephone screening and soon face-to-face</i> interviewing with YVBI.
               <br />
-              Dearfully designed by HR Specialists for the HR world. Starting today, YVBI can be the new member of your
-              HR team.
+              Dearfully designed by HR Specialists for the HR world.
+              <br />
+              <Strong>Starting today, YVBI can be the new member of your HR team.</Strong>
             </Block>
             <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
               {translations.genericRegister}
@@ -121,39 +122,28 @@ class MainPage extends React.PureComponent {
 
             <Block className={classNames(styles.sectionContent, styles.leftImage)}>
               <Block className={styles.sectionContentText}>
-                <Heading type="h3" className={styles.subHeadline}>
-                  1. Post your message for your selected candidates
-                </Heading>
                 <Block className={styles.sectionText}>
                   Post a full job description or a short message for your targeted candidates. You can choose either a
                   general or a particular message if you want to draw the attention of a certain candidate.
                 </Block>
-                <Heading type="h3" className={styles.subHeadline}>
-                  2. Play their response to you
-                </Heading>
+
                 <Block className={styles.sectionText}>
                   Let the selected candidates who show interest in your job record a message for you. You can now easily
                   measure the candidate’s interest in the job. The ones who want to meet and work for you will answer
                   through a recorded audio message.
                 </Block>
-                <Heading type="h3" className={styles.subHeadline}>
-                  3. Share the candidate message with your team
-                </Heading>
+
                 <Block className={styles.sectionText}>
-                  Share the candidate recorded message with all the involved parts (recruitment team, Hiring Manager,
-                  and so on).
+                  It eases the Sourcer’s/Hunter’s work, who usually uses social networks for finding professionals. It
+                  helps you draw the attention of passive candidates, it improves selection and makes you send to higher
+                  interviews (with the Hiring Manager) only the most suitable professionals.
                 </Block>
-                <Heading type="h3" className={styles.subHeadline}>
-                  4. Grade it individually and score it together based on the average score
-                </Heading>
+
                 <Block className={styles.sectionText}>
-                  Individually rate each recorded file and make a short list for face to face interviews.
-                </Block>
-                <Heading type="h3" className={styles.subHeadline}>
-                  5. Take a collective decision & select the right ones for face to face interviews
-                </Heading>
-                <Block className={styles.sectionText}>
-                  Compare each colleague ratings and take a collective decision at the end of the process.
+                  Find their specific questions about the job and forward them to your colleagues and Hiring Manager
+                  before face to face interviews. Establish from the beginning what are the essential questions you want
+                  answers for and decide with your team if those answers qualify the candidates for face to face
+                  interviews.
                 </Block>
               </Block>
 
@@ -265,24 +255,33 @@ class MainPage extends React.PureComponent {
               </Heading>
             </Block>
 
-            <Block className={classNames(styles.sectionContent)}>
+            <Block className={classNames(styles.sectionContent, styles.green)}>
               <Block className={styles.sectionContentText}>
-                Write to the <Strong>support@brick.ro</Strong> your name, surname, company name, your role, phone.
-                <br />
-                <br />
-                After all this information has been saved, a unique code that will represent your application login user
-                will be generated and will be available for 1 month. (For security reasons, this code cannot be
-                recovered in case of losing, so please save it and keep it safe)
-                <br />
-                <br />
+                For registration, send us by email at:{' '}
                 <Strong>
-                  Once logged, you can define the name of your recruitment project and start using the application.
-                </Strong>
+                  <Link href="mailto:register@yourview-beforeinterview.com">register@yourview-beforeinterview.com</Link>
+                </Strong>{' '}
+                your:
+                <br />
+                <br />
+                - first name, surname & your role;
+                <br />
+                - work email address & work mobile phone
+                <br />
+                - <Strong>email subject</Strong>: YVBI trial for followed by your Employer’s name
+                <br />
+                <br />
+                After all this information has been received, one of our users will sent you by provided email, the
+                application “sign in” link where you can join YVBI platform.
+                <br />
+                <br />
+                <Strong>Once logged in, you can name your recruitment projects and start using the application.</Strong>
                 <br />
                 <br />
                 <Button color="orange" size="big" onClick={this.onSignUpModalOpen}>
                   {translations.genericRegister}
                 </Button>
+                <br />
               </Block>
 
               <Block className={styles.sectionContentImageWrapper}>

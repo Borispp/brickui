@@ -46,7 +46,10 @@ class InterviewInviteForm extends React.PureComponent {
     }
   };
 
-  resetForm = () => this.props.reset();
+  resetForm = () => {
+    this.setState({ isSuccessed: false });
+    this.props.reset();
+  };
 
   render() {
     const { submitting, translations, submitSucceeded, error } = this.props;
@@ -91,13 +94,11 @@ class InterviewInviteForm extends React.PureComponent {
               </Message>
             </Block>
           )}
-        {!(!submitting && submitSucceeded) && (
-          <Block>
-            <Button type="submit" size="medium" className={styles.button} color="orange" submitting={submitting}>
-              {translations.interviewInviteCandidate}
-            </Button>
-          </Block>
-        )}
+        <Block>
+          <Button type="submit" size="medium" className={styles.button} color="orange" submitting={submitting}>
+            {translations.interviewInviteCandidate}
+          </Button>
+        </Block>
       </Block>
     );
   }

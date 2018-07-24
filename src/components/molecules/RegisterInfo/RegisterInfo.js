@@ -11,21 +11,27 @@ import styles from './RegisterInfo.scss';
 const RegisterInfo = ({ className }) => (
   <Block className={classNames(styles.wrapper, className)}>
     <Block className={styles.paymentWrapper}>
-      Write to the{' '}
+      For registration, send us by email at:{' '}
       <Strong>
-        <Link href="mailto:support@brick.ro" className={styles.link}>
-          support@brick.ro
+        <Link href="mailto:register@yourview-beforeinterview.com" className={styles.link}>
+          register@yourview-beforeinterview.com
         </Link>
       </Strong>{' '}
-      your name, surname, company name, your role, phone.
+      your:
       <br />
       <br />
-      After all this information has been saved, a unique code that will represent your application login user will be
-      generated and will be available for 1 month. (For security reasons, this code cannot be recovered in case of
-      losing, so please save it and keep it safe)
+      - first name, surname & your role;
+      <br />
+      - work email address & work mobile phone
+      <br />
+      - <Strong>email subject</Strong>: YVBI trial for followed by your Employer’s name
       <br />
       <br />
-      Once logged, you can define the name of your recruitment project and start using the application.
+      After all this information has been received, one of our users will sent you by provided email, the application
+      “sign in” link where you can join YVBI platform.
+      <br />
+      <br />
+      <Strong>Once logged in, you can name your recruitment projects and start using the application.</Strong>
     </Block>
   </Block>
 );

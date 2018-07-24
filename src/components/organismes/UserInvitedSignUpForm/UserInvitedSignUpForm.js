@@ -8,6 +8,7 @@ import FormField from 'components/atoms/FormField';
 import CheckBox from 'components/atoms/CheckBox';
 import Block from 'components/atoms/Block';
 import Button from 'components/atoms/Button';
+import Strong from 'components/atoms/Strong';
 import InputText from 'components/atoms/InputText';
 import Message from 'components/atoms/Message';
 import { getTranslations } from 'modules/systemData/selectors';
@@ -107,6 +108,61 @@ class UserInvitedSignUpForm extends React.PureComponent {
             <Block className={styles.link} onClick={this.onOpenTerms}>
               Terms of use
             </Block>.
+          </Block>
+
+          <Block>
+            <FormField name="confirmAdmin" id="confirmAdmin" component={CheckBox}>
+              <Strong>The controller and platform administrator:</Strong> SC Brick Human Resource Consulting SRL, owner
+              of YVBI (yourview-beforeinterview.com).
+              <br />
+              <br />
+              - The controller representative: Ciprian Savin, Senior HR Consultant email: ciprian.savin@brick-hrc.com;
+              <br />
+              <br />
+              - Contact details: www.brick-hrc.com and www.yourview-beforeinterview.com
+              <br />
+              <br />
+              - The purpose of the processing for which the personal data is intended: enable communication between the
+              parts (you, the Employer – your employees and Applicant – the candidate showing interest for your
+              employment announcement);
+              <br />
+              <br />
+              - The legal basis for the processing: The controller is personal data operator registered at A.N.S.P.D.C.
+              with 27126 number according to romanian law no.677/2001;
+              <br />
+              <br />
+              - The recipients of the personal data: the controller, you as an employer, your employees as users, your
+              selected candidates, the controller service provider: Amazon Web Services (AWS): with servers in EU
+              countries.
+            </FormField>
+          </Block>
+          <br />
+
+          <Block>
+            <FormField name="confirmProcessing" id="confirmProcessing" component={CheckBox}>
+              <Strong>TFor a fair and transparent processing is good to know that:</Strong>
+              <br />
+              <br />
+              - Your selected candidates data will be permanently deleted by your representative or by the platform
+              administrator in the shortest period of time from the end of the recruitment project, no more than 90 days
+              from their registration;
+              <br />
+              <br />
+              - Your selected candidates data will be permanently deleted by your representative or by the platform
+              administrator in the shortest period of time from the end of the recruitment project, no more than 90 days
+              from their registration;
+              <br />
+              <br />
+              - You have the right to lodge a complaint with a supervisory authority.
+            </FormField>
+          </Block>
+          <br />
+
+          <Block>
+            <FormField name="confirmErasure" id="confirmErasure" component={CheckBox}>
+              Only in cases where the applicant requests the right to be erasure from the database, the application user
+              will be informed by e-mail.
+            </FormField>
           </Block>
         </Block>
 
@@ -227,6 +283,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           },
         },
         confirmTerms: {
+          required: true,
+        },
+        confirmAdmin: {
+          required: true,
+        },
+        confirmProcessing: {
+          required: true,
+        },
+        confirmErasure: {
           required: true,
         },
       },

@@ -160,6 +160,15 @@ class UserList extends React.PureComponent {
           </Button>
         </Block>
 
+        <Block className={styles.listDescription}>
+          Invite your colleagues to vote and share the candidate recorded message with all the involved parts
+          (recruitment team, Hiring Manager, an so on).
+          <br />
+          Grade it individually and score it together based on the average score.
+          <br />
+          Take a collective decision & select th right ones for face to face interviews
+        </Block>
+
         <Modal isOpen={isInviteFormOpen} size="small" onModalClose={this.onInviteFormModalClose}>
           <ModalContainer title={translations.usersInviteUser} type="centred">
             <InviteUserForm companyId={companyId} />

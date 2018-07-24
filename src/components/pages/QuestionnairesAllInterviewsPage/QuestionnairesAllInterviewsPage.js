@@ -58,22 +58,13 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       error: null,
       interview: null,
       usersChecked: {},
+      selectedEmail: false,
+      rejectedEmail: false,
     };
   }
 
-  componentWillMount = async () => {
-    const companyId = get(this.props.match, 'params.companyId');
-    const questionnaireId = get(this.props.match, 'params.questionnaireId');
-    const [{ status, message }] = await Promise.all([
-      this.props.getQuestionnaireInterviewUserDetails({ companyId, questionnaireId }),
-      this.props.getQuestionnaireSingle(questionnaireId),
-    ]);
-
-    if (status === 'error') {
-      this.setState({
-        error: message,
-      });
-    }
+  componentWillMount = () => {
+    this.loadData();
   };
 
   componentWillUnmount() {
@@ -100,6 +91,11 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
     });
   };
 
+  onAccordEmailChecked = name => () => {
+    console.log(name);
+    this.setState(() => ({ [name]: !this.state[name] }));
+  };
+
   onSelectCandidates = async () => {
     const companyId = get(this.props.match, 'params.companyId');
     const questionnaireId = get(this.props.match, 'params.questionnaireId');
@@ -114,6 +110,48 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
       this.props.history.push(withParams(appRoutes.dashboard.questionnairesList, { companyId }));
     } else {
       this.props.setNotificationError({ content: result.message });
+    }
+  };
+
+  onEraseCandidates = async () => {
+    const companyId = get(this.props.match, 'params.companyId');
+    const questionnaireId = get(this.props.match, 'params.questionnaireId');
+    const users = Object.keys(this.state.usersChecked);
+
+    const result = await postRequest(
+      withParams(api.questionnaire.questionnaireEraseUsers, { companyId, questionnaireId }),
+      { users },
+    );
+
+    await this.loadData();
+
+    this.setState({
+      usersChecked: {},
+    });
+
+    if (result.status !== 'error') {
+      this.props.setNotificationSuccess({ content: 'Success' });
+      window.location.reload(true);
+    } else {
+      this.props.setNotificationError({ content: result.message });
+    }
+  };
+
+  isCloseQuestionnaireValid = () =>
+    !isEmpty(this.state.usersChecked) && this.state.selectedEmail && this.state.rejectedEmail;
+
+  loadData = async () => {
+    const companyId = get(this.props.match, 'params.companyId');
+    const questionnaireId = get(this.props.match, 'params.questionnaireId');
+    const [{ status, message }] = await Promise.all([
+      this.props.getQuestionnaireInterviewUserDetails({ companyId, questionnaireId }),
+      this.props.getQuestionnaireSingle(questionnaireId),
+    ]);
+
+    if (status === 'error') {
+      this.setState({
+        error: message,
+      });
     }
   };
 
@@ -283,16 +321,53 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
           </Block>
         )}
 
-        {questionnaire &&
-          !questionnaire.isClosed && (
-            <Block className={styles.controls}>
-              <Button onClick={this.onSelectCandidates} disabled={isEmpty(usersChecked)}>
-                {translations.questionnaireCandidatesSelectAndClose}
-              </Button>
-              <br />
-              <Text className={styles.selectQuestionnaireInfo}>*Questionnaire will be closed</Text>
-            </Block>
-          )}
+        <Block>
+          {questionnaire &&
+            !questionnaire.isClosed && (
+              <Block className={styles.controls}>
+                {!isEmpty(usersChecked) && (
+                  <Block className={styles.checkboxes}>
+                    <CheckBox
+                      input={{
+                        name: 'selectedEmail',
+                        onChange: this.onAccordEmailChecked('selectedEmail'),
+                        checked: this.state.selectedEmail || false,
+                      }}
+                    >
+                      For selected candidates will be sent an email with notification
+                    </CheckBox>
+
+                    <CheckBox
+                      input={{
+                        name: 'rejectedEmail',
+                        onChange: this.onAccordEmailChecked('rejectedEmail'),
+                        checked: this.state.rejectedEmail || false,
+                      }}
+                    >
+                      For rejected candidates will be sent an email with notification of rejection
+                    </CheckBox>
+                  </Block>
+                )}
+
+                <Button onClick={this.onSelectCandidates} disabled={!this.isCloseQuestionnaireValid()}>
+                  {translations.questionnaireCandidatesSelectAndClose}
+                </Button>
+                <br />
+                <Text className={styles.selectQuestionnaireInfo}>
+                  * rejected candidates will receive a notification by email
+                </Text>
+              </Block>
+            )}
+
+          {questionnaire &&
+            !questionnaire.isClosed && (
+              <Block className={styles.controls}>
+                <Button onClick={this.onEraseCandidates} disabled={isEmpty(usersChecked)} color="red">
+                  {translations.questionnaireCandidatesErase}
+                </Button>
+              </Block>
+            )}
+        </Block>
 
         {interview && (
           <Modal isOpen={!!interview} onModalClose={this.onInterviewReviewsModalClose}>

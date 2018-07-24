@@ -7,8 +7,8 @@ import map from 'lodash/map';
 import get from 'lodash/get';
 
 import Block from 'components/atoms/Block';
-import List from 'components/atoms/List';
-import ListItem from 'components/atoms/ListItem';
+// import List from 'components/atoms/List';
+// import ListItem from 'components/atoms/ListItem';
 import Strong from 'components/atoms/Strong';
 import Heading from 'components/atoms/Heading';
 import Svg from 'components/atoms/Svg';
@@ -121,32 +121,6 @@ class InterviewQuestionsForm extends React.PureComponent {
             {translations.genericAllQuestionsIsRequired}
           </Message>
         )}
-
-        <Block className={styles.participants}>
-          <Strong>{translations.genericDataReviewPersons}</Strong>
-          <br />
-          <br />
-          <Strong>Employer and the owner of the employment announcement:</Strong>
-          <br />
-          <List className={styles.participantsList}>
-            {map(participants, ({ fullName, role }, i) => (
-              <ListItem key={i}>
-                {fullName}
-                {'\u00A0'}
-                {role === 'USER' && '(HR)'}
-                {role === 'ADMIN' && '(Admin)'}
-              </ListItem>
-            ))}
-          </List>
-          <Strong>Platform administrator:</Strong> Brick Human Resource Consulting, owner of YVBI
-          (yourview-beforeinterview.com)
-          <br />
-          <br />
-          Your data will be stored by the platform administrator hosting provider: Amazon Web Services: with the server
-          in one of the EU countries Your data will be permanently deleted by the platform administrator in the shortest
-          period of time from the end of the recruitment project, no more than 60 days from registration. You will
-          receive a confirmation email in this sense.
-        </Block>
 
         <Block className={styles.controls}>
           <Button

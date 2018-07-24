@@ -169,6 +169,20 @@
 
 .controls {
   margin-top: 18px;
+
+  &:first-child {
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 18px;
+  }
+
+  button {
+    margin-right: 10px;
+  }
+}
+
+.checkboxes {
+  line-height: 24px;
+  margin-bottom: 6px;
 }
 
 .selectQuestionnaireInfo {

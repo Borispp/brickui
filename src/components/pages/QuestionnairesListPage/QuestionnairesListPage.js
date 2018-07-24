@@ -152,15 +152,16 @@ class QuestionnairesListPage extends React.PureComponent {
                     <Text className={styles.controlName}>{translations.allInterviewers}</Text>
                   </Link>
                 )}
-                {!isClosed && (
-                  <Block
-                    onClick={this.onInviteFormModalOpen({ _id, title, company })}
-                    className={styles.controlButtonWrapper}
-                  >
-                    <Svg type="invite" className={styles.controlButtonIcon} />
-                    <Text className={styles.controlName}>{translations.interviewInviteCandidate}</Text>
-                  </Block>
-                )}
+                {!isClosed &&
+                  [roles.globalAdmin, roles.admin].includes(userRole) && (
+                    <Block
+                      onClick={this.onInviteFormModalOpen({ _id, title, company })}
+                      className={styles.controlButtonWrapper}
+                    >
+                      <Svg type="invite" className={styles.controlButtonIcon} />
+                      <Text className={styles.controlName}>{translations.interviewInviteCandidate}</Text>
+                    </Block>
+                  )}
                 {!isClosed && (
                   <Block
                     onClick={this.onQuestionnaireUserListModalOpen({ _id, title })}

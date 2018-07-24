@@ -23,6 +23,13 @@
   }
 }
 
+.subHeadlineSmall {
+  font-size: 13px;
+  font-weight: 400;
+  display: block;
+  color: $greyText;
+}
+
 .noUsers {
   font-size: 13px;
   margin: -10px 0 0;
@@ -46,10 +53,11 @@
 }
 
 .questionsArray {
-  flex: 0 0 440px;
+  flex: 0 0 500px;
 }
 
 .questionsExamples {
+  display: none;
   flex: 1;
   margin-left: 50px;
 }
@@ -77,7 +85,7 @@
 }
 
 .descriptionFields {
-  max-width: 440px;
+  max-width: 500px;
 }
 
 .questionnaireDescriptionHeading {
@@ -90,7 +98,7 @@
 }
 
 .fieldsArrayItem {
-  max-width: 440px;
+  max-width: 500px;
   border-bottom: 1px solid $grey-border;
   margin-bottom: 10px;
   padding-bottom: 12px;

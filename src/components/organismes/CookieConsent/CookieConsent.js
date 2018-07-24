@@ -5,6 +5,7 @@ import CookieConsentComponent from 'react-cookie-consent';
 
 import Block from 'components/atoms/Block';
 import Modal from 'components/atoms/Modal';
+import Strong from 'components/atoms/Strong';
 
 import ModalContainer from 'components/molecules/ModalContainer';
 
@@ -38,7 +39,10 @@ class CookieConsent extends React.PureComponent {
           buttonStyle={{ color: '#4e503b', fontSize: '13px' }}
           expires={150}
         >
-          This website uses cookies to ensure you get the best experience on our website.
+          <Strong>A privacy reminder from YVBI</Strong>
+          <br />
+          To be consistent with data protection laws, we’re asking you to take a moment to review YVBI Privacy policy,
+          Terms of use and Cookie policy.
           <br />
           <Block className={styles.moreLink} onClick={this.onCookiesDescriptionModalOpen}>
             More info

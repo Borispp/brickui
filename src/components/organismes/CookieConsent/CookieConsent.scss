@@ -1,5 +1,6 @@
 .wrapper {
   padding-top: 75px;
+  font-size: 13px;
 
   &:empty {
     padding-top: 0 !important;
@@ -41,14 +42,29 @@
   line-height: 24px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1105px) {
   .wrapper {
-    padding-top: 91px;
+    padding-top: 104px;
+  }
+}
+@media (max-width: 654px) {
+  .wrapper {
+    padding-top: 119px;
   }
 }
 
+@media (max-width: 515px) {
+  .wrapper {
+    padding-top: 140px;
+  }
+}
 @media (max-width: 500px) {
   .wrapper {
-    padding-top: 149px;
+    padding-top: 160px;
+    text-align: center;
+
+    :global(.cookieConsent) {
+      justify-content: center !important;
+    }
   }
 }

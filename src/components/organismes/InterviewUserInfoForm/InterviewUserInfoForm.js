@@ -92,33 +92,53 @@ class InterviewUserInfoForm extends React.PureComponent {
         </Block>
 
         <Block className={styles.participants}>
-          <Strong>{translations.genericDataReviewPersons}</Strong>
+          <Strong>
+            Information to be provided when personal data is collected from the data subject according REGULATION (EU)
+            2016/679 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 27 April 2016 on the protection of natural persons
+            with regard to the processing of personal data and on the free movement of such data, and repealing
+            Directive 95/46/EC (General Data Protection Regulation).
+            <br />
+            Your data will be viewed by representatives of the following parties:
+          </Strong>
           <br />
           <br />
           <FormField name="confirmParticipants" id="confirmParticipants" component={CheckBox}>
             <Strong>Employer and the owner of the employment announcement:</Strong>
             <br />
             <List className={styles.participantsList}>
-              {map(participants, ({ fullName, role }, i) => (
-                <ListItem key={i}>
-                  {fullName}
-                  {'\u00A0'}
-                  {role === 'USER' && '(HR)'}
-                  {role === 'ADMIN' && '(Admin)'}
-                </ListItem>
-              ))}
+              {// eslint-disable-next-line no-unused-vars
+              map(participants, ({ fullName, role }, i) => <ListItem key={i}>{fullName}</ListItem>)}
             </List>
+            The recipients of the personal data: the controller, the employer and his employees, the controller service
+            provider: Amazon Web Services (AWS): with servers in EU countries.
           </FormField>
+          <br />
+          <br />
           <FormField name="confirmAdmin" id="confirmAdmin" component={CheckBox}>
-            <Strong>Platform administrator:</Strong> Brick Human Resource Consulting, owner of YVBI
-            (yourview-beforeinterview.com)
+            <Strong>The controller and platform administrator:</Strong> SC Brick Human Resource Consulting SRL, owner of
+            YVBI (yourview-beforeinterview.com).
+            <br />
+            - Contact details: www.brick-hrc.com and www.yourview-beforeinterview.com
+            <br />
+            - The purpose of the processing for which the personal data is intended: enable communication between the
+            parts (Employer – its employees and Applicant – the candidate showing interest for the employment
+            announcement);
+            <br />
+            - The legal basis for the processing: The controller is personal data operator registered at A.N.S.P.D.C.
+            with 27126 number according to romanian law no.677/2001;
           </FormField>
           <br />
           <FormField name="confirmServer" id="confirmServer" component={CheckBox}>
-            Your data will be stored by the platform administrator hosting provider: Amazon Web Services: with the
-            server in one of the EU countries Your data will be permanently deleted by the platform administrator in the
-            shortest period of time from the end of the recruitment project, no more than 60 days from registration. You
-            will receive a confirmation email in this sense.
+            <Strong>For a fair and transparent processing is good to know that:</Strong>
+            <br />
+            - Your data will be permanently deleted by the platform administrator in the shortest period of time from
+            the end of the recruitment project, no more than 90 days from registration. You will receive a confirmation
+            email;
+            <br />
+            - You have the right to request access, rectification, portability or erasure of personal data or
+            restriction of processing concerning the data subject;
+            <br />
+            - You have the right to lodge a complaint with a supervisory authority.
           </FormField>
         </Block>
 
@@ -223,15 +243,15 @@ export default withRouter(
         userName: {
           required: true,
         },
-        phone: {
-          rules: {
-            required: true,
-            pattern: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
-          },
-          messages: {
-            pattern: 'Wrong phone format',
-          },
-        },
+        // phone: {
+        //   rules: {
+        //     required: true,
+        //     pattern: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+        //   },
+        //   messages: {
+        //     pattern: 'Wrong phone format',
+        //   },
+        // },
         email: {
           rules: {
             required: true,

@@ -121,6 +121,16 @@
   justify-content: center;
 }
 
+.listDescription {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 24px 0;
+  font-size: 14px;
+  line-height: 18px;
+  color: $mainText;
+}
+
 .controlButtonIcon {
   display: flex;
   width: 24px;

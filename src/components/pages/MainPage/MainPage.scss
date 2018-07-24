@@ -86,6 +86,18 @@
       margin-right: 30px;
     }
   }
+
+
+  &.green {
+    a {
+      @include link;
+      color: $greenMain;
+
+      &:hover {
+        color: $greenMain;
+      }
+    }
+  }
 }
 
 .sectionContentText {

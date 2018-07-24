@@ -24,9 +24,12 @@ import { getInterviewUserPassedList, getInterviewUserIsntPassedList } from 'modu
 import { getTranslations } from 'modules/systemData/selectors';
 import { postRequest } from 'modules/api/actions';
 
+import { getUserRole } from 'modules/account/selectors';
+
 import api from 'routes/api';
 import app from 'routes/app';
 import { withParams } from 'utils/url';
+import roles from 'utils/roleHelper';
 
 import styles from './InviteCandidatesList.scss';
 
@@ -83,6 +86,7 @@ class InviteCandidatesList extends React.PureComponent {
       questionnaireId,
       companyId,
       questionnaireName,
+      userRole,
     } = this.props;
     const { isInviteFormOpen } = this.state;
 
@@ -147,13 +151,15 @@ class InviteCandidatesList extends React.PureComponent {
                     <Svg type="link" className={styles.controlButtonIcon} />
                     <Text className={styles.controlName}>{translations.genericDirectLink}</Text>
                   </Link>
-                  <Block
-                    className={classNames(styles.link, styles.controlButtonWrapper)}
-                    onClick={this.resendInvitation({ tokenId: interview.token })}
-                  >
-                    <Svg type="resend" className={styles.controlButtonIcon} />
-                    <Text className={styles.controlName}>{translations.resendInterviewInvitation}</Text>
-                  </Block>
+                  {[roles.globalAdmin, roles.admin].includes(userRole) && (
+                    <Block
+                      className={classNames(styles.link, styles.controlButtonWrapper)}
+                      onClick={this.resendInvitation({ tokenId: interview.token })}
+                    >
+                      <Svg type="resend" className={styles.controlButtonIcon} />
+                      <Text className={styles.controlName}>{translations.resendInterviewInvitation}</Text>
+                    </Block>
+                  )}
                   <Block
                     onClick={this.onInterviewInviteDelete(interview.token)}
                     className={classNames(styles.controlButtonWrapper, styles.delete)}
@@ -168,11 +174,13 @@ class InviteCandidatesList extends React.PureComponent {
             userListIsntPassed.length === 0 && <Block className={styles.noUsers}>{translations.userInvitedNone}</Block>}
         </Block>
 
-        <Block className={styles.controlWrapper}>
-          <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
-            {translations.interviewInviteCandidate}
-          </Button>
-        </Block>
+        {[roles.globalAdmin, roles.admin].includes(userRole) && (
+          <Block className={styles.controlWrapper}>
+            <Button color="orange" size="medium" onClick={this.onInviteFormModalOpen}>
+              {translations.interviewInviteCandidate}
+            </Button>
+          </Block>
+        )}
 
         <Modal isOpen={isInviteFormOpen} onModalClose={this.onInviteFormModalClose}>
           <ModalContainer title={questionnaireName} type="centred">
@@ -212,6 +220,7 @@ InviteCandidatesList.propTypes = {
   userListPassed: PropTypes.arrayOf(interview),
   userListIsntPassed: PropTypes.arrayOf(interview),
   translations: PropTypes.object.isRequired,
+  userRole: PropTypes.string.isRequired,
 };
 
 InviteCandidatesList.defaultProps = {
@@ -224,6 +233,7 @@ const mapStateToProps = (state, props) => ({
   userListPassed: getInterviewUserPassedList(props.questionnaireId)(state),
   userListIsntPassed: getInterviewUserIsntPassedList(props.questionnaireId)(state),
   translations: getTranslations(state),
+  userRole: getUserRole(state),
 });
 
 const mapDispatchToProps = {

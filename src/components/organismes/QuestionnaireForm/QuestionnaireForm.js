@@ -58,13 +58,6 @@ const questionItem = ({ fields, question, index, translations }) => (
       placeholder={translations.questionTitle}
       className={classNames(styles.formField, styles.questionTitle)}
     />
-    <FormField
-      name={`${question}.text`}
-      id={`${question}${index}`}
-      component={Textarea}
-      placeholder={translations.questionText}
-      className={classNames(styles.formField, styles.questionText)}
-    />
   </Block>
 );
 
@@ -129,6 +122,9 @@ class QuestionnaireForm extends React.PureComponent {
           <Block>
             <Heading type="h3" className={styles.subHeadline}>
               {translations.questionnaireAccessList}
+              <Text className={styles.subHeadlineSmall}>
+                * individually select each checkbox for those who take part in the selection process
+              </Text>
             </Heading>
 
             <Block className={styles.participants}>
@@ -322,15 +318,15 @@ export default withRouter(
               questionsArrayErrors[index] = questionErrors;
             }
 
-            if (question && question.title && question.title.length > 60) {
-              questionErrors.title = 'Maximum 60 characters allowed';
+            if (question && question.title && question.title.length > 120) {
+              questionErrors.title = 'Maximum 120 characters allowed';
               questionsArrayErrors[index] = questionErrors;
             }
 
-            if (!question || !question.text) {
-              questionErrors.text = 'Required';
-              questionsArrayErrors[index] = questionErrors;
-            }
+            // if (!question || !question.text) {
+            //   questionErrors.text = 'Required';
+            //   questionsArrayErrors[index] = questionErrors;
+            // }
           });
 
           if (questionsArrayErrors.length) {
