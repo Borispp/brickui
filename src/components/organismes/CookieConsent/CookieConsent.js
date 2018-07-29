@@ -21,7 +21,11 @@ class CookieConsent extends React.PureComponent {
     };
   }
 
-  onCookiesDescriptionModalOpen = () => this.setState({ isCookiesDescriptionOpen: true });
+  onCookiesDescriptionModalOpen = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+
+    // this.setState({ isCookiesDescriptionOpen: true });
+  };
 
   onCookiesDescriptionModalClose = () => this.setState({ isCookiesDescriptionOpen: false });
 

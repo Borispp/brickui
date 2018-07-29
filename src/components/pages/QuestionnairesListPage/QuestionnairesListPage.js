@@ -127,14 +127,20 @@ class QuestionnairesListPage extends React.PureComponent {
         <Block className={styles.questionnaireListWrapper}>
           {map(questionnaireList, ({ _id, title, company, isClosed }) => (
             <Block key={_id} className={styles.questionnaireListItem}>
-              {!isClosed && (
-                <Link
-                  href={withParams(appRoutes.dashboard.questionnaireEdit, { companyId, questionnaireId: _id })}
-                  className={styles.questionnaireListName}
-                >
-                  {title}
-                </Link>
-              )}
+              {!isClosed &&
+                [roles.globalAdmin, roles.admin].includes(userRole) && (
+                  <Link
+                    href={withParams(appRoutes.dashboard.questionnaireEdit, { companyId, questionnaireId: _id })}
+                    className={styles.questionnaireListName}
+                  >
+                    {title}
+                  </Link>
+                )}
+
+              {!isClosed &&
+                ![roles.globalAdmin, roles.admin].includes(userRole) && (
+                  <Text className={styles.questionnaireListNameText}>{title}</Text>
+                )}
 
               {isClosed && (
                 <Text className={styles.isQuestionnaireClosed}>

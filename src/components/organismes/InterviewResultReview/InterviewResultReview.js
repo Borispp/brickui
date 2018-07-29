@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import Block from 'components/atoms/Block';
 import Strong from 'components/atoms/Strong';
 import Heading from 'components/atoms/Heading';
-import Paragraph from 'components/atoms/Paragraph';
+// import Paragraph from 'components/atoms/Paragraph';
 import Image from 'components/atoms/Image';
 
 import styles from './InterviewResultReview.scss';
@@ -18,10 +18,7 @@ class InterviewResultReview extends React.PureComponent {
   };
 
   render() {
-    const {
-      className,
-      interview: { userName, email, phone, answers, questions, questionnaire, updatedAt, avatar },
-    } = this.props;
+    const { className, interview: { userName, email, phone, answers, questionnaire, updatedAt, avatar } } = this.props;
 
     return (
       <Block className={classNames(styles.wrapper, className)}>
@@ -46,8 +43,7 @@ class InterviewResultReview extends React.PureComponent {
 
         {map(answers, (audioSrc, index) => (
           <Block key={index} className={styles.item}>
-            <Heading type="h3">{get(questions, `[${index}].title`)}</Heading>
-            <Paragraph>{get(questions, `[${index}].text`)}</Paragraph>
+            <Heading type="h3">{get(questionnaire, `questions.[${index}].title`)}</Heading>
             {/* eslint-disable jsx-a11y/media-has-caption */}
             <audio
               src={`${process.env.REACT_APP_API_PUBLIC_URL}/public/audios/${audioSrc}.wav`}
@@ -66,13 +62,7 @@ class InterviewResultReview extends React.PureComponent {
 export const interviewShape = {
   _id: PropTypes.string,
   answers: PropTypes.arrayOf(PropTypes.string),
-  questions: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
-      title: PropTypes.string,
-      text: PropTypes.string,
-    }),
-  ),
+
   company: PropTypes.string,
   email: PropTypes.string,
   phone: PropTypes.string,
@@ -80,6 +70,14 @@ export const interviewShape = {
   questionnaire: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
+
+    questions: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string,
+        title: PropTypes.string,
+        text: PropTypes.string,
+      }),
+    ),
   }),
   userName: PropTypes.string,
   isSaved: PropTypes.bool,

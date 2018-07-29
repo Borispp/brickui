@@ -45,6 +45,17 @@
   overflow: hidden;
 }
 
+.questionnaireListNameText {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  width: 300px;
+  margin-right: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .controlButtonIcon {
   display: flex;
   width: 24px;
@@ -142,7 +153,8 @@
     margin-bottom: 20px;
   }
 
-  .questionnaireListName {
+  .questionnaireListName,
+  .questionnaireListNameText {
     width: auto;
     flex: 1;
     font-size: 15px;

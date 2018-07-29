@@ -37,6 +37,7 @@ import {
 } from 'modules/questionnaires/selectors';
 
 import { getTranslations } from 'modules/systemData/selectors';
+import { getUserRole } from 'modules/account/selectors';
 
 import { interpolate } from 'utils/text';
 
@@ -47,6 +48,7 @@ import appRoutes from 'routes/app';
 import { postRequest } from 'modules/api/actions';
 import api from 'routes/api';
 import { withParams } from 'utils/url';
+import roles from 'utils/roleHelper';
 
 import styles from './QuestionnairesAllInterviewsPage.scss';
 
@@ -92,7 +94,6 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
   };
 
   onAccordEmailChecked = name => () => {
-    console.log(name);
     this.setState(() => ({ [name]: !this.state[name] }));
   };
 
@@ -251,6 +252,20 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
               <Text className={styles.controlName}>{this.props.translations.genericAddReview}</Text>
             </Link>
           )}
+
+          {this.props.questionnaire.isClosed && (
+            <Link
+              target="_blank"
+              href={withParams(appRoutes.interview.review, {
+                companyId: get(this.props.match, 'params.companyId'),
+                interviewId: props.original._id,
+              })}
+              className={classNames(styles.link, styles.controlButtonWrapper)}
+            >
+              <Svg type="feedback" className={styles.controlButtonIcon} />
+              <Text className={styles.controlName}>{this.props.translations.genericShowReview}</Text>
+            </Link>
+          )}
         </Block>
       ),
       sortable: false,
@@ -276,7 +291,7 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
   ];
 
   render() {
-    const { className, translations, interviewUserDetails, questionnaire } = this.props;
+    const { className, translations, interviewUserDetails, questionnaire, userRole } = this.props;
     const { error, interview, usersChecked } = this.state;
 
     return (
@@ -334,7 +349,8 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
                         checked: this.state.selectedEmail || false,
                       }}
                     >
-                      For selected candidates will be sent an email with notification
+                      I agree that for selected candidates there will be sent an email with notification. All the
+                      selected candidates (in the checkbox) will be contacted for face to face interviews.
                     </CheckBox>
 
                     <CheckBox
@@ -344,7 +360,8 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
                         checked: this.state.rejectedEmail || false,
                       }}
                     >
-                      For rejected candidates will be sent an email with notification of rejection
+                      I agree that unselected candidates (in the checkbox) will be automatically deleted and there will
+                      be sent an email with notification of rejection
                     </CheckBox>
                   </Block>
                 )}
@@ -360,7 +377,8 @@ class QuestionnairesAllInterviewsPage extends React.PureComponent {
             )}
 
           {questionnaire &&
-            !questionnaire.isClosed && (
+            !questionnaire.isClosed &&
+            [roles.globalAdmin].includes(userRole) && (
               <Block className={styles.controls}>
                 <Button onClick={this.onEraseCandidates} disabled={isEmpty(usersChecked)} color="red">
                   {translations.questionnaireCandidatesErase}
@@ -421,6 +439,7 @@ QuestionnairesAllInterviewsPage.propTypes = {
       questionnaireId: PropTypes.string,
     }),
   }),
+  userRole: PropTypes.string.isRequired,
 };
 
 QuestionnairesAllInterviewsPage.defaultProps = {
@@ -435,6 +454,7 @@ const mapStateToProps = state => ({
   interviewUserDetails: getQuestionnaireInterviewUserDetailsSelector(state),
   questionnaire: getQuestionnaire(state),
   translations: getTranslations(state),
+  userRole: getUserRole(state),
 });
 
 const mapDispatchToProps = {

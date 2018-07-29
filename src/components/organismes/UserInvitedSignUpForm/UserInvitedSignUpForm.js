@@ -110,7 +110,19 @@ class UserInvitedSignUpForm extends React.PureComponent {
             </Block>.
           </Block>
 
-          <Block>
+          <Block className={styles.representatives}>
+            <Strong>
+              Information to be provided when personal data is collected from the data subject according REGULATION (EU)
+              2016/679 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 27 April 2016 on the protection of natural
+              persons with regard to the processing of personal data and on the free movement of such data, and
+              repealing Directive 95/46/EC (General Data Protection Regulation).
+              <br />
+              <br />
+              Your data will be viewed by representatives of the following parties:
+            </Strong>
+
+            <br />
+            <br />
             <FormField name="confirmAdmin" id="confirmAdmin" component={CheckBox}>
               <Strong>The controller and platform administrator:</Strong> SC Brick Human Resource Consulting SRL, owner
               of YVBI (yourview-beforeinterview.com).
@@ -140,7 +152,7 @@ class UserInvitedSignUpForm extends React.PureComponent {
 
           <Block>
             <FormField name="confirmProcessing" id="confirmProcessing" component={CheckBox}>
-              <Strong>TFor a fair and transparent processing is good to know that:</Strong>
+              <Strong>For a fair and transparent processing is good to know that:</Strong>
               <br />
               <br />
               - Your selected candidates data will be permanently deleted by your representative or by the platform

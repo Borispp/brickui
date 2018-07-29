@@ -25,7 +25,7 @@ const request = (url, { ...options }) => {
       const response = await fetch(apiUrl, options);
 
       const json = await response.json().catch(() => {});
-
+      console.log(json);
       if (!response.ok) {
         if (response.status === 400) {
           resolve(json);
@@ -33,6 +33,10 @@ const request = (url, { ...options }) => {
 
         if (response.status === 401) {
           signOut();
+
+          if (apiUrl !== `${baseUrl}/api/users/get_user`) {
+            window.location.reload();
+          }
         }
 
         if (response.status === 404) {

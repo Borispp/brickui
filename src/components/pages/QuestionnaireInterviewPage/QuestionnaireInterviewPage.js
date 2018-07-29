@@ -111,6 +111,8 @@ class QuestionnaireInterviewPage extends React.PureComponent {
             <Block className={styles.interviewSaved}>
               <Svg type="success" className={styles.successIcon} />
               {translations.interviewSavedSuccess}
+              <br />
+              You will be contacted directly by the employer and/ or notified by email.
             </Block>
           )}
 

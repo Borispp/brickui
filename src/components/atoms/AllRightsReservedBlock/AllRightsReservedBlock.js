@@ -20,6 +20,7 @@ class AllRightsReservedBlock extends React.PureComponent {
     super(props);
 
     this.state = {
+      isCookiePolicyModalOpen: false,
       isTermsModalOpen: false,
       isPrivacyModalOpen: false,
       isPaymentMethodModalOpen: false,
@@ -46,6 +47,9 @@ class AllRightsReservedBlock extends React.PureComponent {
   onPrivacyModalOpen = () => this.setState({ isPrivacyModalOpen: true });
   onPrivacyModalClose = () => this.setState({ isPrivacyModalOpen: false });
 
+  onCookiePolicyModalOpen = () => this.setState({ isCookiePolicyModalOpen: true });
+  onCookiePolicyModalClose = () => this.setState({ isCookiePolicyModalOpen: false });
+
   onPaymentMethodModalOpen = () => this.setState({ isPaymentMethodModalOpen: true });
   onPaymentMethodModalClose = () => this.setState({ isPaymentMethodModalOpen: false });
 
@@ -65,6 +69,7 @@ class AllRightsReservedBlock extends React.PureComponent {
     const { translations, type, className } = this.props;
     const {
       isTermsModalOpen,
+      isCookiePolicyModalOpen,
       isPrivacyModalOpen,
       isContactModalOpen,
       isPaymentMethodModalOpen,
@@ -85,9 +90,6 @@ class AllRightsReservedBlock extends React.PureComponent {
           <Link className={styles.link} onClick={this.onTermsModalOpen}>
             {translations.genericTermsOfUse}
           </Link>
-          <Link className={styles.link} onClick={this.onTermsModalOpen}>
-            {translations.genericCookiePolicy}
-          </Link>
           <Link className={styles.link} onClick={this.onPricingModalOpen}>
             {translations.genericPricing}
           </Link>
@@ -104,6 +106,15 @@ class AllRightsReservedBlock extends React.PureComponent {
             {translations.genericContact}
           </Link>
         </Block>
+
+        <Modal isOpen={isCookiePolicyModalOpen} size="big" onModalClose={this.onCookiePolicyModalClose}>
+          <ModalContainer title={translations.genericCookiePolicy}>
+            <Block className={styles.modalWrapper}>
+              <Strong>rdf</Strong>
+              <br />
+            </Block>
+          </ModalContainer>
+        </Modal>
 
         <Modal isOpen={isTermsModalOpen} size="big" onModalClose={this.onTermsModalClose}>
           <ModalContainer title={translations.genericTermsOfUse}>
