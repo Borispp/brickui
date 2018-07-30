@@ -91,7 +91,7 @@ class AllRightsReservedBlock extends React.PureComponent {
             {translations.genericTermsOfUse}
           </Link>
           <Link className={styles.link} onClick={this.onPricingModalOpen}>
-            {translations.genericPricing}
+            Services
           </Link>
           <Link className={styles.link} onClick={this.onPaymentMethodModalOpen}>
             {translations.genericPaymentMethod}
@@ -1005,54 +1005,63 @@ class AllRightsReservedBlock extends React.PureComponent {
         </Modal>
 
         <Modal isOpen={isPricingModalOpen} size="big" onModalClose={this.onPricingModalClose}>
-          <ModalContainer title={translations.genericPricing}>
+          <ModalContainer title="Services">
             <Block className={styles.modalWrapper}>
-              You only have to pay when you place an order, after the one month trial.
+              <Strong>Recruitment and Selection</Strong>
+              <br />
+              The main objective of this type of service is to meet companies looking to hire new staff and / or go
+              through a process of renewal of the existing one.
+              <br />
+              We want to lay the foundations of an active recruitment system which can help identify good and very good
+              candidates and contact them when there is a perfect match with our clients. To match this goal we will
+              promote specialized search and / or Head Hunting for maximize our results (delivering the best
+              candidates).For further details about this service, please contact our Human Resources department (see
+              contact) - each request will be answered to in the shortest time.
+              <br /> <br />
+              <Strong>Benefits:</Strong>
+              <br />
+              - Shorting the time for hiring the candidates involved in this type of project;
+              <br />
+              - Delivering the best candidates in the desired field.
+              <br /> <br />
+              <Strong>Outplacement</Strong>
+              <br />
+              The main objective of this type of service is to provide the necessary assistance for candidates that go
+              through a downsizing process and to identify as soon as possible new career opportunities that meet the
+              desires and experience of each person involved in the process.
               <br />
               <br />
-              <Strong>Price list for our one month YVBI subscriptions</Strong>
+              We want each of our candidates involved in this project to take the following three steps:
               <br />
               <br />
-              YVBI 1 to 3 – you can work with one to three different recruitment projects
+              <Strong>Step1 – Knowing the candidate</Strong>
               <br />
-              For 65 EUR* / month
-              <br />
-              *including all taxes
-              <br />
-              <br />
-              YVBI 3 to 6 - you can work with three to six different recruitment projects
-              <br />
-              For 98 EUR* / month
-              <br />
-              *including all taxes
+              A first detailed interview for revealing: the professional experience of the candidate, his main
+              professional options regarding the future suitable job, suitable tests for the person involved in the
+              process (personality tests, psychological tests of self and / or intelligence tests).
               <br />
               <br />
-              <Strong>Price list for our two months YVBI subscription</Strong>
+              <Strong>Step 2 - Calibration of the candidate expectations with the labor market requirements</Strong>
               <br />
-              YVBI 6 to 10 - you can work with six to ten different recruitment projects
-              <br />
-              For only 130 EUR* / two months
-              <br />
-              *including all taxes
+              General feedback about the most important issues to be taken into account when: compiles a cover letter /
+              resume, knows his own abilities and qualities, knows how to approach to an interview, knows how to choose
+              their employment ads, succeeds to rank himself correctly before submitting any applications.
               <br />
               <br />
-              If you want to subscribe to one of our YVBI services, please send us an email to
-              <a href="mailto:mysubscription@yourview-beforeinterview.com">
-                mysubscription@yourview-beforeinterview.com
-              </a>{' '}
-              with the following:
+              <Strong>Step 3 – Actively seeking of a job</Strong>
+              Configuring the entire selection process (interview appointment, providing feedback from potential
+              employers) together with actively seeking an opened job on the market. We will be at your disposal for any
+              questions or further information, regardless of which it is the stage where the candidates are. For
+              further details about this service, please contact our Human Resources department (see Contact) - each
+              request will be answered to in the shortest time.
               <br />
-              - for releasing an invoice: company’s (customer’s) full name & address and VAT identification number (if
-              you are liable for the tax on the transaction);
               <br />
-              - first name, surname & your role;
-              <br />
-              - work email address & work mobile phone;
-              <br />
-              - the subscription you want;
-              <br />
-              - <Strong>Email subject:</Strong> YVBI subscription for “your Employer’s name”.
-              <br />
+              <Strong>Executive Search</Strong>
+              The main objective of this type of service is to meet the needs of the companies who are looking to hire
+              qualified personnel. Based on our know-how and networking acquired in time, this recruitment service meets
+              client companies that focus on the quality of their employees. Candidates recommended through this service
+              will always be the best trained in their field. For further details about this service, please contact our
+              Human Resources department (see contact) - each request will be answered to in the shortest time.
             </Block>
           </ModalContainer>
         </Modal>
